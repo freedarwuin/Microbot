@@ -3,8 +3,7 @@
 ## [Back](development.md)
 
 ## Overview
-The `Rs2Bank` class manages interactions with the banking system in the game, facilitating operations like opening the bank, depositing, withdrawing, and managing inventory items.
-
+La clase `Rs2Bank` administra las interacciones con el sistema bancario en el juego, facilitando operaciones como abrir el banco, depositar, retirar y administrar artículos del inventario.
 ## Methods
 
 ### `closeBank`
