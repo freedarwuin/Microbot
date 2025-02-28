@@ -11,108 +11,108 @@ La clase `Rs2Bank` administra las interacciones con el sistema bancario en el ju
 - **Descripción**: Cierra la interfaz del banco si está abierta, garantizando que esté correctamente cerrada verificando el estado de la interfaz.
 
 ### `depositAll`
-- **Signature**: `public static boolean depositAll(int id)`
-- **Description**: Deposits all instances of a specified item by its ID into the bank.
+- **Firma**: `public static boolean depositAll(int id)`
+- **Descripción**: Deposita en el banco todas las instancias de un artículo específico por su ID.
 
 ### `depositAllExcept(Integer... ids)`
-- **Signature**: `public static boolean depositAllExcept(Integer... ids)`
-- **Description**: Deposits all items except those identified by provided IDs.
+- **Firma**: `public static boolean depositAllExcept(Integer... ids)`
+- **Descripción**: Deposita todos los artículos excepto aquellos identificados por las identificaciones proporcionadas.
 
 ### `depositAllExcept(String... names)`
-- **Signature**: `public static boolean depositAllExcept(String... names)`
-- **Description**: Deposits all items except those with names matching the provided strings.
+- **Firma**: `public static boolean depositAllExcept(String... names)`
+- **Descripción**: Deposita todos los artículos excepto aquellos cuyos nombres coincidan con las cadenas proporcionadas.
 
 ### `depositEquipment`
-- **Signature**: `public static void depositEquipment()`
-- **Description**: Deposits all items currently equipped by the player into the bank.
+- **Firma**: `public static void depositEquipment()`
+- **Descripción**: Deposita todos los elementos actualmente equipados por el jugador en el banco.
 
 ### `depositOne`
-- **Signature**: `public static void depositOne(int id)`
-- **Description**: Deposits a single item into the bank by its ID.
+- **Firma**: `public static void depositOne(int id)`
+- **Descripción**: Deposita un solo artículo en el banco por su identificación.
 
 ### `depositOne(String name)`
-- **Signature**: `public static void depositOne(String name)`
-- **Description**: Deposits one item by its name, handling partial name matches.
+- **Firma**: `public static void depositOne(String name)`
+- **Descripción**: Deposita un artículo por su nombre y maneja coincidencias de nombres parciales.
 
 ### `depositX`
-- **Signature**: `public static void depositX(int id, int amount)`
-- **Description**: Deposits a specified quantity of an item by its ID.
+- **Firma**: `public static void depositX(int id, int amount)`
+- **Descripción**: Deposita una cantidad específica de un artículo según su ID.
 
 ### `findBankItem`
-- **Signature**: `public static Rs2Item findBankItem(String name)`
-- **Description**: Searches for a bank item by its name, supporting both exact and partial matches.
+- **Firma**: `public static Rs2Item findBankItem(String name)`
+- **Descripción**: Busca un artículo bancario por su nombre, admitiendo coincidencias exactas y parciales.
 
 ### `getNearestBank`
-- **Signature**: `public static BankLocation getNearestBank()`
-- **Description**: Identifies the nearest bank location relative to the player's current position.
+- **Firma**: `public static BankLocation getNearestBank()`
+- **Descripción**: Identifica la ubicación del banco más cercano a la posición actual del jugador.
 
 ### `handleBankPin`
-- **Signature**: `public static boolean handleBankPin(String pin)`
-- **Description**: Interacts with the bank PIN interface, entering the provided PIN if necessary.
+- **Firma**: `public static boolean handleBankPin(String pin)`
+- **Descripción**: Interactúa con la interfaz PIN del banco, ingresando el PIN proporcionado si es necesario.
 
 ### `hasItem`
-- **Signature**: `public static boolean hasItem(int id)`
-- **Description**: Verifies whether the player has a specific item in the bank, identified by its ID.
+- **Firma**: `public static boolean hasItem(int id)`
+- **Descripción**: Verifica si el jugador tiene un artículo específico en el banco, identificado por su ID.
 
 ### `invokeMenu`
-- **Signature**: `public static void invokeMenu(int entryIndex, Rs2Item rs2Item)`
-- **Description**: Executes menu actions for a specified item and menu entry, adjusting according to the container type.
+- **Firma**: `public static void invokeMenu(int entryIndex, Rs2Item rs2Item)`
+- **Descripción**: Ejecuta acciones de menú para un elemento y una entrada de menú específicos, ajustándose según el tipo de contenedor.
 
 ### `isOpen`
-- **Signature**: `public static boolean isOpen()`
-- **Description**: Checks if the bank interface is currently open. Notifies the user if a bank PIN needs to be entered.
+- **Firma**: `public static boolean isOpen()`
+- **Descripción**: Comprueba si la interfaz del banco está abierta actualmente. Notifica al usuario si es necesario introducir un PIN bancario.
 
 ### `openBank`
-- **Signature**: `public static boolean openBank()`
-- **Description**: Attempts to open the bank by interacting with the nearest NPC named "banker" or other bank-related objects.
+- **Firma**: `public static boolean openBank()`
+- **Descripción**: Intenta abrir el banco interactuando con el NPC más cercano llamado "banker" u otros objetos relacionados con el banco.
 
 ### `openBank(NPC npc)`
-- **Signature**: `public static boolean openBank(NPC npc)`
-- **Description**: Opens the bank by directly interacting with a specified NPC.
+- **Firma**: `public static boolean openBank(NPC npc)`
+- **Descripción**: Abre el banco interactuando directamente con un NPC específico.
 
 ### `openBank(TileObject object)`
-- **Signature**: `public static boolean openBank(TileObject object)`
-- **Description**: Attempts to open the bank by interacting with a specified tile object.
+- **Firma**: `public static boolean openBank(TileObject object)`
+- **Descripción**: Intenta abrir el banco interactuando con un objeto de mosaico específico.
 
 ### `storeBankItemsInMemory`
-- **Signature**: `public static void storeBankItemsInMemory(ItemContainerChanged e)`
-- **Description**: Updates the cached list of bank items based on changes detected in an item container event.
+- **Firma**: `public static void storeBankItemsInMemory(ItemContainerChanged e)`
+- **Descripción**: Actualiza la lista almacenada en caché de elementos bancarios en función de los cambios detectados en un evento contenedor de elementos.
 
 ### `useBank`
-- **Signature**: `public static boolean useBank()`
-- **Description**: Facilitates the use of a bank through available interaction means.
+- **Firma**: `public static boolean useBank()`
+- **Descripción**: Facilita el uso de un banco a través de los medios de interacción disponibles.
 
 ### `walkToBank`
-- **Signature**: `public static boolean walkToBank()`
-- **Description**: Directs the player to walk to the nearest bank location.
+- **Firma**: `public static boolean walkToBank()`
+- **Descripción**: Indica al jugador que camine hasta el banco más cercano.
 
 ### `wearItem(int id)`
-- **Signature**: `public static void wearItem(int id)`
-- **Description**: Equips an item directly from the bank by its ID.
+- **Firma**: `public static void wearItem(int id)`
+- **Descripción**: Equipa un artículo directamente desde el banco por su ID.
 
 ### `withdrawAll`
-- **Signature**: `public static void withdrawAll(int id)`
-- **Description**: Withdraws all instances of a specified item from the bank by its ID.
+- **Firma**: `public static void withdrawAll(int id)`
+- **Descripción**: Retira todas las instancias de un artículo específico del banco según su ID.
 
 ### `withdrawAll(String name)`
-- **Signature**: `public static void withdrawAll(String name)`
-- **Description**: Withdraws all items with a specified name from the bank.
+- **Firma**: `public static void withdrawAll(String name)`
+- **Descripción**: Retira todos los artículos con un nombre específico del banco.
 
 ### `withdrawAndEquip(int id)`
-- **Signature**: `public static void withdrawAndEquip(int id)`
-- **Description**: Withdraws and immediately equips an item by its ID.
+- **Firma**: `public static void withdrawAndEquip(int id)`
+- **Descripción**: Retira y equipa inmediatamente un objeto según su ID.
 
 ### `withdrawOne`
-- **Signature**: `public static void withdrawOne(int id)`
-- **Description**: Withdraws a single item from the bank by its ID.
+- **Firma**: `public static void withdrawOne(int id)`
+- **Descripción**: Retira un solo artículo del banco por su ID.
 
 ### `withdrawOne(String name)`
-- **Signature**: `public static void withdrawOne(String name)`
-- **Description**: Withdraws a single item based on its name from the bank.
+- **Firma**: `public static void withdrawOne(String name)`
+- **Descripción**: Retira un solo artículo según su nombre del banco.
 
 ### `withdrawX`
-- **Signature**: `public static void withdrawX(int id, int amount)`
-- **Description**: Withdraws a specified quantity of an item from the bank by its ID.
+- **Firma**: `public static void withdrawX(int id, int amount)`
+- **Descripción**: Retira una cantidad específica de un artículo del banco según su ID.
 
-## Additional Details
-For more complex methods involving item identification and interaction, examples of usage can further clarify the expected behavior and potential edge cases.
+## Detalles adicionales
+Para métodos más complejos que involucran identificación e interacción de elementos, los ejemplos de uso pueden aclarar aún más el comportamiento esperado y los posibles casos extremos.
