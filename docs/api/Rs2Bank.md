@@ -2,13 +2,13 @@
 
 ## [Back](development.md)
 
-## Overview
+## Descripción general
 La clase `Rs2Bank` administra las interacciones con el sistema bancario en el juego, facilitando operaciones como abrir el banco, depositar, retirar y administrar artículos del inventario.
-## Methods
+## Métodos
 
 ### `closeBank`
-- **Signature**: `public static boolean closeBank()`
-- **Description**: Closes the bank interface if it is open, ensuring it is properly closed by verifying the interface status.
+- **Firma**: `public static boolean closeBank()`
+- **Descripción**: Cierra la interfaz del banco si está abierta, garantizando que esté correctamente cerrada verificando el estado de la interfaz.
 
 ### `depositAll`
 - **Signature**: `public static boolean depositAll(int id)`
