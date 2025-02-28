@@ -1,58 +1,58 @@
-# Rs2Npc Class Documentation
-## [Back](development.md)
-## Overview
-The `Rs2Npc` class provides a comprehensive suite of methods for interacting with NPCs within the game. These methods include retrieving NPCs by various attributes, validating NPC interactability, performing actions like attacking or pickpocketing, and handling NPC visibility and targeting through the game's camera and walking systems.
+# Documentación de la clase Rs2Npc
+## [Volver](development.md)
+## Descripción general
+La clase `Rs2Npc` proporciona un conjunto completo de métodos para interactuar con los NPC dentro del juego. Estos métodos incluyen la recuperación de los NPC por varios atributos, la validación de la interactividad de los NPC, la realización de acciones como atacar o robar, y el manejo de la visibilidad y la selección de objetivos de los NPC a través de la cámara y los sistemas de caminata del juego.
 
-## Methods
+## Métodos
 
 ### `getNpcByIndex`
-- **Description**: Retrieves an NPC based on its unique index.
-- **Parameters**:
-    - `index`: `int` - The index of the NPC.
-- **Returns**: `NPC` - The NPC corresponding to the given index or `null` if no NPC with that index exists.
+- **Descripción**: recupera un NPC en función de su índice único.
+- **Parámetros**:
+- `index`: `int` - El índice del NPC.
+- **Devuelve**: `NPC` - El NPC correspondiente al índice dado o `null` si no existe ningún NPC con ese índice.
 
 ### `validateInteractable`
-- **Description**: Validates if an NPC can be interacted with by ensuring it is not null, then walking to its location and turning the camera towards it.
-- **Parameters**:
-    - `npc`: `NPC` - The NPC to validate.
-- **Returns**: `NPC` - The same NPC if it is valid for interaction, `null` otherwise.
+- **Descripción**: Valida si se puede interactuar con un NPC asegurándose de que no sea nulo, luego camina hacia su ubicación y gira la cámara hacia él.
+- **Parámetros**:
+- `npc`: `NPC` - El NPC a validar.
+- **Devuelve**: `NPC` - El mismo NPC si es válido para la interacción, `null` en caso contrario.
 
 ### `getNpcsForPlayer`
-- **Description**: Retrieves a list of NPCs that are currently interacting with the player.
-- **Returns**: `List<NPC>` - A list of NPCs sorted by their distance from the player.
+- **Descripción**: Recupera una lista de NPC que están interactuando actualmente con el jugador.
+- **Devuelve**: `List<NPC>` - Una lista de NPC ordenados por su distancia del jugador.
 
 ### `getHealth`
-- **Description**: Computes the health of an NPC based on its health ratio and scale.
-- **Parameters**:
-    - `npc`: `Actor` - The NPC whose health is to be determined.
-- **Returns**: `int` - The estimated health of the NPC.
+- **Descripción**: Calcula la salud de un NPC en función de su índice de salud y escala.
+- **Parámetros**:
+- `npc`: `Actor` - El NPC cuya salud se determinará.
+- **Devuelve**: `int` - La salud estimada del PNJ.
 
 ### `getNpcs`
-- **Description**: Retrieves a stream of all NPCs currently in the game environment, filtered by non-null, non-dead status, and sorted by proximity to the player.
-- **Returns**: `Stream<NPC>` - A stream of NPCs.
+- **Descripción**: Obtiene un flujo de todos los PNJ que se encuentran actualmente en el entorno del juego, filtrados por estado no nulo o no muerto, y ordenados por proximidad al jugador.
+- **Devuelve**: `Stream<NPC>` - Un flujo de PNJ.
 
 ### `interact`
-- **Description**: Performs a specified action on an NPC, such as "attack" or "talk-to".
-- **Parameters**:
-    - `npc`: `NPC` - The NPC to interact with.
-    - `action`: `String` - The action to perform.
-- **Returns**: `boolean` - `true` if the action was successfully initiated, `false` otherwise.
+- **Descripción**: Realiza una acción específica en un PNJ, como "atacar" o "hablar con".
+- **Parámetros**:
+- `npc`: `NPC` - El PNJ con el que interactuar.
+- `action`: `String` - La acción a realizar.
+- **Devuelve**: `boolean` - `true` si la acción se inició correctamente, `false` en caso contrario.
 
 ### `hasLineOfSight`
-- **Description**: Checks if the player has a clear line of sight to the NPC.
-- **Parameters**:
-    - `npc`: `NPC` - The NPC to check visibility.
-- **Returns**: `boolean` - `true` if there is a line of sight, `false` otherwise.
+- **Descripción**: Comprueba si el jugador tiene una línea de visión clara hacia el NPC.
+- **Parámetros**:
+- `npc`: `NPC` - El NPC para comprobar la visibilidad.
+- **Devuelve**: `boolean` - `true` si hay una línea de visión, `false` en caso contrario.
 
 ### `attack`
-- **Description**: Initiates an attack on a given NPC.
-- **Parameters**:
-    - `npc`: `NPC` - The NPC to attack.
-- **Returns**: `boolean` - `true` if the attack was successfully initiated, `false` otherwise.
+- **Descripción**: Inicia un ataque a un NPC determinado.
+- **Parámetros**:
+- `npc`: `NPC` - El NPC al que atacar.
+- **Devuelve**: `boolean` - `true` si el ataque se inició correctamente, `false` en caso contrario.
 
-## Remarks
-- **Thread Safety**: Most operations that involve game data fetches are run on the client thread to ensure safe access.
-- **NPC Interaction**: This class is central for tasks that require direct NPC interaction, providing both high-level methods for complex actions and low-level methods for precise control.
+## Observaciones
+- **Seguridad de subprocesos**: La mayoría de las operaciones que implican la obtención de datos del juego se ejecutan en el subproceso del cliente para garantizar un acceso seguro.
+- **Interacción con NPC**: esta clase es fundamental para las tareas que requieren interacción directa con NPC, ya que proporciona métodos de alto nivel para acciones complejas y métodos de bajo nivel para un control preciso.
 
-## Conclusion
-The `Rs2Npc` class is an essential component of the Microbot client, facilitating advanced NPC interaction capabilities for automation tasks. Its methods are designed to handle various aspects of NPC engagement, from basic interactions to complex behaviors like combat and pathfinding.
+## Conclusión
+La clase `Rs2Npc` es un componente esencial del cliente de Microbot, que facilita capacidades avanzadas de interacción con NPC para tareas de automatización. Sus métodos están diseñados para manejar varios aspectos de la interacción con NPC, desde interacciones básicas hasta comportamientos complejos como el combate y la búsqueda de caminos.

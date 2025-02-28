@@ -1,11 +1,10 @@
-# Rs2Camera Class Documentation
+# Rs2Camera Documentación de la clase
 
-## [Back](development.md)
+## [Volver](development.md)
 
-## Overview
-The `Rs2Camera` class provides methods to manipulate the camera view in the game, including setting camera angles, pitching, and determining if a tile is visible on the screen.
-
-## Methods
+## Descripción general
+La clase `Rs2Camera` proporciona métodos para manipular la vista de la cámara en el juego, incluyendo la configuración de ángulos de la cámara, el lanzamiento y la determinación de si un mosaico es visible en la pantalla.
+## Métodos
 
 ### `angleToTile(Actor t)`
 - **Signature**: `public static int angleToTile(Actor t)`

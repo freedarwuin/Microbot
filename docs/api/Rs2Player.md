@@ -1,86 +1,86 @@
-# Rs2Player Class Documentation
-## [Back](development.md)
-## Overview
-The `Rs2Player` class is responsible for managing the player's state and interactions within the game. It includes methods for managing player status like hitpoints, energy, and various potion effects, as well as player actions like logging out, eating, and toggling run energy.
+# Documentación de la clase Rs2Player
+## [Volver](development.md)
+## Descripción general
+La clase `Rs2Player` es responsable de administrar el estado del jugador y las interacciones dentro del juego. Incluye métodos para administrar el estado del jugador, como puntos de vida, energía y varios efectos de pociones, así como acciones del jugador, como cerrar sesión, comer y alternar la energía de carrera.
 
-## Methods
+## Métodos
 
 ### `hasAntiFireActive`
-- **Returns**: `boolean` - True if any antifire potion effect is active.
+- **Devuelve**: `boolean` - Verdadero si hay algún efecto de antifire potion activo.
 
 ### `hasSuperAntiFireActive`
-- **Returns**: `boolean` - True if a super antifire potion effect is active.
+- **Devuelve**: `boolean` - Verdadero si hay un efecto de super antifire potion activo.
 
 ### `hasDivineRangedActive`
-- **Returns**: `boolean` - True if a divine ranging potion effect is active.
+- **Devuelve**: `boolean` - Verdadero si hay un efecto de divine ranging potion activo.
 
 ### `hasRangingPotionActive`
-- **Returns**: `boolean` - True if a ranging potion effect is active that boosts ranged skill beyond base levels.
+- **Devuelve**: `boolean` - Verdadero si hay un efecto de ranging potion activo que potencia la habilidad de alcance más allá de los niveles básicos.
 
 ### `hasAntiVenomActive`
-- **Returns**: `boolean` - True if any antivenom effect is active, including effects from items like the serpentine helm.
+- **Devuelve**: `boolean` - Verdadero si hay algún efecto antipoison activo, incluidos los efectos de elementos como el serpentine helm.
 
 ### `hasAntiPoisonActive`
-- **Returns**: `boolean` - True if any antipoison effect is active.
+- **Devuelve**: `boolean` - Verdadero si hay algún efecto antipoison  activo.
 
 ### `handlePotionTimers`
-- **Parameters**:
-    - `event`: `VarbitChanged` - The event triggered when a varbit changes, used to update potion timers.
-- **Description**: Updates potion timers based on varbit changes.
+- **Parámetros**:
+- `event`: `VarbitChanged` - El evento que se activa cuando cambia un varbit, se usa para actualizar los temporizadores de poción.
+- **Descripción**: Actualiza los temporizadores de poción según los cambios de varbit.
 
 ### `waitForWalking`
-- **Description**: Waits until the player starts and then stops walking.
+- **Descripción**: Espera hasta que el jugador comience a caminar y luego deje de caminar.
 
 ### `isAnimating`
-- **Returns**: `boolean` - True if the player is currently playing an animation.
+- **Devuelve**: `boolean` - Verdadero si el jugador está reproduciendo una animación.
 
 ### `isWalking`
-- **Returns**: `boolean` - True if the player is currently walking.
+- **Devuelve**: `boolean` - Verdadero si el jugador está caminando.
 
 ### `isMember`
-- **Returns**: `boolean` - True if the player has membership active.
+- **Devuelve**: `boolean` - Verdadero si el jugador tiene una membresía activa.
 
 ### `logout`
-- **Description**: Initiates a logout action for the player.
+- **Descripción**: Inicia una acción de cierre de sesión para el jugador.
 
 ### `eatAt`
-- **Parameters**:
-    - `percentage`: `int` - The health percentage threshold below which the player should eat.
-- **Returns**: `boolean` - True if the player successfully ate to maintain health above the specified percentage.
+- **Parámetros**:
+- `percentage`: `int` - El umbral de porcentaje de salud por debajo del cual el jugador debe comer.
+- **Devuelve**: `boolean` - Verdadero si el jugador comió con éxito para mantener la salud por encima del porcentaje especificado.
 
 ### `getPlayers`
-- **Returns**: `List<Player>` - A list of players in the current game environment, excluding the player themselves.
+- **Devuelve**: `List<Player>` - Una lista de jugadores en el entorno de juego actual, excluyendo al jugador mismo.
 
 ### `getWorldLocation`
-- **Returns**: `WorldPoint` - The current world location of the player, accounting for instance regions.
+- **Devuelve**: `WorldPoint` - La ubicación actual del jugador en el mundo, teniendo en cuenta las regiones de instancia.
 
 ### `isFullHealth`
-- **Returns**: `boolean` - True if the player is at full health.
+- **Devuelve**: `boolean` - Verdadero si el jugador tiene la salud completa.
 
 ### `isInMulti`
-- **Returns**: `boolean` - True if the player is in a multi-combat area.
+- **Devuelve**: `boolean` - Verdadero si el jugador está en un área de combate múltiple.
 
 ### `logoutIfPlayerDetected`
-- **Parameters**:
-  - `amountOfPlayers`: `int` - Amount of players to detect before logging out.
-- **Returns**: `boolean` - True if a player is detected.
+- **Parámetros**:
+- `amountOfPlayers`: `int` - Cantidad de jugadores a detectar antes de cerrar sesión.
+- **Devuelve**: `boolean` - Verdadero si se detecta un jugador.
 
 ### `logoutIfPlayerDetected`
-- **Parameters**:
-  - `amountOfPlayers`: `int` - Amount of players to detect before logging out.
-  - `time`: `int` - The time in milliseconds for a player to be detected before logging out.
-- **Returns**: `boolean` - True if a player is detected.
+- **Parámetros**:
+- `amountOfPlayers`: `int` - Cantidad de jugadores a detectar antes de cerrar sesión.
+- `time`: `int` - El tiempo en milisegundos que debe transcurrir para que se detecte a un jugador antes de cerrar la sesión.
+- **Devuelve**: `boolean` - Verdadero si se detecta a un jugador.
 
 ### `logoutIfPlayerDetected`
-- **Parameters**:
-  - `amountOfPlayers`: `int` - Amount of players to detect before logging out.
-  - `time`: `int` - The time in milliseconds for a player to be detected before logging out.
-  - `distance`: `int` - The distance between a player required before logging out.
-- **Returns**: `boolean` - True if a player is detected.
+- **Parámetros**:
+- `amountOfPlayers`: `int` - Cantidad de jugadores que se deben detectar antes de cerrar la sesión.
+- `time`: `int` - El tiempo en milisegundos que debe transcurrir para que se detecte a un jugador antes de cerrar la sesión.
+- `distance`: `int` - La distancia que debe haber entre un jugador y otro antes de cerrar la sesión.
+- **Devuelve**: `boolean` - Verdadero si se detecta a un jugador.
 
-## Remarks
-- **Game Interaction**: This class provides critical functionalities for interacting with various game mechanics, from potion effects to player movement.
-- **Utility Methods**: Includes utilities for waiting on player actions (like walking or animation), which are essential for coordinating tasks in automation scripts.
+## Observaciones
+- **Interacción con el juego**: esta clase proporciona funciones fundamentales para interactuar con varias mecánicas del juego, desde los efectos de las pociones hasta el movimiento del jugador.
+- **Métodos de utilidad**: incluye utilidades para esperar las acciones del jugador (como caminar o realizar una animación), que son esenciales para coordinar tareas en los scripts de automatización.
 
-## Conclusion
-The `Rs2Player` class is essential for managing the player's interaction within the game, providing methods to handle health, status effects, and environmental awareness. It serves as a central point for scripting player behavior in response to game state changes and player conditions.
+## Conclusión
+La clase `Rs2Player` es esencial para gestionar la interacción del jugador dentro del juego, ya que proporciona métodos para gestionar la salud, los efectos de estado y la conciencia del entorno. Sirve como punto central para programar el comportamiento del jugador en respuesta a los cambios de estado del juego y las condiciones del jugador.

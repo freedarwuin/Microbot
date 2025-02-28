@@ -1,127 +1,127 @@
-# Rs2Inventory Class Documentation
-## [Back](development.md)
-## Overview
-`Rs2Inventory` manages the player's inventory in the game, offering methods for interacting with items, checking inventory status, and performing complex item manipulations.
+# Documentación de la clase Rs2Inventory
+## [Volver](development.md)
+## Descripción general
+`Rs2Inventory` administra el inventario del jugador en el juego, ofreciendo métodos para interactuar con los elementos, verificar el estado del inventario y realizar manipulaciones complejas de elementos.
 
-## Methods
+## Métodos
 
 ### `inventory`
-- **Description**: Retrieves the current inventory container.
-- **Returns**: `ItemContainer` - The current inventory.
+- **Descripción**: recupera el contenedor del inventario actual.
+- **Devuelve**: `ItemContainer` - El inventario actual.
 
 ### `inventoryItems`
-- **Description**: Holds the list of items currently in the inventory.
+- **Descripción**: contiene la lista de elementos que se encuentran actualmente en el inventario.
 
 ### `storeInventoryItemsInMemory`
-- **Description**: Updates the memory with the current inventory items whenever there's a change.
-- **Parameters**:
-    - `e`: `ItemContainerChanged` - The event triggered when inventory changes.
+- **Descripción**: actualiza la memoria con los elementos del inventario actual siempre que haya un cambio.
+- **Parámetros**:
+- `e`: `ItemContainerChanged` - El evento que se activa cuando cambia el inventario.
 
 ### `items`
-- **Description**: Provides a list of all items in the inventory.
-- **Returns**: `List<Rs2Item>` - List of inventory items.
+- **Descripción**: Proporciona una lista de todos los artículos del inventario.
+- **Devuelve**: `List<Rs2Item>` - Lista de artículos del inventario.
 
 ### `all`
-- **Description**: Returns a list of all items in the inventory.
-- **Returns**: `List<Rs2Item>` - List of all items.
+- **Descripción**: Devuelve una lista de todos los artículos del inventario.
+- **Devuelve**: `List<Rs2Item>` - Lista de todos los artículos.
 
 ### `all`
-- **Description**: Returns a list of all items that match a given filter.
-- **Parameters**:
-    - `filter`: `Predicate<Rs2Item>` - The filter to apply.
-- **Returns**: `List<Rs2Item>` - Filtered list of items.
+- **Descripción**: Devuelve una lista de todos los artículos que coinciden con un filtro determinado.
+- **Parámetros**:
+- `filter`: `Predicate<Rs2Item>` - El filtro que se aplicará.
+- **Devuelve**: `List<Rs2Item>` - Lista filtrada de artículos.
 
 ### `capacity`
-- **Description**: Returns the total capacity of the inventory.
-- **Returns**: `int` - The capacity of the inventory.
+- **Descripción**: Devuelve la capacidad total del inventario.
+- **Devuelve**: `int` - La capacidad del inventario.
 
 ### `combine`
-- **Description**: Combines two items in the inventory by their IDs.
-- **Parameters**:
-    - `primaryItemId`: `int` - ID of the primary item.
-    - `secondaryItemId`: `int` - ID of the secondary item.
-- **Returns**: `boolean` - True if successful, false otherwise.
+- **Descripción**: Combina dos elementos del inventario por sus ID.
+- **Parámetros**:
+- `primaryItemId`: `int` - ID del elemento principal.
+- `secondaryItemId`: `int` - ID del elemento secundario.
+- **Devuelve**: `boolean` - Verdadero si la operación es exitosa, falso en caso contrario.
 
 ### `combine`
-- **Description**: Combines two items in the inventory by their names.
-- **Parameters**:
-    - `primaryItemName`: `String` - Name of the primary item.
-    - `secondaryItemName`: `String` - Name of the secondary item.
-- **Returns**: `boolean` - True if successful, false otherwise.
+- **Descripción**: Combina dos elementos del inventario por sus nombres.
+- **Parámetros**:
+- `primaryItemName`: `String` - Nombre del elemento principal.
+- `secondaryItemName`: `String` - Nombre del elemento secundario.
+- **Devuelve**: `boolean` - Verdadero si la operación es exitosa, falso en caso contrario.
 
 ### `contains`
-- **Description**: Checks if the inventory contains an item with a specific ID.
-- **Parameters**:
-    - `id`: `int` - The ID to check.
-- **Returns**: `boolean` - True if the item is present, false otherwise.
+- **Descripción**: Comprueba si el inventario contiene un elemento con un ID específico.
+- **Parámetros**:
+- `id`: `int` - El ID a verificar.
+- **Devuelve**: `boolean` - Verdadero si el artículo está presente, falso en caso contrario.
 
 ### `contains`
-- **Description**: Checks if the inventory contains items with specific IDs.
-- **Parameters**:
-    - `ids`: `int[]` - The IDs to check.
-- **Returns**: `boolean` - True if all items are present, false otherwise.
+- **Descripción**: Comprueba si el inventario contiene artículos con ID específicos.
+- **Parámetros**:
+- `ids`: `int[]` - Los ID a verificar.
+- **Devuelve**: `boolean` - Verdadero si todos los artículos están presentes, falso en caso contrario.
 
 ### `contains`
-- **Description**: Checks if the inventory contains an item with a specific name.
-- **Parameters**:
-    - `name`: `String` - The name to check.
-- **Returns**: `boolean` - True if the item is present, false otherwise.
+- **Descripción**: Comprueba si el inventario contiene un artículo con un nombre específico.
+- **Parámetros**:
+- `name`: `String` - El nombre a verificar.
+- **Devuelve**: `boolean` - Verdadero si el artículo está presente, falso en caso contrario.
 
 ### `count`
-- **Description**: Counts the number of items matching a specific ID.
-- **Parameters**:
-    - `id`: `int` - The ID to match.
-- **Returns**: `int` - Count of matching items.
+- **Descripción**: Cuenta la cantidad de artículos que coinciden con un ID específico.
+- **Parámetros**:
+- `id`: `int` - El ID que se va a buscar.
+- **Devuelve**: `int` - Cantidad de elementos que coinciden.
 
 ### `deselect`
-- **Description**: Deselects any selected item in the inventory.
-- **Returns**: `boolean` - True if an item was deselected, false otherwise.
+- **Descripción**: Deselecciona cualquier elemento seleccionado en el inventario.
+- **Devuelve**: `boolean` - Verdadero si se deseleccionó un elemento, falso en caso contrario.
 
 ### `drop`
-- **Description**: Drops an item with a specific ID.
-- **Parameters**:
-    - `id`: `int` - The ID of the item to drop.
-- **Returns**: `boolean` - True if the item was dropped, false otherwise.
+- **Descripción**: Deselecciona un elemento con un ID específico.
+- **Parámetros**:
+- `id`: `int` - El ID del elemento que se va a descartar.
+- **Devuelve**: `boolean` - Verdadero si se deseleccionó el elemento, falso en caso contrario.
 
 ### `dropAll`
-- **Description**: Drops all items in the inventory.
-- **Returns**: `boolean` - True if all items were dropped, false otherwise.
+- **Descripción**: Deselecciona todos los elementos del inventario.
+- **Devuelve**: `boolean` - Verdadero si se deseleccionaron todos los elementos, falso en caso contrario.
 
 ### `emptySlotCount`
-- **Description**: Returns the count of empty slots in the inventory.
-- **Returns**: `int` - Number of empty slots.
+- **Descripción**: Devuelve el recuento de espacios vacíos en el inventario.
+- **Devuelve**: `int` - Número de espacios vacíos.
 
 ### `get`
-- **Description**: Retrieves an item by ID.
-- **Parameters**:
-    - `id`: `int` - The item's ID.
-- **Returns**: `Rs2Item` - The item, or null if not found.
+- **Descripción**: Recupera un elemento por ID.
+- **Parámetros**:
+- `id`: `int` - El ID del elemento.
+- **Devuelve**: `Rs2Item` - El elemento, o null si no se encuentra.
 
 ### `getActionsForSlot`
-- **Description**: Retrieves available actions for an item in a specified slot.
-- **Parameters**:
-    - `slot`: `int` - The slot to check.
-- **Returns**: `String[]` - Array of actions.
+- **Descripción**: Recupera las acciones disponibles para un elemento en un espacio especificado.
+- **Parámetros**:
+- `slot`: `int` - El espacio a verificar.
+- **Devuelve**: `String[]` - Matriz de acciones.
 
 ### `isFull`
-- **Description**: Checks if the inventory is full.
-- **Returns**: `boolean` - True if the inventory is full, false otherwise.
+- **Descripción**: Comprueba si el inventario está lleno.
+- **Devuelve**: `boolean` - Verdadero si el inventario está lleno, falso en caso contrario.
 
 ### `isEmpty`
-- **Description**: Checks if the inventory is empty.
-- **Returns**: `boolean` - True if the inventory is empty, false otherwise.
+- **Descripción**: Comprueba si el inventario está vacío.
+- **Devuelve**: `boolean` - Verdadero si el inventario está vacío, falso en caso contrario.
 
 ### `interact`
-- **Description**: Interacts with an item by ID.
-- **Parameters**:
-    - `id`: `int` - The item's ID.
-    - `action`: `String` - The action to perform (optional).
-- **Returns**: `boolean` - True if the interaction was successful, false otherwise.
+- **Descripción**: Interactúa con un elemento por ID.
+- **Parámetros**:
+- `id`: `int` - El ID del elemento.
+- `action`: `String` - La acción a realizar (opcional).
+- **Devuelve**: `boolean` - Verdadero si la interacción fue exitosa, falso en caso contrario.
 
-## Additional Methods
-The class includes numerous other methods for more specific or advanced inventory manipulations, such as filtering items, checking for item presence by different criteria, interacting with multiple items, and handling special cases like noted or unnoted items.
+## Métodos adicionales
+La clase incluye muchos otros métodos para manipulaciones de inventario más específicas o avanzadas, como filtrar elementos, verificar la presencia de elementos por diferentes criterios, interactuar con múltiples elementos y manejar casos especiales como elementos anotados o no anotados.
 
-## Usage Example
+## Ejemplo de uso
 ```java
 Rs2Inventory.interact(12345, "Use");
 boolean hasItem = Rs2Inventory.contains("Magic potion");

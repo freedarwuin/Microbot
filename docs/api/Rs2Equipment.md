@@ -1,81 +1,81 @@
-# Rs2Equipment Class Documentation
-## [Back](development.md)
-## Overview
-The `Rs2Equipment` class provides methods to interact with the player's equipment, allowing for checking equipment status, manipulating specific items, and managing actions related to equipment slots.
+# Documentación de la clase Rs2Equipment
+## [Volver](development.md)
+## Descripción general
+La clase `Rs2Equipment` proporciona métodos para interactuar con el equipo del jugador, lo que permite verificar el estado del equipo, manipular elementos específicos y administrar acciones relacionadas con las ranuras de equipo.
 
-## Methods
+## Métodos
 
 ### `equipment`
-- **Signature**: `public static ItemContainer equipment()`
-- **Description**: Retrieves the current equipment item container from the game client.
+- **Firma**: `public static ItemContainer equipment()`
+- **Descripción**: recupera el contenedor de elementos de equipo actual del cliente del juego.
 
 ### `getEquippedItem`
-- **Signature**: `public static Rs2Item getEquippedItem(EquipmentInventorySlot slot)`
-- **Description**: Retrieves an equipped item from a specified equipment slot.
+- **Firma**: `public static Rs2Item getEquippedItem(EquipmentInventorySlot slot)`
+- **Descripción**: recupera un elemento equipado de una ranura de equipo específica.
 
 ### `hasEquipped`
 - **Signature**: `public static boolean hasEquipped(String itemName)`
-- **Description**: Checks if an item with a specific name is equipped. This method is deprecated and will be removed in favor of `isWearing`.
+- **Description**: Comprueba si un elemento con un nombre específico está equipado. Este método está en desuso y se eliminará en favor de `isWearing`.
 
 ### `hasEquippedContains`
 - **Signature**: `public static boolean hasEquippedContains(String itemName)`
-- **Description**: Checks if any equipped item's name contains the specified substring.
+- **Description**: Comprueba si el nombre de cualquier elemento equipado contiene la subcadena especificada.
 
 ### `hasEquipped`
 - **Signature**: `public static boolean hasEquipped(int id)`
-- **Description**: Determines if an item with a specific ID is equipped.
+- **Description**: Determina si un elemento con un ID específico está equipado.
 
 ### `hasEquippedSlot`
-- **Signature**: `public static boolean hasEquippedSlot(EquipmentInventorySlot slot)`
-- **Description**: Checks if any item is equipped in the specified slot.
+- **Firma**: `public static boolean hasEquippedSlot(EquipmentInventorySlot slot)`
+- **Descripción**: Comprueba si hay algún objeto equipado en la ranura especificada.
 
 ### `hasGuthanBodyEquiped`
-- **Signature**: `public static boolean hasGuthanBodyEquiped()`
-- **Description**: Checks if "Guthan's platebody" is equipped.
+- **Firma**: `public static boolean hasGuthanBodyEquiped()`
+- **Descripción**: Comprueba si está equipado el "Guthan's platebody".
 
 ### `hasGuthanHelmEquiped`
-- **Signature**: `public static boolean hasGuthanHelmEquiped()`
-- **Description**: Checks if "Guthan's helm" is equipped.
+- **Firma**: `public static boolean hasGuthanHelmEquiped()`
+- **Descripción**: Comprueba si está equipado el "Guthan's platebody".
 
 ### `hasGuthanLegsEquiped`
-- **Signature**: `public static boolean hasGuthanLegsEquiped()`
-- **Description**: Checks if "Guthan's chainskirt" is equipped.
+- **Firma**: `public static boolean hasGuthanLegsEquiped()`
+- **Descripción**: Comprueba si la "Guthan's chainskirt" está equipada.
 
 ### `hasGuthanWeaponEquiped`
-- **Signature**: `public static boolean hasGuthanWeaponEquiped()`
-- **Description**: Checks if "Guthan's warspear" is equipped.
+- **Firma**: `public static boolean hasGuthanWeaponEquiped()`
+- **Descripción**: Comprueba si la "Guthan's warspear" está equipada.
 
 ### `isEquipped`
-- **Signature**: `public static boolean isEquipped(String name, EquipmentInventorySlot slot, boolean exact)`
-- **Description**: Determines if a specific item by name is equipped in a given slot, with an option for exact matching.
+- **Firma**: `public static boolean isEquipped(String name, EquipmentInventorySlot slot, boolean exact)`
+- **Descripción**: Determina si un objeto específico por nombre está equipado en una ranura determinada, con una opción para una coincidencia exacta.
 
 ### `isEquipped`
-- **Signature**: `public static boolean isEquipped(int id, EquipmentInventorySlot slot)`
-- **Description**: Checks if a specific item by ID is equipped in a given slot.
+- **Firma**: `public static boolean isEquipped(int id, EquipmentInventorySlot slot)`
+- **Descripción**: Comprueba si un elemento específico por ID está equipado en una ranura determinada.
 
 ### `isWearing`
-- **Signature**: `public static boolean isWearing(String name, boolean exact)`
-- **Description**: Checks across all equipment slots to see if a specific item by name is worn, with an option for exact matching.
+- **Firma**: `public static boolean isWearing(String name, boolean exact)`
+- **Descripción**: Comprueba en todas las ranuras de equipo si se lleva puesto un elemento específico por nombre, con una opción para una coincidencia exacta.
 
 ### `isWearing`
-- **Signature**: `public static boolean isWearing(int id)`
-- **Description**: Checks across all equipment slots to see if a specific item by ID is worn.
+- **Firma**: `public static boolean isWearing(int id)`
+- **Descripción**: Comprueba en todas las ranuras de equipo si se lleva puesto un elemento específico por ID.
 
 ### `isWearingFullGuthan`
-- **Signature**: `public static boolean isWearingFullGuthan()`
-- **Description**: Determines if the player is wearing the full set of Guthan's equipment.
+- **Firma**: `public static boolean isWearingFullGuthan()`
+- **Descripción**: determina si el jugador lleva puesto el conjunto completo de equipamiento de Guthan.
 
 ### `storeEquipmentItemsInMemory`
-- **Signature**: `public static void storeEquipmentItemsInMemory(ItemContainerChanged e)`
-- **Description**: Updates the stored list of equipment items based on changes detected in the equipment item container.
+- **Firma**: `public static void storeEquipmentItemsInMemory(ItemContainerChanged e)`
+- **Descripción**: actualiza la lista almacenada de elementos de equipamiento en función de los cambios detectados en el contenedor de elementos de equipamiento.
 
 ### `useAmuletAction`
-- **Signature**: `public static void useAmuletAction(JewelleryLocationEnum jewelleryLocationEnum)`
-- **Description**: Performs an action on an amulet, such as equipping it, based on the specified jewellery location.
+- **Firma**: `public static void useAmuletAction(JewelleryLocationEnum jewelleryLocationEnum)`
+- **Descripción**: realiza una acción sobre un amuleto, como equiparlo, en función de la ubicación de la joya especificada.
 
 ### `useRingAction`
-- **Signature**: `public static void useRingAction(JewelleryLocationEnum jewelleryLocationEnum)`
-- **Description**: Performs an action on a ring, such as equipping it, based on the specified jewellery location.
+- **Firma**: `public static void useRingAction(JewelleryLocationEnum jewelleryLocationEnum)`
+- **Descripción**: Realiza una acción en un anillo, como equiparlo, según la ubicación de la joya especificada.
 
-## Additional Details
-This class is critical for scripts that need to interact with the player's equipped items, allowing for efficient checks and manipulations related to gear and accessories.
+## Detalles adicionales
+Esta clase es fundamental para los scripts que necesitan interactuar con los elementos equipados del jugador, lo que permite realizar controles y manipulaciones eficientes relacionados con el equipo y los accesorios.

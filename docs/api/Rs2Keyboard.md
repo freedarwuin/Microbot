@@ -1,73 +1,73 @@
-# Rs2Keyboard Class Documentation
-## [Back](development.md)
-## Overview
-The `Rs2Keyboard` class simulates keyboard actions such as typing strings, pressing, holding, and releasing keys. It directly interacts with the game's canvas to dispatch keyboard events.
+# Documentación de la clase Rs2Keyboard
+## [Volver](development.md)
+## Descripción general
+La clase `Rs2Keyboard` simula acciones del teclado, como escribir cadenas, presionar, mantener presionadas y soltar teclas. Interactúa directamente con el lienzo del juego para enviar eventos del teclado.
 
-## Methods
+## Métodos
 
 ### `getCanvas`
-- **Description**: Retrieves the game canvas from the Microbot client.
-- **Returns**: `Canvas` - The game's canvas used for dispatching keyboard events.
+- **Descripción**: Recupera el lienzo del juego del cliente Microbot.
+- **Devuelve**: `Canvas` - El lienzo del juego utilizado para enviar eventos del teclado.
 
 ### `typeString`
-- **Description**: Types a string by dispatching a sequence of `KEY_TYPED` events for each character.
-- **Parameters**:
-    - `word`: `String` - The string to type.
-- **Behavior**: Simulates typing with delays between key presses.
+- **Descripción**: Escribe una cadena enviando una secuencia de eventos `KEY_TYPED` para cada carácter.
+- **Parámetros**:
+- `word`: `String` - La cadena que se va a escribir.
+- **Comportamiento**: Simula la escritura con demoras entre las pulsaciones de teclas.
 
 ### `keyPress`
-- **Description**: Presses a single character key.
-- **Parameters**:
-    - `key`: `char` - The character key to press.
-- **Behavior**: Dispatches a `KEY_TYPED` event for the character.
+- **Descripción**: Presiona una tecla de un solo carácter.
+- **Parámetros**:
+- `key`: `char` - La tecla del carácter que se debe presionar.
+- **Comportamiento**: Envía un evento `KEY_TYPED` para el carácter.
 
 ### `holdShift`
-- **Description**: Holds the shift key down.
-- **Behavior**: Dispatches a `KEY_PRESSED` event for the shift key.
+- **Descripción**: Mantiene presionada la tecla Shift.
+- **Comportamiento**: Envía un evento `KEY_PRESSED` para la tecla Shift.
 
 ### `releaseShift`
-- **Description**: Releases the shift key.
-- **Behavior**: Dispatches a `KEY_RELEASED` event for the shift key.
+- **Descripción**: Suelta la tecla Shift.
+- **Comportamiento**: Envía un evento `KEY_RELEASED` para la tecla Shift.
 
 ### `keyHold`
-- **Description**: Holds down a specified key.
-- **Parameters**:
-    - `key`: `int` - The key code (from `KeyEvent`) to hold.
-- **Behavior**: Dispatches a `KEY_PRESSED` event for the specified key.
+- **Descripción**: Mantiene presionada una tecla específica.
+- **Parámetros**:
+- `key`: `int` - El código de tecla (de `KeyEvent`) que se debe mantener presionado.
+- **Comportamiento**: Envía un evento `KEY_PRESSED` para la tecla específica.
 
 ### `keyRelease`
-- **Description**: Releases a specified key.
-- **Parameters**:
-    - `key`: `int` - The key code (from `KeyEvent`) to release.
-- **Behavior**: Dispatches a `KEY_RELEASED` event for the specified key.
+- **Descripción**: Suelta una tecla especificada.
+- **Parámetros**:
+- `key`: `int` - El código de tecla (de `KeyEvent`) que se va a soltar.
+- **Comportamiento**: Envía un evento `KEY_RELEASED` para la tecla especificada.
 
 ### `keyPress`
-- **Description**: Simulates a complete key press (press and release).
-- **Parameters**:
-    - `key`: `int` - The key code to press.
-- **Behavior**: Calls `keyHold` and `keyRelease` successively.
+- **Descripción**: Simula una pulsación completa de una tecla (pulsación y liberación).
+- **Parámetros**:
+- `key`: `int` - El código de tecla que se va a pulsar.
+- **Comportamiento**: Llama a `keyHold` y `keyRelease` sucesivamente.
 
 ### `enter`
-- **Description**: Simulates pressing the Enter key.
-- **Behavior**: Calls `keyHold` and `keyRelease` for `KeyEvent.VK_ENTER`.
+- **Descripción**: Simula pulsar la tecla Enter.
+- **Comportamiento**: Llama a `keyHold` y `keyRelease` para `KeyEvent.VK_ENTER`.
 
 ### `isKeyPressed`
-- **Description**: Checks if a specific key is currently pressed.
-- **Parameters**:
-    - `keyCode`: `int` - The key code to check.
-- **Returns**: `boolean` - True if the key is pressed, false otherwise.
+- **Descripción**: Comprueba si una tecla específica está presionada actualmente.
+- **Parámetros**:
+- `keyCode`: `int` - El código de la tecla a verificar.
+- **Devoluciones**: `boolean` - Verdadero si la tecla está presionada, falso en caso contrario.
 
-## Static Members
+## Miembros estáticos
 
 ### `pressedKeys`
-- **Type**: `Map<Integer, Boolean>`
-- **Description**: Keeps track of the pressed state of keys.
+- **Tipo**: `Map<Integer, Boolean>`
+- **Descripción**: Realiza un seguimiento del estado presionado de las teclas.
 
-## Usage Example
+## Ejemplo de uso
 ```java
-Rs2Keyboard.typeString("Hello, world!");
+Rs2Keyboard.typeString("¡Hola, mundo!");
 Rs2Keyboard.keyPress('a');
 Rs2Keyboard.holdShift();
 Rs2Keyboard.releaseShift();
 Rs2Keyboard.enter();
-boolean isShiftPressed = Rs2Keyboard.isKeyPressed(KeyEvent.VK_SHIFT);
+booleano isShiftPressed = Rs2Keyboard.isKeyPressed(KeyEvent.VK_SHIFT);

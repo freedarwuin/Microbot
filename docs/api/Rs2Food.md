@@ -1,50 +1,49 @@
-# Rs2Food Enumeration Documentation
-## [Back](development.md)
-## Overview
-The `Rs2Food` enumeration defines constants for various food items used in the game. Each food item is associated with an identifier (ID), the amount it heals (heal), and a descriptive name.
+# Documentación de la enumeración Rs2Food
+## [Volver](development.md)
+## Descripción general
+La enumeración `Rs2Food` define constantes para varios elementos de comida utilizados en el juego. Cada elemento de comida está asociado con un identificador (ID), la cantidad que cura (curación) y un nombre descriptivo.
 
-## Enumeration Constants
+## Constantes de enumeración
 
-### Food Items
-Each constant in the `Rs2Food` enumeration represents a specific type of food, including its healing properties and item ID. Below are a few examples from the enumeration:
+### Elementos de comida
+Cada constante en la enumeración `Rs2Food` representa un tipo específico de comida, incluidas sus propiedades curativas y la identificación del elemento. A continuación, se muestran algunos ejemplos de la enumeración:
 
-- **Dark_Crab**: Represents a Dark Crab which heals 27 points.
-- **ROCKTAIL**: Represents a Rocktail which heals 23 points.
-- **MANTA**: Represents a Manta Ray which heals 22 points.
-- **SHARK**: Represents a Shark which heals 20 points.
-- **LOBSTER**: Represents a Lobster which heals 12 points.
-- **TROUT**: Represents a Trout which heals 7 points.
-- **SALMON**: Represents a Salmon which heals 9 points.
-- **SWORDFISH**: Represents a Swordfish which heals 14 points.
-- **TUNA**: Represents a Tuna which heals 10 points.
-- **MONKFISH**: Represents a Monkfish which heals 16 points.
-- **SEA_TURTLE**: Represents a Sea Turtle which heals 21 points.
-- **CAKE**: Represents a Cake which heals 4 points.
-- **CHOCOLATE_CAKE**: Represents a Chocolate Cake which heals 5 points.
-- **PLAIN_PIZZA**: Represents a Plain Pizza which heals 7 points.
-- **MEAT_PIZZA**: Represents a Meat Pizza which heals 8 points.
-- **ANCHOVY_PIZZA**: Represents an Anchovy Pizza which heals 9 points.
-- **PINEAPPLE_PIZZA**: Represents a Pineapple Pizza which heals 11 points.
-- **BREAD**: Represents Bread which heals 5 points.
-- **APPLE_PIE**: Represents an Apple Pie which heals 7 points.
-- **MEAT_PIE**: Represents a Meat Pie which heals 6 points.
+- **Dark_Crab**: representa un cangrejo oscuro que cura 27 puntos.
+- **ROCKTAIL**: representa un Rocktail que cura 23 puntos.
+- **MANTA**: representa una manta raya que cura 22 puntos.
+- **SHARK**: representa un tiburón que cura 20 puntos.
+- **LOBSTER**: Representa una langosta que cura 12 puntos.
+- **TROUT**: Representa una trucha que cura 7 puntos.
+- **SALMON**: Representa un salmón que cura 9 puntos.
+- **SWORDFISH**: Representa un pez espada que cura 14 puntos.
+- **TUNA**: Representa un atún que cura 10 puntos.
+- **MONKFISH**: Representa un rape que cura 16 puntos.
+- **SEA_TURTLE**: Representa una tortuga marina que cura 21 puntos.
+- **CAKE**: Representa una tarta que cura 4 puntos.
+- **CHOCOLATE_CAKE**: Representa una tarta de chocolate que cura 5 puntos.
+- **PLAIN_PIZZA**: Representa una pizza simple que cura 7 puntos.
+- **MEAT_PIZZA**: Representa una pizza de carne que cura 8 puntos.
+- **ANCHOVY_PIZZA**: Representa una pizza de anchoas que cura 9 puntos.
+- **PINEAPPLE_PIZZA**: Representa una pizza de piña que cura 11 puntos.
+- **BREAD**: Representa un pan que cura 5 puntos.
+- **APPLE_PIE**: Representa una tarta de manzana que cura 7 puntos.
+- **MEAT_PIE**: Representa una tarta de carne que cura 6 puntos.
 
-... and many more.
+... y muchos más.
 
-## Methods
+## Métodos
 
 ### `getId`
-- **Description**: Returns the ID of the food item, which is used within the game to identify different types of food.
+- **Descripción**: Devuelve el ID del alimento, que se utiliza dentro del juego para identificar diferentes tipos de alimentos.
 
 ### `getHeal`
-- **Description**: Returns the amount of health points the food item can restore when consumed.
+- **Descripción**: Devuelve la cantidad de puntos de salud que el alimento puede restaurar cuando se consume.
 
 ### `getName`
-- **Description**: Provides the name of the food item, which can be used in game interfaces and scripts.
+- **Descripción**: Proporciona el nombre del alimento, que se puede utilizar en las interfaces y scripts del juego.
 
 ### `toString`
-- **Description**: Returns a string representation of the food item, combining its name and healing value, useful for display or debugging purposes.
+- **Descripción**: Devuelve una representación en cadena del alimento, que combina su nombre y valor de curación, útil para fines de visualización o depuración.
 
-## Usage
-This enumeration is particularly useful for scripts dealing with health management, where food items are needed to restore health points. It simplifies the process of selecting appropriate food based on its healing capabilities and provides an easy way to reference them by name or ID.
-
+## Uso
+Esta enumeración es particularmente útil para los scripts que tratan con la gestión de la salud, donde se necesitan alimentos para restaurar puntos de salud. Simplifica el proceso de selección de alimentos adecuados en función de sus capacidades de curación y proporciona una forma sencilla de hacer referencia a ellos por nombre o ID.

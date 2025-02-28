@@ -1,38 +1,38 @@
-# Rs2Prayer Class Documentation
-## [Back](development.md)
-## Overview
-The `Rs2Prayer` class offers functionalities to manage and interact with prayer abilities in the game. It includes methods to toggle prayers on or off, check if prayers are active, and determine if the player is out of prayer points.
+# Documentación de la clase Rs2Prayer
+## [Volver](development.md)
+## Descripción general
+La clase `Rs2Prayer` ofrece funcionalidades para administrar e interactuar con las habilidades de oración en el juego. Incluye métodos para activar o desactivar las oraciones, verificar si las oraciones están activas y determinar si el jugador se quedó sin puntos de oración.
 
-## Methods
+## Métodos
 
 ### `toggle(Rs2PrayerEnum name)`
-- **Parameters**:
-    - `name`: `Rs2PrayerEnum` - The enum entry representing the prayer to toggle.
-- **Description**: Toggles the specified prayer without checking its current state.
+- **Parámetros**:
+- `name`: `Rs2PrayerEnum` - La entrada de enumeración que representa la oración que se va a activar.
+- **Descripción**: Activa o desactiva la oración especificada sin verificar su estado actual.
 
 ### `toggle(Rs2PrayerEnum name, boolean on)`
-- **Parameters**:
-    - `name`: `Rs2PrayerEnum` - The enum entry representing the prayer to toggle.
-    - `on`: `boolean` - Desired state of the prayer; `true` to activate, `false` to deactivate.
-- **Description**: Toggles the specified prayer to the desired state. Checks the current state to avoid unnecessary toggling.
+- **Parámetros**:
+- `name`: `Rs2PrayerEnum` - La entrada de enumeración que representa la oración que se va a activar o desactivar.
+- `on`: `boolean` - Estado deseado de la oración; `true` para activar, `false` para desactivar.
+- **Descripción**: Cambia la oración especificada al estado deseado. Verifica el estado actual para evitar cambios innecesarios.
 
 ### `isPrayerActive(Rs2PrayerEnum name)`
-- **Parameters**:
-    - `name`: `Rs2PrayerEnum` - The prayer to check.
-- **Returns**: `boolean` - True if the specified prayer is currently active.
-- **Description**: Checks if the specified prayer is active.
+- **Parámetros**:
+- `name`: `Rs2PrayerEnum` - La oración a verificar.
+- **Devuelve**: `boolean` - Verdadero si la oración especificada está actualmente activa.
+- **Descripción**: Verifica si la oración especificada está activa.
 
 ### `isQuickPrayerEnabled`
-- **Returns**: `boolean` - True if quick prayers are currently enabled.
-- **Description**: Checks if quick prayers are enabled.
+- **Devuelve**: `boolean` - Verdadero si las oraciones rápidas están actualmente habilitadas.
+- **Descripción**: Verifica si las oraciones rápidas están habilitadas.
 
 ### `isOutOfPrayer`
-- **Returns**: `boolean` - True if the player has no prayer points left.
-- **Description**: Checks if the player is out of prayer points.
+- **Devuelve**: `boolean` - Verdadero si al jugador no le quedan puntos de oración.
+- **Descripción**: Comprueba si al jugador se le han acabado los puntos de oración.
 
-## Usage Examples
+## Ejemplos de uso
 
-### Toggling a Prayer
+### Activar o desactivar una oración
 ```java
-Rs2Prayer.toggle(Rs2PrayerEnum.PIETY, true); // Activates Piety
-Rs2Prayer.toggle(Rs2PrayerEnum.PIETY, false); // Deactivates Piety
+Rs2Prayer.toggle(Rs2PrayerEnum.PIETY, true); // Activa el PIETY
+Rs2Prayer.toggle(Rs2PrayerEnum.PIETY, false); // Desactiva el PIETY
