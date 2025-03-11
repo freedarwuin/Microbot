@@ -20,21 +20,21 @@ import org.slf4j.LoggerFactory;
 public class SummerPiesPlugin extends Plugin {
     private static final Logger log = LoggerFactory.getLogger(SummerPiesPlugin.class);
     @Inject
-    private SummerPiesConfig config;
+    private net.runelite.client.plugins.microbot.SummerPies.SummerPiesConfig config;
     @Inject
     private OverlayManager overlayManager;
     @Inject
     private SummerPiesOverlay exampleOverlay;
     @Inject
-    SummerPiesScript SummerPiesScript;
+    net.runelite.client.plugins.microbot.SummerPies.SummerPiesScript SummerPiesScript;
     int ticks = 10;
 
     public SummerPiesPlugin() {
     }
 
     @Provides
-    SummerPiesConfig provideConfig(ConfigManager configManager) {
-        return (SummerPiesConfig) configManager.getConfig(SummerPiesConfig.class);
+    net.runelite.client.plugins.microbot.SummerPies.SummerPiesConfig provideConfig(ConfigManager configManager) {
+        return (net.runelite.client.plugins.microbot.SummerPies.SummerPiesConfig) configManager.getConfig(SummerPiesConfig.class);
     }
 
     protected void startUp() throws AWTException {
