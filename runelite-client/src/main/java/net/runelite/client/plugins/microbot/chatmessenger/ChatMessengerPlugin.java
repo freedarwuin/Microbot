@@ -5,6 +5,8 @@ import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.GameTick;
+import net.runelite.api.events.CommandExecuted;
+import net.runelite.api.ChatMessageType;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
@@ -15,7 +17,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 
 @Slf4j
 @PluginDescriptor(
-        name = "Chat Messenger",
+        name = PluginDescriptor.LT + "Chat Messenger",
         description = "Envía mensajes al chat con la opción de alternar entre 'all' y 'channel'.",
         tags = {"chat", "messenger", "spam"}
 )
@@ -49,12 +51,13 @@ public class ChatMessengerPlugin extends Plugin
         navButton = NavigationButton.builder()
                 .tooltip("Chat Messenger")
                 .priority(5)
-                .panel(new ChatMessengerPanel(this, config))
+                .panel(new ChatMessengerPanel(this)) // Asegurarse de que el panel se pasa correctamente
                 .build();
 
         clientToolbar.addNavigation(navButton);
         log.info("Chat Messenger iniciado.");
     }
+
 
     @Override
     protected void shutDown() throws Exception
@@ -66,6 +69,7 @@ public class ChatMessengerPlugin extends Plugin
     @Subscribe
     public void onGameTick(GameTick event)
     {
+        log.info("GameTick detectado. Estado de sendMessage: " + sendMessage);
         if (sendMessage)
         {
             int intervalTicks = config.spamInterval() * 1000 / 600; // Convierte segundos a ticks (~0.6s por tick)
@@ -77,10 +81,10 @@ public class ChatMessengerPlugin extends Plugin
                     switch (config.chatMode())
                     {
                         case ALL:
-                            client.runScript(5557, message);
+                            client.runScript(3123, message);
                             break;
                         case CHANNEL:
-                            client.runScript(5557, "/" + message);
+                            client.runScript(3123, "/" + message);
                             break;
                     }
                 }
@@ -94,5 +98,15 @@ public class ChatMessengerPlugin extends Plugin
     {
         sendMessage = !sendMessage;
         log.info("Chat Messenger " + (sendMessage ? "Activado" : "Desactivado"));
+        client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Chat Messenger " + (sendMessage ? "Activado" : "Desactivado"), null);
+    }
+
+    @Subscribe
+    public void onCommandExecuted(CommandExecuted commandExecuted)
+    {
+        if (commandExecuted.getCommand().equalsIgnoreCase("toggleChatMessenger"))
+        {
+            toggleMessaging();
+        }
     }
 }
