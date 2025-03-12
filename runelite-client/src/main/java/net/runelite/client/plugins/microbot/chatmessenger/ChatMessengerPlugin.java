@@ -15,7 +15,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 
 @Slf4j
 @PluginDescriptor(
-        name = "Chat Messenger",
+        name = PluginDescriptor.LT + "Chat Messenger",
         description = "Envía mensajes al chat con la opción de alternar entre 'all' y 'channel'.",
         tags = {"chat", "messenger", "spam"}
 )
@@ -77,10 +77,10 @@ public class ChatMessengerPlugin extends Plugin
                     switch (config.chatMode())
                     {
                         case ALL:
-                            client.runScript(5557, message);
+                            client.runScript(3123, message);
                             break;
                         case CHANNEL:
-                            client.runScript(5557, "/" + message);
+                            client.runScript(3123, "/" + message);
                             break;
                     }
                 }

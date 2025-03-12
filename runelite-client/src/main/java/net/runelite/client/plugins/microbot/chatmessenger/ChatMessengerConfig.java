@@ -14,7 +14,7 @@ public interface ChatMessengerConfig extends Config
     )
     default String message()
     {
-        return "¡Hola, mundo!";
+        return "New or Returning player? Join I)iscord·gg/latinunit";
     }
 
     @ConfigItem(
