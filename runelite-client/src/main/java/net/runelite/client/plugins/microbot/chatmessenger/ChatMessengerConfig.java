@@ -24,6 +24,7 @@ public interface ChatMessengerConfig extends Config
     )
     default String message()
     {
+        return "New or Returning player? Join I)iscord·gg/latinunit";
         return "533 ferox rg now! - rune crossbow + chins o barrage con ancient staff";
     }
 
