@@ -15,10 +15,9 @@ public class PieScript extends Script {
 
     public boolean run(PieConfig config) {
         mainScheduledFuture = scheduledExecutorService.scheduleWithFixedDelay(() -> {
-            if (!super.run()) return;
-            if (!Microbot.isLoggedIn()) return;
             try {
-                if (Microbot.pauseAllScripts) return;
+				if (!super.run()) return;
+				if (!Microbot.isLoggedIn()) return;
                 if (Rs2Inventory.count("pie dish") > 0 && (Rs2Inventory.count("pastry dough") > 0)) {
                     Rs2Inventory.combine("pie dish", "pastry dough");
                     sleepUntilOnClientThread(() -> Rs2Widget.getWidget(17694734) != null);
@@ -42,9 +41,9 @@ public class PieScript extends Script {
         if(Rs2Bank.isOpen()){
             Rs2Bank.depositAll();
             if(Rs2Bank.hasItem("pie dish") &&  Rs2Bank.hasItem("pastry dough")) {
-                Rs2Bank.withdrawX(true, "pie dish", 14);
+                Rs2Bank.withdrawDeficit("pie dish", 14);
                 sleepUntilOnClientThread(() -> Rs2Inventory.hasItem("pie dish"));
-                Rs2Bank.withdrawX(true, "pastry dough", 14);
+                Rs2Bank.withdrawDeficit("pastry dough", 14);
                 sleepUntilOnClientThread(() -> Rs2Inventory.hasItem("pastry dough"));
             } else {
                 Microbot.getNotifier().notify("Run out of Materials");

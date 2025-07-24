@@ -1,4 +1,4 @@
-# Origin	Destination	menuOption menuTarget objectID	Skills	Item IDs	Currency	Quests	Varbits	Varplayers	isMembers	Duration	Display Info
+# Origin	Destination	menuOption menuTarget objectID	Skills	Item IDs	Currency	Quests	Varbits	Varplayers	isMembers	Duration	Display info
 # Tutorial Island											
 3097 3107 0	3098 3107 0	Open;Door;9398								1	
 3098 3107 0	3097 3107 0	Open;Door;9398								1	
@@ -465,9 +465,15 @@
 2597 3108 1	2597 3108 0	Climb-down;Ladder;16681								2	
 2596 3107 0	2596 3107 1	Climb-up;Ladder;16683								2	
 2596 3107 1	2596 3107 0	Climb-down;Ladder;16681								2	
-2594 9484 0	2594 3084 0	Climb-up;Ladder;17385	 								
-2594 9486 0	2594 3086 0	Climb-up;Ladder;17385	 								
-2594 3086 0	2594 9486 0	Climb-down;Ladder;17384	 								
+2594 9484 0	2594 3084 0	Climb-up;Ladder;17385
+2594 9486 0	2594 3086 0	Climb-up;Ladder;17385
+2594 3086 0	2594 9486 0	Climb-down;Ladder;17384
+2620 9496 0	2620 9566 0	Climb-down;Staircase;15656								1
+2621 9496 0	2620 9566 0	Climb-down;Staircase;15656								1
+2620 9565 0	2621 9496 0	Climb-up;Staircase;15657								1
+2621 9565 0	2621 9496 0	Climb-up;Staircase;15657								1
+2601 9481 0	2601 9482 0	Pick-lock;Door;11728	82 Thieving	1523						10
+2601 9482 0	2601 9481 0	Pick-lock;Door;11728	82 Thieving	1523						10
 											
 # Hazelmere Island											
 2677 3088 1	2677 3088 0	Climb-down;Ladder;16679								2	
@@ -3207,9 +3213,7 @@
 3325 3520 0	3325 3523 0	Cross;Wilderness Ditch;23271								4	
 3325 3523 0	3325 3520 0	Cross;Wilderness Ditch;23271								4	
 3326 3520 0	3326 3523 0	Cross;Wilderness Ditch;23271								4	
-3326 3523 0	3326 3520 0	Cross;Wilderness Ditch;23271								4	
-3327 3520 0	3327 3523 0	Cross;Wilderness Ditch;23271								4	
-3327 3523 0	3327 3520 0	Cross;Wilderness Ditch;23271								4	
+3326 3523 0	3326 3520 0	Cross;Wilderness Ditch;23271								4
 3328 3520 0	3328 3523 0	Cross;Wilderness Ditch;23271								4	
 3328 3523 0	3328 3520 0	Cross;Wilderness Ditch;23271								4	
 3329 3520 0	3329 3523 0	Cross;Wilderness Ditch;23271								4	
@@ -4942,22 +4946,22 @@
 # Prifddinas											
 2157 3330 0	2157 3333 1	Cross;Gangplank;34948									
 2157 3333 1	2157 3330 0	Cross;Gangplank;34949									
-2181 3327 0	3208 6079 0	Enter;City Gate;36519									
-3208 6079 0	2181 3327 0	Exit;City Gate;36523									
-2181 3328 0	3208 6080 0	Enter;City Gate;36518									
-3208 6080 0	2181 3328 0	Exit;City Gate;36522									
-2239 3386 0	3263 6135 0	Enter;City Gate;36519									
-3263 6135 0	2239 3386 0	Exit;City Gate;36523									
-2240 3386 0	3264 6135 0	Enter;City Gate;36518									
-3264 6135 0	2240 3386 0	Exit;City Gate;36522									
-2298 3328 0	3319 6080 0	Enter;City Gate;36519									
-3319 6080 0	2298 3328 0	Exit;City Gate;36523									
-2298 3327 0	3319 6079 0	Enter;City Gate;36518									
-3319 6079 0	2298 3327 0	Exit;City Gate;36522									
-2240 3269 0	3264 6024 0	Enter;City Gate;36519									
-3264 6024 0	2240 3269 0	Exit;City Gate;36523									
-2239 3269 0	3263 6024 0	Enter;City Gate;36518									
-3263 6024 0	2239 3269 0	Exit;City Gate;36522									
+2181 3327 0	3208 6079 0	Enter;City Gate;36519				Song of the Elves
+3208 6079 0	2181 3327 0	Exit;City Gate;36523				Song of the Elves
+2181 3328 0	3208 6080 0	Enter;City Gate;36518				Song of the Elves
+3208 6080 0	2181 3328 0	Exit;City Gate;36522				Song of the Elves
+2239 3386 0	3263 6135 0	Enter;City Gate;36519				Song of the Elves
+3263 6135 0	2239 3386 0	Exit;City Gate;36523				Song of the Elves
+2240 3386 0	3264 6135 0	Enter;City Gate;36518				Song of the Elves
+3264 6135 0	2240 3386 0	Exit;City Gate;36522				Song of the Elves
+2298 3328 0	3319 6080 0	Enter;City Gate;36519				Song of the Elves
+3319 6080 0	2298 3328 0	Exit;City Gate;36523				Song of the Elves
+2298 3327 0	3319 6079 0	Enter;City Gate;36518				Song of the Elves
+3319 6079 0	2298 3327 0	Exit;City Gate;36522				Song of the Elves
+2240 3269 0	3264 6024 0	Enter;City Gate;36519				Song of the Elves
+3264 6024 0	2240 3269 0	Exit;City Gate;36523				Song of the Elves
+2239 3269 0	3263 6024 0	Enter;City Gate;36518				Song of the Elves
+3263 6024 0	2239 3269 0	Exit;City Gate;36522				Song of the Elves
 3225 6046 0	3225 12445 0	Enter;Cave;36690									
 3226 6046 0	3225 12445 0	Enter;Cave;36690									
 3225 12445 0	3225 6046 0	Exit;Steps;36691									

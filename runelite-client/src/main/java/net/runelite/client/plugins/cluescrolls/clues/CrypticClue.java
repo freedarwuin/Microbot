@@ -36,6 +36,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Singular;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.NPC;
 import net.runelite.api.ObjectComposition;
@@ -58,6 +59,7 @@ import net.runelite.client.ui.overlay.components.TitleComponent;
 
 @Getter
 @Slf4j
+@ToString
 public class CrypticClue extends ClueScroll implements NpcClueScroll, ObjectClueScroll
 {
 	static final List<CrypticClue> CLUES = ImmutableList.of(
@@ -1655,7 +1657,7 @@ public class CrypticClue extends ClueScroll implements NpcClueScroll, ObjectClue
 			.solution("Ellis is tanner just north of Al Kharid bank.")
 			.build(),
 		CrypticClue.builder()
-			.itemId(ItemID.TRAIL_CLUE_EASY_VAGUE010)
+			.itemId(ItemID.TRAIL_CLUE_EASY_VAGUE009)
 			.text("Search the chests in the Dwarven Mine.")
 			.location(new WorldPoint(3000, 9798, 0))
 			.objectId(ObjectID.CHESTCLOSED)
@@ -1898,7 +1900,7 @@ public class CrypticClue extends ClueScroll implements NpcClueScroll, ObjectClue
 			.text("A general who sets a 'shining' example.")
 			.location(new WorldPoint(2186, 3148, 0))
 			.npc("General Hining")
-			.solution("Talk to General Hining in Tyras Camp.")
+			.solution("Talk to General Hining in Tyras Camp. Fairy ring BJS (with 76 agility).")
 			.build(),
 		CrypticClue.builder()
 			.itemId(ItemID.TRAIL_ELITE_RIDDLE_EXP1)
@@ -2004,6 +2006,26 @@ public class CrypticClue extends ClueScroll implements NpcClueScroll, ObjectClue
 			.text("Dig outside the bank on Aldarin.")
 			.location(new WorldPoint(1390, 2926, 0))
 			.solution("Dig outside the bank on Aldarin. Fairy ring CKQ.")
+			.build(),
+		CrypticClue.builder()
+			.itemId(ItemID.TRAIL_EASY_VAGUE_VM3)
+			.text("He's been studying unusual tree migrations.")
+			.npc("Ranulph")
+			.location(new WorldPoint(1367, 3367, 0))
+			.solution("Talk to Ranulph in Auburnvalue.")
+			.build(),
+		CrypticClue.builder()
+			.itemId(ItemID.TRAIL_ELITE_RIDDLE_VM03)
+			.text("Crush the spirited earth.")
+			.npc("Earthen Nagua")
+			.solution("Kill an earthen nagua.")
+			.build(),
+		CrypticClue.builder()
+			.itemId(ItemID.TRAIL_CLUE_MEDIUM_RIDDLE_VM02)
+			.text("Search the crate abandoned in the shadow of a mountain's grace.")
+			.location(new WorldPoint(1388, 3216, 0))
+			.objectId(ObjectID.TLATI_CRATE_01_DARK_CLUE)
+			.solution("Search the crate south of the Auburn Forest.")
 			.build()
 	);
 

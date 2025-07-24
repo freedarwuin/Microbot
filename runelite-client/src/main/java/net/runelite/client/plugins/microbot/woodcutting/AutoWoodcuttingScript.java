@@ -103,7 +103,7 @@ public class AutoWoodcuttingScript extends Script {
                     }
                 }
 
-                if (state != State.RESETTING && (Rs2Player.isMoving() || Rs2Player.isAnimating() || Microbot.pauseAllScripts))
+                if (state != State.RESETTING && (Rs2Player.isMoving() || Rs2Player.isAnimating()))
                     return;
 
                 if (Rs2AntibanSettings.actionCooldownActive)
@@ -175,7 +175,7 @@ public class AutoWoodcuttingScript extends Script {
     private void resetInventory(AutoWoodcuttingConfig config) {
         switch (config.resetOptions()) {
             case DROP:
-                Rs2Inventory.dropAllExcept(false, config.interactOrder(), "axe", "tinderbox");
+                Rs2Inventory.dropAllExcept(false, config.interactOrder(), "axe", "tinderbox", "crystal shard");
                 state = State.WOODCUTTING;
                 break;
             case BANK:

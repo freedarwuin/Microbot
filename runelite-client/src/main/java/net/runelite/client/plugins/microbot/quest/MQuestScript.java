@@ -108,11 +108,11 @@ public class MQuestScript extends Script {
                     var widgetHighlight = questStep.getWidgetsToHighlight().stream()
                             .filter(x -> x instanceof WidgetHighlight)
                             .map(x -> (WidgetHighlight) x)
-                            .filter(x -> Rs2Widget.isWidgetVisible(x.getGroupId(), x.getChildId()))
+                            .filter(x -> Rs2Widget.isWidgetVisible(x.getInterfaceID()))
                             .findFirst().orElse(null);
 
                     if (widgetHighlight != null) {
-                        var widget = Rs2Widget.getWidget(widgetHighlight.getGroupId(), widgetHighlight.getChildId());
+                        var widget = Rs2Widget.getWidget(widgetHighlight.getInterfaceID());
                         if (widget != null) {
                             if (widgetHighlight.getChildChildId() != -1) {
                                 var childWidget = widget.getChildren()[widgetHighlight.getChildChildId()];
@@ -239,7 +239,7 @@ public class MQuestScript extends Script {
             if (requirement instanceof ItemRequirement) {
                 var itemRequirement = (ItemRequirement) requirement;
 
-                if (itemRequirement.isEquip() && Rs2Inventory.contains(itemRequirement.getAllIds().toArray(new Integer[0]))
+                if (itemRequirement.isEquip() && Rs2Inventory.contains(itemRequirement.getAllIds().stream().mapToInt(i -> i).toArray())
                         && itemRequirement.getAllIds().stream().noneMatch(Rs2Equipment::isWearing)) {
                     Rs2Inventory.wear(itemRequirement.getAllIds().stream().filter(Rs2Inventory::contains).findFirst().orElse(-1));
                     return true;
@@ -299,7 +299,7 @@ public class MQuestScript extends Script {
 
             if (step.getText().stream().anyMatch(x -> x.toLowerCase().contains("kill"))) {
                 if (!Rs2Combat.inCombat())
-                    Rs2Npc.interact(step.npcID, "Attack");
+                    Rs2Npc.interact(npc, "Attack");
 
                 return true;
             }
@@ -522,7 +522,7 @@ public class MQuestScript extends Script {
                 ItemRequirement itemRequirement = (ItemRequirement) requirement;
 
                 if (itemRequirement.shouldHighlightInInventory(Microbot.getClient())
-                        && Rs2Inventory.contains(itemRequirement.getAllIds().toArray(new Integer[0]))) {
+                        && Rs2Inventory.contains(itemRequirement.getAllIds().stream().mapToInt(i -> i).toArray())) {
                     var itemId = itemRequirement.getAllIds().stream().filter(Rs2Inventory::contains).findFirst().orElse(-1);
                     Rs2Inventory.interact(itemId, chooseCorrectItemOption(conditionalStep, itemId));
                     sleep(100, 200);
@@ -530,7 +530,7 @@ public class MQuestScript extends Script {
                     continue;
                 }
 
-                if (!Rs2Inventory.contains(itemRequirement.getAllIds().toArray(new Integer[0])) && conditionalStep.getWorldPoint() != null) {
+                if (!Rs2Inventory.contains(itemRequirement.getAllIds().stream().mapToInt(i -> i).toArray()) && conditionalStep.getWorldPoint() != null) {
                     if (Rs2Walker.canReach(conditionalStep.getWorldPoint()) &&
                             (conditionalStep.getWorldPoint().distanceTo(Rs2Player.getWorldLocation()) < 2)
                             || conditionalStep.getWorldPoint().toWorldArea().hasLineOfSightTo(Microbot.getClient().getTopLevelWorldView(), Microbot.getClient().getLocalPlayer().getWorldLocation().toWorldArea())
@@ -540,7 +540,7 @@ public class MQuestScript extends Script {
                         Rs2Walker.walkTo(conditionalStep.getWorldPoint(), 2);
                     }
                     return true;
-                } else if (!Rs2Inventory.contains(itemRequirement.getAllIds().toArray(new Integer[0]))) {
+                } else if (!Rs2Inventory.contains(itemRequirement.getAllIds().stream().mapToInt(i -> i).toArray())) {
                     Rs2GroundItem.loot(itemRequirement.getId());
                     return true;
                 }
