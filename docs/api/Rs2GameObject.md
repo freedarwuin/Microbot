@@ -1,85 +1,87 @@
-# Rs2GameObject Class Documentation
-## [Back](development.md)
-## Overview
-The `Rs2GameObject` class provides methods to interact with game objects within the game environment. It offers functionalities to locate, interact, and manipulate game objects based on various criteria like ID, name, or location.
+# Documentación de la clase Rs2GameObject
 
-## Methods
+## [Volver](development.md)
+
+## Descripción general
+La clase `Rs2GameObject` proporciona métodos para interactuar con objetos del juego dentro del entorno del juego. Ofrece funcionalidades para localizar, interactuar y manipular objetos del juego basándose en varios criterios como ID, nombre o ubicación.
+
+## Métodos
 
 ### `clickObject`
-- **Signature**: `private static boolean clickObject(TileObject object, String action)`
-- **Description**: Handles the clicking of a game object, applying a specified action. This method includes detailed logic for handling the action based on the object's properties and current game state.
+- **Firma**: `private static boolean clickObject(TileObject object, String action)`
+- **Descripción**: Maneja el clic en un objeto del juego, aplicando una acción específica. Este método incluye lógica detallada para manejar la acción según las propiedades del objeto y el estado actual del juego.
 
 ### `convertGameObjectToObjectComposition`
-- **Signature**: `public static ObjectComposition convertGameObjectToObjectComposition(TileObject tileObject)`
-- **Description**: Converts a `TileObject` to an `ObjectComposition` by fetching its definition from the client, considering proximity restrictions.
+- **Firma**: `public static ObjectComposition convertGameObjectToObjectComposition(TileObject tileObject)`
+- **Descripción**: Convierte un `TileObject` a un `ObjectComposition` obteniendo su definición desde el cliente, considerando restricciones de proximidad.
 
 ### `exists`
-- **Signature**: `public static boolean exists(int id)`
-- **Description**: Checks if a game object with the specified ID exists in the visible area.
+- **Firma**: `public static boolean exists(int id)`
+- **Descripción**: Verifica si un objeto del juego con el ID especificado existe en el área visible.
 
 ### `findBank`
-- **Signature**: `public static GameObject findBank()`
-- **Description**: Searches for a game object that acts as a bank within the visible area.
+- **Firma**: `public static GameObject findBank()`
+- **Descripción**: Busca un objeto del juego que funcione como banco dentro del área visible.
 
 ### `findChest`
-- **Signature**: `public static GameObject findChest()`
-- **Description**: Searches for a game object that acts as a chest within the visible area.
+- **Firma**: `public static GameObject findChest()`
+- **Descripción**: Busca un objeto del juego que funcione como cofre dentro del área visible.
 
 ### `findDoor`
-- **Signature**: `public static WallObject findDoor(int id)`
-- **Description**: Finds a door object by ID within the visible tiles of the current scene.
+- **Firma**: `public static WallObject findDoor(int id)`
+- **Descripción**: Encuentra un objeto puerta por ID dentro de los tiles visibles de la escena actual.
 
 ### `findGameObjectByLocation`
-- **Signature**: `public static TileObject findGameObjectByLocation(WorldPoint worldPoint)`
-- **Description**: Finds a game object at a specific world point.
+- **Firma**: `public static TileObject findGameObjectByLocation(WorldPoint worldPoint)`
+- **Descripción**: Encuentra un objeto del juego en un punto específico del mundo.
 
 ### `findObject`
-- **Signature**: `@Deprecated public static ObjectComposition findObject(int id)`
-- **Description**: Fetches the object composition for a given ID. This method is deprecated and will be removed in favor of other object fetching methods.
+- **Firma**: `@Deprecated public static ObjectComposition findObject(int id)`
+- **Descripción**: Obtiene la composición de un objeto por su ID. Este método está obsoleto y se eliminará en favor de otros métodos de obtención de objetos.
 
 ### `findObjectById`
-- **Signature**: `public static TileObject findObjectById(int id)`
-- **Description**: Locates a game object based on its ID from various object types like ground objects, wall objects, etc.
+- **Firma**: `public static TileObject findObjectById(int id)`
+- **Descripción**: Localiza un objeto del juego según su ID en varios tipos de objetos como objetos en el suelo, paredes, etc.
 
 ### `findObjectByIdAndDistance`
-- **Signature**: `public static TileObject findObjectByIdAndDistance(int id, int distance)`
-- **Description**: Finds a game object by ID that is within a specified distance.
+- **Firma**: `public static TileObject findObjectByIdAndDistance(int id, int distance)`
+- **Descripción**: Encuentra un objeto del juego por ID que se encuentre dentro de una distancia especificada.
 
 ### `findObjectByLocation`
-- **Signature**: `public static TileObject findObjectByLocation(WorldPoint worldPoint)`
-- **Description**: Finds a game object based on its world location.
+- **Firma**: `public static TileObject findObjectByLocation(WorldPoint worldPoint)`
+- **Descripción**: Encuentra un objeto del juego basado en su ubicación en el mundo.
 
 ### `get`
-- **Signature**: `public static GameObject get(String name, boolean exact)`
-- **Description**: Retrieves a game object by name, with an option for exact matching.
+- **Firma**: `public static GameObject get(String name, boolean exact)`
+- **Descripción**: Recupera un objeto del juego por nombre, con opción de coincidencia exacta.
 
 ### `getGameObject`
-- **Signature**: `public static GameObject getGameObject(LocalPoint localPoint)`
-- **Description**: Retrieves a game object at a given local point.
+- **Firma**: `public static GameObject getGameObject(LocalPoint localPoint)`
+- **Descripción**: Recupera un objeto del juego en un punto local determinado.
 
 ### `getGameObjects`
-- **Signature**: `public static List<GameObject> getGameObjects()`
-- **Description**: Retrieves a list of all game objects within the game's visible area.
+- **Firma**: `public static List<GameObject> getGameObjects()`
+- **Descripción**: Recupera una lista de todos los objetos del juego dentro del área visible.
 
 ### `getGroundObjects`
-- **Signature**: `public static List<GroundObject> getGroundObjects()`
-- **Description**: Retrieves a list of all ground objects within a specified distance from the player.
+- **Firma**: `public static List<GroundObject> getGroundObjects()`
+- **Descripción**: Recupera una lista de todos los objetos en el suelo dentro de una distancia especificada del jugador.
 
 ### `getTiles`
-- **Signature**: `public static List<Tile> getTiles()`
-- **Description**: Retrieves all tiles within the game's visible area up to a certain distance.
+- **Firma**: `public static List<Tile> getTiles()`
+- **Descripción**: Recupera todos los tiles dentro del área visible del juego hasta cierta distancia.
 
 ### `getWallObjects`
-- **Signature**: `public static List<WallObject> getWallObjects()`
-- **Description**: Retrieves a list of all wall objects within a specified distance from the player.
+- **Firma**: `public static List<WallObject> getWallObjects()`
+- **Descripción**: Recupera una lista de todos los objetos de pared dentro de una distancia especificada del jugador.
 
 ### `hasLineOfSight`
-- **Signature**: `public static boolean hasLineOfSight(TileObject tileObject)`
-- **Description**: Checks if there is a line of sight to the specified tile object from the player's current location.
+- **Firma**: `public static boolean hasLineOfSight(TileObject tileObject)`
+- **Descripción**: Verifica si hay línea de visión hacia el objeto especificado desde la ubicación actual del jugador.
 
 ### `interact`
-- **Signature**: `public static boolean interact(int id, String action, int distance)`
-- **Description**: Interacts with a game object by ID, performing a specified action, only if it is within a certain distance.
+- **Firma**: `public static boolean interact(int id, String action, int distance)`
+- **Descripción**: Interactúa con un objeto del juego por ID, realizando una acción específica solo si se encuentra dentro de cierta distancia.
 
-## Additional Details
-This class is crucial for scripts that need to dynamically interact with game objects based on various conditions and parameters, enhancing the automation capabilities within the game environment.
+## Detalles adicionales
+Esta clase es crucial para scripts que necesitan interactuar dinámicamente con objetos del juego según varias condiciones y parámetros, mejorando las capacidades de automatización dentro del entorno del juego.

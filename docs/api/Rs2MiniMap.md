@@ -1,13 +1,14 @@
 # Rs2MiniMap Class Documentation
+
 ## [Back](development.md)
+
 ## Overview
-The `Rs2MiniMap` class provides methods for translating in-game coordinates into mini-map points in the Microbot client. This functionality is essential for navigation and pathfinding tasks that require mini-map interaction.
+La clase `Rs2MiniMap` proporciona métodos para traducir coordenadas dentro del juego a puntos en el mini-mapa en el cliente Microbot. Esta funcionalidad es esencial para tareas de navegación y pathfinding que requieren interacción con el mini-mapa.
 
 ## Methods
 
 ### `localToMinimap(LocalPoint localPoint)`
-- **Description**: Converts a `LocalPoint` to its corresponding point on the mini-map.
-- **Parameters**:
-    - `localPoint`: `LocalPoint` - The local point within the current region.
-- **Returns**: `Point` - The mini-map coordinates of the specified local point. Returns `null` if the input is `null` or if the point cannot be converted.
-
+- **Descripción**: Convierte un `LocalPoint` a su punto correspondiente en el mini-mapa.
+- **Parámetros**:
+    - `localPoint`: `LocalPoint` - El punto local dentro de la región actual.
+- **Retorna**: `Point` - Las coordenadas en el mini-mapa del punto local especificado. Retorna `null` si la entrada es `null` o si el punto no puede ser convertido.

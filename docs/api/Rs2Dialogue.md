@@ -1,21 +1,23 @@
-# Rs2Dialogue Class Documentation
-## [Back](development.md)
-## Overview
-The `Rs2Dialogue` class provides methods to handle in-game dialogue interactions, allowing for checking if a dialogue is present and automating responses.
+# Documentación de la clase Rs2Dialogue
 
-## Methods
+## [Volver](development.md)
+
+## Descripción general
+La clase `Rs2Dialogue` proporciona métodos para manejar interacciones de diálogo dentro del juego, permitiendo verificar si hay un diálogo presente y automatizar respuestas.
+
+## Métodos
 
 ### `clickContinue`
-- **Signature**: `public static void clickContinue()`
-- **Description**: Simulates pressing the spacebar to continue through dialogues when the "Click here to continue" prompt is visible.
+- **Firma**: `public static void clickContinue()`
+- **Descripción**: Simula presionar la barra espaciadora para continuar los diálogos cuando aparece el mensaje "Click here to continue" (Haz clic aquí para continuar).
 
 ### `hasSelectAnOption`
-- **Signature**: `public static boolean hasSelectAnOption()`
-- **Description**: Checks if the "Select an Option" dialogue is currently on the screen, indicating a choice needs to be made by the player.
+- **Firma**: `public static boolean hasSelectAnOption()`
+- **Descripción**: Comprueba si el diálogo "Select an Option" (Seleccionar una opción) está actualmente en pantalla, indicando que el jugador debe tomar una decisión.
 
 ### `isInDialogue`
-- **Signature**: `public static boolean isInDialogue()`
-- **Description**: Determines if any dialogue is active by checking for common dialogue prompts such as "Click here to continue" or "please wait...".
+- **Firma**: `public static boolean isInDialogue()`
+- **Descripción**: Determina si hay algún diálogo activo verificando los mensajes comunes de diálogo como "Click here to continue" o "please wait..." (por favor espera...).
 
-## Additional Details
-These methods are useful for automating routine interactions with game dialogues, facilitating smoother gameplay and interaction handling in scripts.
+## Detalles adicionales
+Estos métodos son útiles para automatizar interacciones rutinarias con los diálogos del juego, facilitando una experiencia de juego más fluida y un manejo eficiente de las interacciones en los scripts.

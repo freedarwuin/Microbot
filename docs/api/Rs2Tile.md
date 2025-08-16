@@ -1,13 +1,13 @@
 ## [Back](development.md)
 
 ### `isWalkable(Tile tile)`
-- **Parameters**:
-    - `Tile`: `tile` - Represents a tile in the game.
-- **Returns**:
-  - true if the tile is walkable
+- **Parámetros**:
+    - `Tile tile` - Representa un tile en el juego.
+- **Retorna**:
+    - `boolean` - `true` si el tile es transitable, `false` de lo contrario.
 
 ### `isWalkable(LocalPoint localPoint)`
-- **Parameters**:
-    - `LocalPoint`: `localPoint` - A two-dimensional point in the local coordinate space.
-- **Returns**:
-    - true if the localPoint is walkable
+- **Parámetros**:
+    - `LocalPoint localPoint` - Punto bidimensional en el espacio de coordenadas local.
+- **Retorna**:
+    - `boolean` - `true` si el punto local es transitable, `false` de lo contrario.

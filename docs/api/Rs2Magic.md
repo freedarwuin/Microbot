@@ -1,57 +1,58 @@
 # Rs2Magic Class Documentation
+
 ## [Back](development.md)
+
 ## Overview
-The `Rs2Magic` class facilitates magic-related operations in the Microbot client, allowing for casting spells on various entities and performing alchemy. It handles interactions with the game's magic interface and provides utility functions for different spell actions.
+La clase `Rs2Magic` facilita operaciones relacionadas con magia en el cliente Microbot, permitiendo lanzar hechizos sobre varias entidades y realizar alquimia. Maneja interacciones con la interfaz de magia del juego y proporciona funciones útiles para distintas acciones mágicas.
 
 ## Methods
 
 ### `canCast`
-- **Description**: Checks if the player has the required Magic level to cast a specified spell.
-- **Parameters**:
-    - `magicSpell`: `MagicAction` - The magic spell to check.
-- **Returns**: `boolean` - True if the player can cast the spell, otherwise false.
+- **Descripción**: Verifica si el jugador tiene el nivel de Magia requerido para lanzar un hechizo específico.
+- **Parámetros**:
+    - `magicSpell`: `MagicAction` - El hechizo mágico a verificar.
+- **Retorna**: `boolean` - True si el jugador puede lanzar el hechizo, de lo contrario false.
 
 ### `cast`
-- **Description**: Casts a specified spell.
-- **Parameters**:
-    - `magicSpell`: `MagicAction` - The magic spell to cast.
-- **Behavior**: Switches to the magic tab, sets the status, and invokes the spell action.
+- **Descripción**: Lanza un hechizo específico.
+- **Parámetros**:
+    - `magicSpell`: `MagicAction` - El hechizo mágico a lanzar.
+- **Comportamiento**: Cambia a la pestaña de magia, ajusta el estado y ejecuta la acción del hechizo.
 
 ### `castOn`
-- **Description**: Casts a specified spell on an actor.
-- **Parameters**:
-    - `magicSpell`: `MagicAction` - The magic spell to cast.
-    - `actor`: `Actor` - The target actor.
-- **Behavior**: Ensures the target is in view before casting the spell.
+- **Descripción**: Lanza un hechizo sobre un actor.
+- **Parámetros**:
+    - `magicSpell`: `MagicAction` - El hechizo mágico a lanzar.
+    - `actor`: `Actor` - El actor objetivo.
+- **Comportamiento**: Se asegura de que el objetivo esté visible antes de lanzar el hechizo.
 
 ### `alch`
-- **Description**: Performs alchemy on an item, choosing High or Low Alchemy based on Magic level.
-- **Overloads**:
-    - **Item Name**: Casts alchemy on the first item with the specified name found in the inventory.
-    - **Item Object**: Directly casts alchemy on the provided `Rs2Item` object.
-- **Parameters**:
-    - `itemName`: `String` - The name of the item to alchemize.
-    - `item`: `Rs2Item` - The item object to alchemize.
+- **Descripción**: Realiza alquimia sobre un ítem, eligiendo High o Low Alchemy según el nivel de Magia.
+- **Sobrecargas**:
+    - **Por nombre de ítem**: Lanza alquimia sobre el primer ítem con el nombre especificado en el inventario.
+    - **Por objeto de ítem**: Lanza alquimia directamente sobre un objeto `Rs2Item` proporcionado.
+- **Parámetros**:
+    - `itemName`: `String` - Nombre del ítem a alquimizar.
+    - `item`: `Rs2Item` - Objeto de ítem a alquimizar.
 
-### `highAlch` and `lowAlch`
-- **Description**: Performs High Level Alchemy or Low Level Alchemy on an item.
-- **Parameters**:
-    - `item`: `Rs2Item` - The item to alchemize.
-- **Behavior**: Switches to the magic tab, ensures the spell is available, and performs the alchemy.
+### `highAlch` y `lowAlch`
+- **Descripción**: Realiza High Level Alchemy o Low Level Alchemy sobre un ítem.
+- **Parámetros**:
+    - `item`: `Rs2Item` - El ítem a alquimizar.
+- **Comportamiento**: Cambia a la pestaña de magia, verifica que el hechizo esté disponible y realiza la alquimia.
 
 ## Static Members
 
 ### `sleepUntil`
-- **Description**: Utility method that pauses execution until a condition becomes true, used to synchronize state changes like tab switches.
+- **Descripción**: Método de utilidad que pausa la ejecución hasta que se cumpla una condición, usado para sincronizar cambios de estado como cambios de pestaña.
 
 ### `alch`
-- **Description**: Helper method to perform the actual alchemy process on an item.
-- **Parameters**:
-    - `alch`: `Widget` - The alchemy spell widget.
-    - `item`: `Rs2Item` - The item to alchemize (optional).
+- **Descripción**: Método auxiliar para realizar el proceso real de alquimia sobre un ítem.
+- **Parámetros**:
+    - `alch`: `Widget` - Widget del hechizo de alquimia.
+    - `item`: `Rs2Item` - Ítem a alquimizar (opcional).
 
 ## Usage Examples
-
 ```java
 Rs2Magic.cast(MagicAction.FIRE_STRIKE);
 Rs2Magic.alch("Rune Platelegs");

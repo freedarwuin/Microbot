@@ -1,43 +1,43 @@
-# Rs2Combat Class Documentation
+# Documentación de la clase Rs2Combat
 
-## [Back](development.md)
+## [Volver](development.md)
 
-## Overview
-The `Rs2Combat` class provides methods for controlling combat settings in the game, such as setting attack styles, managing auto retaliate, and handling special attacks.
+## Descripción general
+La clase `Rs2Combat` proporciona métodos para controlar la configuración de combate en el juego, como establecer estilos de ataque, gestionar el auto-retaliate y manejar ataques especiales.
 
-## Methods
+## Métodos
 
 ### `enableAutoRetialiate`
-- **Signature**: `public static boolean enableAutoRetialiate()`
-- **Description**: Ensures auto retaliate is enabled by checking the current state and interacting with the combat options tab if necessary.
+- **Firma**: `public static boolean enableAutoRetialiate()`
+- **Descripción**: Asegura que el auto-retaliate esté habilitado verificando el estado actual e interactuando con la pestaña de opciones de combate si es necesario.
 
 ### `getSpecState`
-- **Signature**: `public static boolean getSpecState()`
-- **Description**: Checks the state of the special attack widget to determine if the special attack is enabled.
+- **Firma**: `public static boolean getSpecState()`
+- **Descripción**: Comprueba el estado del widget de ataque especial para determinar si el ataque especial está habilitado.
 
 ### `inCombat`
-- **Signature**: `public static boolean inCombat()`
-- **Description**: Determines if the player's character is currently engaged in combat by checking interaction and animation states.
+- **Firma**: `public static boolean inCombat()`
+- **Descripción**: Determina si el personaje del jugador está actualmente en combate verificando los estados de interacción y animación.
 
 ### `isSelected`
-- **Signature**: `private static boolean isSelected(int widgetId)`
-- **Description**: Verifies if a widget is selected by checking its background color for the selection indicator.
+- **Firma**: `private static boolean isSelected(int widgetId)`
+- **Descripción**: Verifica si un widget está seleccionado comprobando su color de fondo para el indicador de selección.
 
 ### `setAttackStyle`
-- **Signature**: `public static boolean setAttackStyle(WidgetInfo style)`
-- **Description**: Sets the player's attack style by clicking on the corresponding widget. Returns true if successful or already set.
+- **Firma**: `public static boolean setAttackStyle(WidgetInfo style)`
+- **Descripción**: Configura el estilo de ataque del jugador haciendo clic en el widget correspondiente. Devuelve true si tiene éxito o si ya está configurado.
 
 ### `setAutoRetaliate`
-- **Signature**: `public static boolean setAutoRetaliate(boolean state)`
-- **Description**: Enables or disables auto retaliate based on the provided state by interacting with the corresponding widget.
+- **Firma**: `public static boolean setAutoRetaliate(boolean state)`
+- **Descripción**: Habilita o deshabilita el auto-retaliate según el estado proporcionado, interactuando con el widget correspondiente.
 
 ### `setSpecState`
-- **Signature**: `public static boolean setSpecState(boolean state, int specialAttackEnergyRequired)`
-- **Description**: Sets the special attack state, enabling or disabling it based on the required energy level compared to the current energy level.
+- **Firma**: `public static boolean setSpecState(boolean state, int specialAttackEnergyRequired)`
+- **Descripción**: Configura el estado del ataque especial, habilitándolo o deshabilitándolo según el nivel de energía requerido comparado con el nivel de energía actual.
 
-### `setSpecState (overloaded)`
-- **Signature**: `public static boolean setSpecState(boolean state)`
-- **Description**: Overloaded method that sets the special attack state without requiring a specific energy level.
+### `setSpecState (sobrecargado)`
+- **Firma**: `public static boolean setSpecState(boolean state)`
+- **Descripción**: Método sobrecargado que configura el estado del ataque especial sin requerir un nivel específico de energía.
 
-## Additional Details
-These methods facilitate the management of combat-related settings and statuses within the game, enhancing the player's ability to adapt and respond to various combat scenarios programmatically.
+## Detalles adicionales
+Estos métodos facilitan la gestión de configuraciones y estados relacionados con el combate dentro del juego, mejorando la capacidad del jugador para adaptarse y responder a diversos escenarios de combate de forma programática.

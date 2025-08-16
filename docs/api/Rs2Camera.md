@@ -1,87 +1,87 @@
-# Rs2Camera Class Documentation
+# Documentación de la clase Rs2Camera
 
-## [Back](development.md)
+## [Volver](development.md)
 
-## Overview
-The `Rs2Camera` class provides methods to manipulate the camera view in the game, including setting camera angles, pitching, and determining if a tile is visible on the screen.
+## Descripción general
+La clase `Rs2Camera` proporciona métodos para manipular la vista de la cámara en el juego, incluyendo ajustar ángulos, inclinación y determinar si una baldosa es visible en la pantalla.
 
-## Methods
+## Métodos
 
 ### `angleToTile(Actor t)`
-- **Signature**: `public static int angleToTile(Actor t)`
-- **Description**: Computes the angle from the player's location to a given actor's position.
+- **Firma**: `public static int angleToTile(Actor t)`
+- **Descripción**: Calcula el ángulo desde la ubicación del jugador hasta la posición de un actor dado.
 
 ### `angleToTile(TileObject t)`
-- **Signature**: `public static int angleToTile(TileObject t)`
-- **Description**: Computes the angle from the player's location to a given tile object's position.
+- **Firma**: `public static int angleToTile(TileObject t)`
+- **Descripción**: Calcula el ángulo desde la ubicación del jugador hasta la posición de un objeto de baldosa dado.
 
 ### `angleToTile(LocalPoint localPoint)`
-- **Signature**: `public static int angleToTile(LocalPoint localPoint)`
-- **Description**: Computes the angle from the player's location to a specified local point.
+- **Firma**: `public static int angleToTile(LocalPoint localPoint)`
+- **Descripción**: Calcula el ángulo desde la ubicación del jugador hasta un punto local específico.
 
 ### `getAngle()`
-- **Signature**: `public static int getAngle()`
-- **Description**: Retrieves the current absolute angle of the camera.
+- **Firma**: `public static int getAngle()`
+- **Descripción**: Obtiene el ángulo absoluto actual de la cámara.
 
 ### `getAngleTo(int degrees)`
-- **Signature**: `public static int getAngleTo(int degrees)`
-- **Description**: Calculates the relative angle difference to a specific degree value from the current camera angle.
+- **Firma**: `public static int getAngleTo(int degrees)`
+- **Descripción**: Calcula la diferencia de ángulo relativo a un valor de grado específico desde el ángulo actual de la cámara.
 
 ### `getCharacterAngle(Actor actor)`
-- **Signature**: `public static int getCharacterAngle(Actor actor)`
-- **Description**: Retrieves the camera angle needed to focus directly on an actor.
+- **Firma**: `public static int getCharacterAngle(Actor actor)`
+- **Descripción**: Obtiene el ángulo de la cámara necesario para enfocar directamente a un actor.
 
 ### `getObjectAngle(TileObject tileObject)`
-- **Signature**: `public static int getObjectAngle(TileObject tileObject)`
-- **Description**: Retrieves the camera angle needed to focus directly on a tile object.
+- **Firma**: `public static int getObjectAngle(TileObject tileObject)`
+- **Descripción**: Obtiene el ángulo de la cámara necesario para enfocar directamente a un objeto de baldosa.
 
 ### `getTileAngle(Actor actor)`
-- **Signature**: `public static int getTileAngle(Actor actor)`
-- **Description**: Calculates the modified angle necessary to focus the camera directly on an actor.
+- **Firma**: `public static int getTileAngle(Actor actor)`
+- **Descripción**: Calcula el ángulo modificado necesario para enfocar la cámara directamente en un actor.
 
 ### `getTileAngle(TileObject tileObject)`
-- **Signature**: `public static int getTileAngle(TileObject tileObject)`
-- **Description**: Calculates the modified angle necessary to focus the camera directly on a tile object.
+- **Firma**: `public static int getTileAngle(TileObject tileObject)`
+- **Descripción**: Calcula el ángulo modificado necesario para enfocar la cámara directamente en un objeto de baldosa.
 
 ### `isTileOnScreen(TileObject tileObject)`
-- **Signature**: `public static boolean isTileOnScreen(TileObject tileObject)`
-- **Description**: Checks if a tile object is currently visible within the game's viewport.
+- **Firma**: `public static boolean isTileOnScreen(TileObject tileObject)`
+- **Descripción**: Comprueba si un objeto de baldosa es actualmente visible dentro del área de visualización del juego.
 
 ### `isTileOnScreen(LocalPoint localPoint)`
-- **Signature**: `public static boolean isTileOnScreen(LocalPoint localPoint)`
-- **Description**: Checks if a location represented by a LocalPoint is currently visible within the game's viewport.
+- **Firma**: `public static boolean isTileOnScreen(LocalPoint localPoint)`
+- **Descripción**: Comprueba si una ubicación representada por un LocalPoint es actualmente visible dentro del área de visualización del juego.
 
 ### `setAngle(int degrees)`
-- **Signature**: `public static void setAngle(int degrees)`
-- **Description**: Sets the camera angle to a specific degree, adjusting the view accordingly.
+- **Firma**: `public static void setAngle(int degrees)`
+- **Descripción**: Ajusta el ángulo de la cámara a un grado específico, modificando la vista en consecuencia.
 
 ### `setAngle(int degrees, Actor actor)`
-- **Signature**: `public static void setAngle(int degrees, Actor actor)`
-- **Description**: Sets the camera to focus on an actor at a specific angle.
+- **Firma**: `public static void setAngle(int degrees, Actor actor)`
+- **Descripción**: Ajusta la cámara para enfocar a un actor en un ángulo específico.
 
 ### `setAngle(int degrees, TileObject tileObject)`
-- **Signature**: `public static void setAngle(int degrees, TileObject tileObject)`
-- **Description**: Sets the camera to focus on a tile object at a specific angle.
+- **Firma**: `public static void setAngle(int degrees, TileObject tileObject)`
+- **Descripción**: Ajusta la cámara para enfocar a un objeto de baldosa en un ángulo específico.
 
 ### `setAngle(int degrees, LocalPoint localPoint)`
-- **Signature**: `public static void setAngle(int degrees, LocalPoint localPoint)`
-- **Description**: Sets the camera to focus on a specific local point at a certain angle.
+- **Firma**: `public static void setAngle(int degrees, LocalPoint localPoint)`
+- **Descripción**: Ajusta la cámara para enfocar un punto local específico en un ángulo determinado.
 
 ### `setPitch(float percentage)`
-- **Signature**: `public static void setPitch(float percentage)`
-- **Description**: Adjusts the camera pitch to a specified percentage of the maximum allowable pitch.
+- **Firma**: `public static void setPitch(float percentage)`
+- **Descripción**: Ajusta la inclinación de la cámara a un porcentaje específico del máximo permitido.
 
 ### `turnTo(Actor actor)`
-- **Signature**: `public static void turnTo(final Actor actor)`
-- **Description**: Rotates the camera to face an actor.
+- **Firma**: `public static void turnTo(final Actor actor)`
+- **Descripción**: Rota la cámara para mirar a un actor.
 
 ### `turnTo(TileObject tileObject)`
-- **Signature**: `public static void turnTo(final TileObject tileObject)`
-- **Description**: Rotates the camera to focus on a tile object.
+- **Firma**: `public static void turnTo(final TileObject tileObject)`
+- **Descripción**: Rota la cámara para enfocar un objeto de baldosa.
 
 ### `turnTo(LocalPoint localPoint)`
-- **Signature**: `public static void turnTo(final LocalPoint localPoint)`
-- **Description**: Rotates the camera to focus on a specific local point in the game world.
+- **Firma**: `public static void turnTo(final LocalPoint localPoint)`
+- **Descripción**: Rota la cámara para enfocar un punto local específico en el mundo del juego.
 
-## Additional Details
-The methods provided facilitate various camera operations critical for enhancing player interaction and visualization within the game environment. This class utilizes keyboard inputs to adjust camera settings dynamically based on game events and object locations.
+## Detalles adicionales
+Los métodos proporcionados facilitan diversas operaciones de cámara, críticas para mejorar la interacción del jugador y la visualización dentro del entorno del juego. Esta clase utiliza entradas del teclado para ajustar la cámara dinámicamente según los eventos del juego y las ubicaciones de los objetos.

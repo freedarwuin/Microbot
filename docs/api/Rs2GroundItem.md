@@ -1,69 +1,71 @@
-# Rs2GroundItem Class Documentation
-## [Back](development.md)
-## Overview
-The `Rs2GroundItem` class provides methods to interact with ground items within the game, facilitating operations like picking up, checking existence, and interacting with items based on various criteria such as item ID, name, or location.
+# Documentación de la clase Rs2GroundItem
 
-## Methods
+## [Volver](development.md)
 
-### `exists`
-- **Signature**: `public static boolean exists(String itemName, int range)`
-- **Description**: Checks if a ground item with the specified name exists within a given range.
+## Descripción general
+La clase `Rs2GroundItem` proporciona métodos para interactuar con los objetos en el suelo dentro del juego, facilitando operaciones como recoger, verificar existencia e interactuar con ítems basándose en diversos criterios como ID del ítem, nombre o ubicación.
+
+## Métodos
 
 ### `exists`
-- **Signature**: `public static boolean exists(int itemId, int range)`
-- **Description**: Checks if a ground item with the specified ID exists within a given range.
+- **Firma**: `public static boolean exists(String itemName, int range)`
+- **Descripción**: Verifica si un objeto en el suelo con el nombre especificado existe dentro de un rango dado.
+
+### `exists`
+- **Firma**: `public static boolean exists(int itemId, int range)`
+- **Descripción**: Verifica si un objeto en el suelo con el ID especificado existe dentro de un rango dado.
 
 ### `getAll`
-- **Signature**: `public static RS2Item[] getAll(int range)`
-- **Description**: Retrieves all ground items within a specified range from the player's location.
+- **Firma**: `public static RS2Item[] getAll(int range)`
+- **Descripción**: Recupera todos los objetos en el suelo dentro de un rango especificado desde la ubicación del jugador.
 
 ### `getAllAt`
-- **Signature**: `public static RS2Item[] getAllAt(int x, int y)`
-- **Description**: Retrieves all ground items located at a specific tile.
+- **Firma**: `public static RS2Item[] getAllAt(int x, int y)`
+- **Descripción**: Recupera todos los objetos en el suelo ubicados en un tile específico.
 
 ### `getTile`
-- **Signature**: `public static Tile getTile(int x, int y)`
-- **Description**: Retrieves the tile at a given world coordinate.
+- **Firma**: `public static Tile getTile(int x, int y)`
+- **Descripción**: Recupera el tile en una coordenada específica del mundo.
 
 ### `interact`
-- **Signature**: `public static boolean interact(String itemName, String action, int x, int y)`
-- **Description**: Interacts with a ground item by name and specified action at a specific tile location.
+- **Firma**: `public static boolean interact(String itemName, String action, int x, int y)`
+- **Descripción**: Interactúa con un objeto del suelo por nombre y acción especificada en una ubicación de tile específica.
 
 ### `interact`
-- **Signature**: `public static boolean interact(int itemId, String action, int x, int y)`
-- **Description**: Interacts with a ground item by ID and specified action at a specific tile location.
+- **Firma**: `public static boolean interact(int itemId, String action, int x, int y)`
+- **Descripción**: Interactúa con un objeto del suelo por ID y acción especificada en una ubicación de tile específica.
 
 ### `interact`
-- **Signature**: `public static boolean interact(String itemName, String action, int range)`
-- **Description**: Interacts with all ground items matching the specified name and action within a certain range.
+- **Firma**: `public static boolean interact(String itemName, String action, int range)`
+- **Descripción**: Interactúa con todos los objetos del suelo que coincidan con el nombre y acción especificada dentro de un rango determinado.
 
 ### `interact`
-- **Signature**: `public static boolean interact(int itemId, String action, int range)`
-- **Description**: Interacts with all ground items matching the specified ID and action within a certain range.
+- **Firma**: `public static boolean interact(int itemId, String action, int range)`
+- **Descripción**: Interactúa con todos los objetos del suelo que coincidan con el ID y acción especificada dentro de un rango determinado.
 
 ### `loot`
-- **Signature**: `public static boolean loot(String lootItem, int minQuantity, int range)`
-- **Description**: Attempts to pick up ground items that match the specified item name, quantity, and within a certain range.
+- **Firma**: `public static boolean loot(String lootItem, int minQuantity, int range)`
+- **Descripción**: Intenta recoger objetos del suelo que coincidan con el nombre del ítem, cantidad mínima y dentro de un rango determinado.
 
 ### `lootAllItemBasedOnValue`
-- **Signature**: `public static boolean lootAllItemBasedOnValue(int value, int range)`
-- **Description**: Attempts to pick up all ground items based on their total value exceeding a specified amount within a certain range.
+- **Firma**: `public static boolean lootAllItemBasedOnValue(int value, int range)`
+- **Descripción**: Intenta recoger todos los objetos en el suelo basándose en su valor total superando una cantidad especificada dentro de un rango determinado.
 
 ### `lootAtGePrice`
-- **Signature**: `public static boolean lootAtGePrice(int minGePrice)`
-- **Description**: Attempts to pick up items based on their Grand Exchange price being above a certain threshold.
+- **Firma**: `public static boolean lootAtGePrice(int minGePrice)`
+- **Descripción**: Intenta recoger objetos basándose en que su precio en el Grand Exchange sea superior a un umbral específico.
 
 ### `lootItemBasedOnValue`
-- **Signature**: `public static boolean lootItemBasedOnValue(int value, int range)`
-- **Description**: Attempts to pick up a single item based on its total value exceeding a specified amount within a certain range.
+- **Firma**: `public static boolean lootItemBasedOnValue(int value, int range)`
+- **Descripción**: Intenta recoger un solo objeto basándose en que su valor total supere una cantidad especificada dentro de un rango determinado.
 
 ### `pickup`
-- **Signature**: `public static boolean pickup(String lootItem, int range)`
-- **Description**: Alias for looting an item, focusing on the action of picking it up.
+- **Firma**: `public static boolean pickup(String lootItem, int range)`
+- **Descripción**: Alias para recoger un objeto, enfocándose en la acción de levantarlo.
 
 ### `take`
-- **Signature**: `public static boolean take(String lootItem, int range)`
-- **Description**: Another alias for looting an item, emphasizing the action of taking it.
+- **Firma**: `public static boolean take(String lootItem, int range)`
+- **Descripción**: Otro alias para recoger un objeto, enfatizando la acción de tomarlo.
 
-## Additional Details
-This class is essential for scripts that automate the collection or interaction with items on the ground within the game, improving efficiency and managing inventory based on item properties and player needs.
+## Detalles adicionales
+Esta clase es esencial para scripts que automatizan la recolección o interacción con objetos en el suelo dentro del juego, mejorando la eficiencia y gestionando el inventario según las propiedades del ítem y las necesidades del jugador.

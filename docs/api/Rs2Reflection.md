@@ -1,41 +1,44 @@
 # Rs2Reflection Class Documentation
+
 ## [Back](development.md)
-The `Rs2Reflection` class provides utility methods for manipulating game elements through Java reflection. This allows for operations that are normally inaccessible through standard API calls, such as obtaining and modifying game entity attributes and invoking hidden actions within the game's client.
+
+## Overview
+La clase `Rs2Reflection` proporciona métodos utilitarios para manipular elementos del juego mediante Java reflection. Esto permite realizar operaciones normalmente inaccesibles a través de la API estándar, como obtener o modificar atributos de entidades del juego e invocar acciones ocultas dentro del cliente del juego.
 
 ## Methods
 
 ### `getAnimation(NPC npc)`
-- **Parameters**: `NPC npc` - The NPC whose animation value is to be retrieved.
-- **Returns**: `int` - The animation identifier of the NPC, or `-1` if not found.
-- **Description**: Retrieves the animation identifier of a given NPC by dynamically identifying the animation field via reflection.
+- **Parámetros**: `NPC npc` - El NPC cuya animación se desea obtener.
+- **Retorna**: `int` - Identificador de la animación del NPC, o `-1` si no se encuentra.
+- **Descripción**: Recupera el identificador de animación de un NPC determinado identificando dinámicamente el campo correspondiente mediante reflection.
 
 ### `getGroundItemActions(ItemComposition item)`
-- **Parameters**: `ItemComposition item` - The item composition to analyze.
-- **Returns**: `String[]` - An array of possible actions for the item on the ground.
-- **Description**: Extracts ground item actions from an item's composition using reflection to access the relevant field.
+- **Parámetros**: `ItemComposition item` - La composición del ítem a analizar.
+- **Retorna**: `String[]` - Array con las posibles acciones para el ítem en el suelo.
+- **Descripción**: Extrae las acciones de ítem en el suelo usando reflection para acceder al campo relevante del objeto.
 
 ### `setItemId(MenuEntry menuEntry, int itemId)`
-- **Parameters**:
-    - `MenuEntry menuEntry` - The menu entry to modify.
-    - `int itemId` - The item ID to set.
-- **Description**: Sets the item ID in a menu entry, presumably to modify the context of an interaction dynamically.
+- **Parámetros**:
+    - `MenuEntry menuEntry` - La entrada del menú a modificar.
+    - `int itemId` - ID del ítem a establecer.
+- **Descripción**: Establece el ID del ítem en una entrada de menú, permitiendo modificar dinámicamente el contexto de la interacción.
 
 ### `getObjectByName(String[] names, boolean exact)`
-- **Parameters**:
-    - `String[] names` - Array of object names to find.
-    - `boolean exact` - Specifies whether to match names exactly.
-- **Returns**: `ArrayList<Integer>` - A list of object IDs matching the names.
-- **Description**: Finds object IDs from the game's object definitions using their names, with an option for exact or partial matches.
+- **Parámetros**:
+    - `String[] names` - Array de nombres de objetos a buscar.
+    - `boolean exact` - Indica si la coincidencia debe ser exacta.
+- **Retorna**: `ArrayList<Integer>` - Lista de IDs de objetos que coinciden con los nombres.
+- **Descripción**: Busca IDs de objetos en las definiciones del juego según sus nombres, con opción de coincidencia exacta o parcial.
 
 ### `invokeMenu(int param0, int param1, int opcode, int identifier, int itemId, String option, String target, int x, int y)`
-- **Parameters**: Parameters defining the context and details of the menu action to invoke.
-- **Description**: Directly invokes a game menu action using reflection, typically used for simulating clicks and other interactions programmatically.
+- **Parámetros**: Parámetros que definen el contexto y detalles de la acción del menú a invocar.
+- **Descripción**: Invoca directamente una acción de menú del juego mediante reflection, usado típicamente para simular clics y otras interacciones programáticamente.
 
 ## Usage Example
 
-This example demonstrates how to use `getAnimation` to retrieve the animation of an NPC and print it:
+Este ejemplo demuestra cómo usar `getAnimation` para obtener la animación de un NPC y mostrarla:
 
 ```java
-NPC someNpc = ... // obtain NPC instance from the game client
+NPC someNpc = ... // obtener instancia de NPC desde el cliente del juego
 int animationId = Rs2Reflection.getAnimation(someNpc);
 System.out.println("Current NPC Animation ID: " + animationId);
