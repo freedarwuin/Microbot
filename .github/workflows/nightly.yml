@@ -2,7 +2,7 @@ name: Nightly release
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "*/5 * * * *"
 
 env:
   version: ${microbot.version}
