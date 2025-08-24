@@ -4,11 +4,11 @@ import net.runelite.client.config.*;
 import org.jetbrains.annotations.Range;
 
 @ConfigGroup("mixology")
-@ConfigInformation("<p>Start the script at the bankchest of the mixology minigame room with an empty inventory.</p> <br />" +
-        "<br />Requirements: " +
+@ConfigInformation("<p>Inicia el script en el cofre del banco dentro de la sala del minijuego de mixología con el inventario vacío.</p> <br />" +
+        "<br />Requisitos: " +
         "<ol> " +
         "<li>60 Herblore</li>" +
-        "<li>Herbs for making mox/aga/lye paste</li>" +
+        "<li>Hierbas para hacer pasta de mox/aga/lye</li>" +
         "</ol>")
 public interface MixologyConfig extends Config {
     @ConfigSection(

@@ -12,14 +12,14 @@ import net.runelite.client.plugins.microbot.util.misc.SpecialAttackWeaponEnum;
 import net.runelite.client.plugins.microbot.util.slayer.enums.SlayerMaster;
 
 @ConfigGroup(AIOFighterConfig.GROUP)
-@ConfigInformation("1. Make sure to place the cannon first before starting the plugin. <br />" +
-        "2. Use food also supports Guthan's healing, the shield weapon is default set to Dragon Defender. <br />" +
-        "3. Prayer, Combat, Ranging & AntiPoison potions are supported. <br />" +
-        "4. Items to loot based your requirements. <br />" +
-        "5. You can turn auto attack NPC off if you have a cannon. <br />" +
-        "6. PrayFlick in different styles. <br />" +
-        "7. SafeSpot you can Shift Right-click the ground to select the tile. <br />" +
-        "8. Right-click NPCs to add them to the attack list. <br />")
+@ConfigInformation("1. Asegúrate de colocar el cañón antes de iniciar el plugin. <br />" +
+        "2. El uso de comida también soporta la curación de Guthan, el arma de escudo por defecto es Dragon Defender. <br />" +
+        "3. Se soportan pociones de Oración, Combate, Rango y AntiVeneno. <br />" +
+        "4. Objetos para recoger según tus requisitos. <br />" +
+        "5. Puedes desactivar el auto ataque a NPC si tienes un cañón. <br />" +
+        "6. Cambio de oración en diferentes estilos. <br />" +
+        "7. SafeSpot: puedes Shift + clic derecho en el suelo para seleccionar la casilla. <br />" +
+        "8. Clic derecho en NPCs para añadirlos a la lista de ataque. <br />")
 public interface AIOFighterConfig extends Config {
 
     String GROUP = "playerassist";

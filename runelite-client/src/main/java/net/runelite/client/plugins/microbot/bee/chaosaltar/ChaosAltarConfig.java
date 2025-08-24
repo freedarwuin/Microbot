@@ -14,13 +14,13 @@ public interface ChaosAltarConfig extends Config {
             position = 1
     )
     default String pluginDescription() {
-        return "For best results:\n"
-                + "- Activate Player Monitor in LITE_MODE\n"
-                + "- Enable AutoLogin\n"
-                + "- Keep Burning Amulets and dragon bones in the bank\n"
-                + "- ONLY WORKS WITH Dragon Bones\n"
-                + "- If you have an alt, consider teleporting to the Lava Maze spot first to distract PKers or bots who can auto-attack when you teleport\n"
-                + "(Note: Microbot currently can't log out fast enough for when someone is waiting for you after teleport)";
+        return "Para mejores resultados:\n"
+                + "- Activar Player Monitor en MODO_LITE\n"
+                + "- Habilitar AutoLogin\n"
+                + "- Mantener Amuletos Ardientes y huesos de dragón en el banco\n"
+                + "- SOLO FUNCIONA CON Huesos de Dragón\n"
+                + "- Si tienes un personaje alternativo, considera teletransportarte primero al Lava Maze para distraer a los PKers o bots que pueden atacar automáticamente cuando te teletransportas\n"
+                + "(Nota: Microbot actualmente no puede cerrar sesión lo suficientemente rápido cuando alguien te espera después del teletransporte)";
     }
 
     @ConfigItem(

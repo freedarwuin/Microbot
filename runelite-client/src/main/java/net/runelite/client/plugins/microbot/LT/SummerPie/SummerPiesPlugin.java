@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @PluginDescriptor(
-        name = "<html>[<font color=#b8f704M>LT</font>] Summer Pies",
+        name = PluginDescriptor.LT + "Summer Pies",
         description = "Summer Pies Plugin",
         tags = {"Summer Pies", "microbot"},
         enabledByDefault = false

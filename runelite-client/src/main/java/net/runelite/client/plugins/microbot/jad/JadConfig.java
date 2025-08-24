@@ -6,7 +6,7 @@ import net.runelite.client.config.ConfigInformation;
 import net.runelite.client.config.ConfigItem;
 
 @ConfigGroup(JadConfig.configGroup)
-@ConfigInformation("This plugin will pray switch jad attacks and attack healers. Supports up to 3 jads")
+@ConfigInformation("Este plugin cambiará las oraciones contra los ataques de Jad y atacará a los curanderos. Soporta hasta 3 jads")
 public interface JadConfig extends Config {
     String configGroup = "micro-jadhelper";
     String shouldAttackHealers = "shouldAttackHealers";

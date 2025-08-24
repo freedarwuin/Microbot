@@ -50,10 +50,10 @@ public interface Construction2Config extends Config {
             section = generalSection
     )
     default String GUIDE() {
-        return "This script supports oak larder, oak dungeon doors, mahogany table with a demon butler. " +
-                "Call the butler and use the planks on him you're going to use." +
-                " Then start the plugin next to the build space with " +
-                "coins, a saw, a hammer and your noted planks and the rest of your inventory un-noted planks.";
+        return "Este script soporta despensa de roble, puertas de mazmorra de roble, mesa de caoba con un mayordomo demonio. " +
+                "Llama al mayordomo y usa las tablas sobre él que vas a usar. " +
+                "Luego inicia el plugin junto al espacio de construcción con " +
+                "monedas, una sierra, un martillo y tus tablas anotadas, y el resto de tu inventario con tablas no anotadas.";
     }
 
     @ConfigItem(

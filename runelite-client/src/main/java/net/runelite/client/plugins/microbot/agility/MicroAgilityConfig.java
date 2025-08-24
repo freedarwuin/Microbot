@@ -8,12 +8,12 @@ import net.runelite.client.config.ConfigSection;
 import net.runelite.client.plugins.microbot.agility.enums.AgilityCourse;
 
 @ConfigGroup("MicroAgility")
-@ConfigInformation("Enable the plugin near the start of your selected agility course. <br />" +
-	"<b>Course requirements:</b>" +
-	"<ul>" +
-	"<li> Ape Atoll - Kruk or Ninja greegree equipped. Stamina pots recommended. </li>" +
-	"<li>Shayzien Advanced - Crossbow and Mith Grapple equipped.</li>" +
-	"</ul>")
+@ConfigInformation("Activa el plugin cerca del inicio del curso de agilidad seleccionado. <br />" +
+        "<b>Requisitos de los cursos:</b>" +
+        "<ul>" +
+        "<li> Ape Atoll - Kruk o Ninja greegree equipado. Se recomiendan pociones de energía.</li>" +
+        "<li> Shayzien Avanzado - Ballesta y Mith Grapple equipados.</li>" +
+        "</ul>")
 public interface MicroAgilityConfig extends Config
 {
 
@@ -33,7 +33,7 @@ public interface MicroAgilityConfig extends Config
 	@ConfigItem(
 		keyName = selectedCourse,
 		name = "Course",
-		description = "Choose your agility course",
+		description = "Elige tu curso de agilidad",
 		position = 1,
 		section = generalSection
 	)
@@ -45,7 +45,7 @@ public interface MicroAgilityConfig extends Config
 	@ConfigItem(
 		keyName = hitpointsThreshold,
 		name = "Eat at",
-		description = "Use food below certain hitpoint percent. If there's no food in the inventory, the script stops. Set to 0 in order to disable.",
+        description = "Usa comida cuando los puntos de vida bajen de cierto porcentaje. Si no hay comida en el inventario, el script se detiene. Coloca 0 para desactivar.",
 		position = 2,
 		section = generalSection
 	)
@@ -57,7 +57,7 @@ public interface MicroAgilityConfig extends Config
 	@ConfigItem(
 		keyName = shouldAlch,
 		name = "Alch",
-		description = "Use Low/High Alchemy while doing agility",
+		description = "Usar Alquimia Baja/Alta mientras haces agilidad",
 		position = 4,
 		section = generalSection
 	)
@@ -69,7 +69,7 @@ public interface MicroAgilityConfig extends Config
 	@ConfigItem(
 		keyName = itemsToAlch,
 		name = "Items to Alch",
-		description = "Enter items to alch, separated by commas (e.g., Rune sword, Dragon dagger, Mithril platebody)",
+		description = "Introduce los ítems para alquear, separados por comas (ejemplo: Espada rúnica, Daga de dragón, Armadura de mithril)",
 		position = 5,
 		section = generalSection
 	)
