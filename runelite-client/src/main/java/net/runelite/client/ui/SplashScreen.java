@@ -245,7 +245,7 @@ public class SplashScreen extends JFrame implements ActionListener {
                 new EmptyBorder(PAD, PAD, PAD, PAD)
         ));
 
-        JLabel factTitle = new JLabel("💡 Did you know?");
+        JLabel factTitle = new JLabel("💡 “¿Lo sabías?");
         factTitle.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
         factTitle.setForeground(fg);
         factTitle.setBorder(new EmptyBorder(0, 0, 8, 0));
