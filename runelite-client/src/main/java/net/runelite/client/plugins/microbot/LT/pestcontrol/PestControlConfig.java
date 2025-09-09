@@ -13,12 +13,12 @@ public interface PestControlConfig extends Config {
             position = 1
     )
     default String GUIDE() {
-        return "Start near a boat of your combat level";
+        return "Empieza cerca de un barco de tu nivel de combate";
     }
 
     @ConfigItem(
             keyName = "NPC Priority 1",
-            name = "NPC Priority 1",
+            name = "Prioridad de NPC 1",
             description = "What npc to attack as first option",
             position = 2
     )
@@ -27,7 +27,7 @@ public interface PestControlConfig extends Config {
     }
     @ConfigItem(
             keyName = "NPC Priority 2",
-            name = "NPC Priority 2",
+            name = "Prioridad de NPC 2",
             description = "What npc to attack as second option",
             position = 3
     )
@@ -36,7 +36,7 @@ public interface PestControlConfig extends Config {
     }
     @ConfigItem(
             keyName = "NPC Priority 3",
-            name = "NPC Priority 3",
+            name = "Prioridad de NPC 3",
             description = "What npc to attack as third option",
             position = 4
     )
@@ -46,7 +46,7 @@ public interface PestControlConfig extends Config {
 
     @ConfigItem(
             keyName = "Alch in boat",
-            name = "Alch while waiting",
+            name = "Alch mientras esperas",
             description = "Alch while waiting",
             position = 5
     )
@@ -56,7 +56,7 @@ public interface PestControlConfig extends Config {
 
     @ConfigItem(
             keyName = "itemToAlch",
-            name = "Item to alch",
+            name = "Item para alch",
             description = "Item to alch",
             position = 6
     )
