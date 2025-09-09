@@ -1,19 +1,20 @@
-package net.runelite.client.plugins.microbot.revKiller;
+package net.runelite.client.plugins.microbot.LT.pestcontrol;
 
 import net.runelite.client.plugins.microbot.Microbot;
+import net.runelite.client.plugins.pestcontrol.Portal;
 import net.runelite.client.ui.overlay.OverlayPanel;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.components.LineComponent;
 import net.runelite.client.ui.overlay.components.TitleComponent;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.awt.*;
 
-public class revKillerOverlay extends OverlayPanel {
+import static net.runelite.client.plugins.microbot.LT.pestcontrol.PestControlScript.portals;
 
+public class PestControlOverlay  extends OverlayPanel {
     @Inject
-    revKillerOverlay(revKillerPlugin plugin)
+    PestControlOverlay(PestControlPlugin plugin)
     {
         super(plugin);
         setPosition(OverlayPosition.TOP_LEFT);
@@ -24,7 +25,7 @@ public class revKillerOverlay extends OverlayPanel {
         try {
             panelComponent.setPreferredSize(new Dimension(200, 300));
             panelComponent.getChildren().add(TitleComponent.builder()
-                    .text("Rev Killer V1.0.0")
+                    .text("Micro PestControl V" + PestControlScript.version)
                     .color(Color.GREEN)
                     .build());
 
@@ -34,7 +35,14 @@ public class revKillerOverlay extends OverlayPanel {
                     .left(Microbot.status)
                     .build());
 
-
+            if (PestControlScript.DEBUG) {
+                for(Portal portal: portals) {
+                    if (portal.getHitPoints() == null) continue;
+                    panelComponent.getChildren().add(LineComponent.builder()
+                            .left(portal.toString() + " - H" + portal.getHitPoints().getText() + " - A " + portal.isAttackAble())
+                            .build());
+                }
+            }
         } catch(Exception ex) {
             System.out.println(ex.getMessage());
         }
