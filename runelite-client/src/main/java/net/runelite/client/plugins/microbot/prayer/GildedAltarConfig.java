@@ -14,6 +14,6 @@ public interface GildedAltarConfig extends Config {
             position = 0
     )
     default String GUIDE() {
-        return "This only supports house advertisements. Use this script in w330";
+        return "Esto solo admite anuncios de casas. Usa este script en el mundo 330";
     }
 }

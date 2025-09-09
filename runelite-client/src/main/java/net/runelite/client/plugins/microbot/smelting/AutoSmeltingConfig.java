@@ -16,8 +16,8 @@ public interface AutoSmeltingConfig extends Config {
             section = generalSection
     )
     default String GUIDE() {
-        return "Select the type of bar you want to smelt and stand near any furnace.\n" +
-                "You need enough ore in your bank to fill your inventory, e.g. 14 tin and 14 copper or 9 iron and 18 coal.\n";
+        return "Selecciona el tipo de lingote que quieres fundir y permanece cerca de cualquier horno.\n" +
+                "Necesitas suficiente mineral en tu banco para llenar tu inventario, por ejemplo: 14 de estaño y 14 de cobre o 9 de hierro y 18 de carbón.\n";
     }
 
     @ConfigSection(

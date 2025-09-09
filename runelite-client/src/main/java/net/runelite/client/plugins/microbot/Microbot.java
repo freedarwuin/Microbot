@@ -36,6 +36,7 @@ import net.runelite.client.plugins.loottracker.LootTrackerItem;
 import net.runelite.client.plugins.loottracker.LootTrackerPlugin;
 import net.runelite.client.plugins.loottracker.LootTrackerRecord;
 import net.runelite.client.plugins.microbot.configs.SpecialAttackConfigs;
+import net.runelite.client.plugins.microbot.LT.dashboard.PluginRequestModel;
 import net.runelite.client.plugins.microbot.qualityoflife.scripts.pouch.PouchScript;
 import net.runelite.client.plugins.microbot.util.cache.Rs2VarPlayerCache;
 import net.runelite.client.plugins.microbot.util.cache.Rs2VarbitCache;
@@ -139,6 +140,9 @@ public class Microbot {
 	@Getter
 	@Inject
 	private static WorldService worldService;
+	@Getter
+	@Setter
+	private static List<PluginRequestModel> botPlugins = new ArrayList<>();
 	@Getter
 	@Inject
 	private static PluginManager pluginManager;
