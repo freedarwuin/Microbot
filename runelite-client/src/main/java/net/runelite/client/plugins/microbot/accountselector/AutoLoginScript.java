@@ -478,6 +478,127 @@ public class AutoLoginScript extends Script {
         }
     }
     
+    /**
+     * checks for ban screen during login attempt or when logged out
+     */
+    private void checkForBan() {
+        GameState gameState = Microbot.getClient().getGameState();
+        
+        // detect ban screen on login screen
+        boolean banDetected = gameState == GameState.LOGIN_SCREEN
+                && Microbot.getClient().getLoginIndex() == BANNED_LOGIN_INDEX;
+        
+        if (banDetected && !isBanned) {
+            isBanned = true;
+            handleBanDetection();
+        }
+    }
+
+    /**
+     * updates cached player name when logged in
+     */
+    private void updatePlayerNameCache() {
+        boolean currentlyLoggedIn = Microbot.isLoggedIn();
+        
+        // detect fresh login - update player name cache
+        if (currentlyLoggedIn && !wasLoggedIn) {
+            Rs2PlayerModel localPlayer = Rs2Player.getLocalPlayer();
+            if (localPlayer != null && localPlayer.getName() != null) {
+                lastKnownPlayerName = localPlayer.getName();
+                log.info("Updated cached player name: {}", lastKnownPlayerName);
+            }
+        }
+        
+        wasLoggedIn = currentlyLoggedIn;
+    }
+
+    /**
+     * handles ban detection - sends notification and shuts down plugins
+     */
+    private void handleBanDetection() {
+        log.info("Ban screen detected for player: {}", lastKnownPlayerName);
+        
+        // send discord notification if webhook is configured
+        sendBanDiscordNotification();
+        
+        // shutdown auto login plugin
+        shutdownPlugin();
+    }
+
+    /**
+     * handles general login failures - sends notification and shuts down plugins
+     */
+    private void handleGeneralFailure(String failureReason) {
+        log.info("Login failure detected for player: {} - {}", lastKnownPlayerName, failureReason);
+        
+        // send discord notification if webhook is configured
+        sendFailureDiscordNotification(failureReason);
+        
+        // shutdown auto login plugin after failure
+        shutdownPlugin();
+    }
+
+    /**
+     * sends discord webhook notification about ban detection
+     */
+    private void sendBanDiscordNotification() {
+        try {
+            // create custom fields for detailed ban information
+            java.util.List<DiscordEmbed.Field> fields = new java.util.ArrayList<>();
+            fields.add(Rs2Discord.createPlayerField(lastKnownPlayerName));
+            fields.add(Rs2Discord.createTimestampField());
+            fields.add(Rs2Discord.createField("Login Index", String.valueOf(BANNED_LOGIN_INDEX), true));
+            fields.add(Rs2Discord.createField("Source", "AutoLogin", true));
+
+            boolean success = Rs2Discord.sendNotificationWithFields(
+                "🚫 Account Ban Detected",
+                "Ban screen detected during login attempt.",
+                0xDC143C, // crimson red
+                fields,
+                "AutoLogin Ban Detection"
+            );
+
+            if (success) {
+                log.info("Ban notification sent to discord webhook");
+            } else {
+                log.info("Failed to send discord notification - webhook may not be configured");
+            }
+        } catch (Exception ex) {
+            log.error("Error sending discord notification", ex);
+        }
+    }
+
+    /**
+     * sends discord webhook notification about general login failures
+     */
+    private void sendFailureDiscordNotification(String failureReason) {
+        try {
+            // send error notification using the flexible discord system
+            boolean success = Rs2Discord.sendAlert("ERROR", failureReason, 0xE74C3C, lastKnownPlayerName, "AutoLogin");
+
+            if (success) {
+                log.info("Login failure notification sent to discord webhook");
+            } else {
+                log.info("Failed to send discord notification - webhook may not be configured");
+            }
+        } catch (Exception ex) {
+            log.error("Error sending discord notification", ex);
+        }
+    }
+
+    /**
+     * shuts down auto login plugin when failure is detected
+     */
+    private void shutdownPlugin() {
+        try {
+            log.info("Shutting down {} plugin due to failure detection", AutoLoginPlugin.class.getSimpleName());
+            Microbot.stopPlugin(AutoLoginPlugin.class);
+            
+        } catch (Exception ex) {
+            log.error("Error shutting down {} plugin", AutoLoginPlugin.class.getSimpleName(), ex);
+        }
+    }
+    
     @Override
     public void shutdown() {
         log.info("Auto login script shutting down");
