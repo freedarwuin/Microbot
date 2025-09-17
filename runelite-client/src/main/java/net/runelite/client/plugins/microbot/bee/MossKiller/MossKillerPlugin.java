@@ -835,7 +835,7 @@ public class MossKillerPlugin extends Plugin implements SchedulablePlugin {
         return null;
     }
 
-    @Override
+    //@Override
     @Subscribe
     public void onPluginScheduleEntrySoftStopEvent(PluginScheduleEntrySoftStopEvent event) {
 
