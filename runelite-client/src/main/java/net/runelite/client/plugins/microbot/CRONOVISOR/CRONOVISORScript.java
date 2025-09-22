@@ -111,17 +111,24 @@ public class CRONOVISORScript extends Script {
     private void sendRandomMessage(CRONOVISORConfig config) {
         List<String> messages = new ArrayList<>();
 
-        // Cargar mensajes según idioma
-        if (config.language() == CRONOVISORConfig.LanguageOption.English) {
+        // Inglés
+        if (config.language() == CRONOVISORConfig.LanguageOption.English
+                || config.language() == CRONOVISORConfig.LanguageOption.Both) {
             if (config.enableMessage1()) messages.add(config.customMessage1_en());
             if (config.enableMessage2()) messages.add(config.customMessage2_en());
             if (config.enableMessage3()) messages.add(config.customMessage3_en());
             if (config.enableMessage4()) messages.add(config.customMessage4_en());
-        } else {
+            if (config.enableMessage5() && !config.customMessage5_en().isEmpty()) messages.add(config.customMessage5_en());
+        }
+
+        // Español
+        if (config.language() == CRONOVISORConfig.LanguageOption.Spanish
+                || config.language() == CRONOVISORConfig.LanguageOption.Both) {
             if (config.enableMessage1()) messages.add(config.customMessage1_es());
             if (config.enableMessage2()) messages.add(config.customMessage2_es());
             if (config.enableMessage3()) messages.add(config.customMessage3_es());
             if (config.enableMessage4()) messages.add(config.customMessage4_es());
+            if (config.enableMessage5() && !config.customMessage5_es().isEmpty()) messages.add(config.customMessage5_es());
         }
 
         if (messages.isEmpty()) return;
