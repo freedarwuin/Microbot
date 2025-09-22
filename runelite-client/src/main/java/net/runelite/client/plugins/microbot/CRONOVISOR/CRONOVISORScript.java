@@ -4,6 +4,7 @@ import net.runelite.api.Client;
 import net.runelite.api.MenuAction;
 import net.runelite.api.MenuEntry;
 import net.runelite.api.Player;
+import net.runelite.api.EquipmentInventorySlot;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.plugins.microbot.Microbot;
@@ -17,6 +18,7 @@ import net.runelite.client.plugins.microbot.util.walker.Rs2Walker;
 import net.runelite.client.plugins.microbot.util.widget.Rs2Widget;
 import net.runelite.client.plugins.microbot.util.bank.Rs2Bank;
 import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory;
+import net.runelite.client.plugins.microbot.util.equipment.Rs2Equipment;
 import org.apache.commons.lang3.RandomUtils;
 
 import javax.inject.Inject;
@@ -124,36 +126,68 @@ public class CRONOVISORScript extends Script {
     }
 
     private void handleBankItems() {
-        boolean hasCloak = Rs2Inventory.contains(CLAN_CLOAK);
-        boolean hasVexillum = Rs2Inventory.contains(CLAN_VEXILLUM);
+        // Verificar si los items están equipados
+        boolean cloakEquipped = Rs2Equipment.isEquipped(CLAN_CLOAK, EquipmentInventorySlot.CAPE);
+        boolean vexillumEquipped = Rs2Equipment.isEquipped(CLAN_VEXILLUM, EquipmentInventorySlot.SHIELD);
 
-        if (hasCloak && hasVexillum) {
-            Rs2Inventory.interact(CLAN_CLOAK, "Wear");
-            Rs2Inventory.interact(CLAN_VEXILLUM, "Wear");
+        // Verificar si los items están en el inventario
+        boolean cloakInInventory = Rs2Inventory.contains(CLAN_CLOAK);
+        boolean vexillumInInventory = Rs2Inventory.contains(CLAN_VEXILLUM);
+
+        System.out.println("DEBUG: cloakEquipped=" + cloakEquipped + ", cloakInInventory=" + cloakInInventory
+                + ", vexillumEquipped=" + vexillumEquipped + ", vexillumInInventory=" + vexillumInInventory);
+
+        // Si ambos items están equipados o en inventario, no abrir el banco
+        if ((cloakEquipped || cloakInInventory) && (vexillumEquipped || vexillumInInventory)) {
+            // Equipar items si están en inventario
+            if (!cloakEquipped && cloakInInventory) {
+                Rs2Inventory.interact(CLAN_CLOAK, "Wear");
+                sleep(500);
+            }
+            if (!vexillumEquipped && vexillumInInventory) {
+                Rs2Inventory.interact(CLAN_VEXILLUM, "Wear");
+                sleep(500);
+            }
+            return; // nada más que hacer
+        }
+
+        // Abrir banco solo si falta algún item **y está disponible en el banco**
+        boolean needBank = false;
+
+        if ((!cloakEquipped && !cloakInInventory) && Rs2Bank.hasItem(CLAN_CLOAK)) needBank = true;
+        if ((!vexillumEquipped && !vexillumInInventory) && Rs2Bank.hasItem(CLAN_VEXILLUM)) needBank = true;
+
+        if (!needBank) {
+            System.out.println("DEBUG: No items missing or not in bank. Skipping bank.");
             return;
         }
 
+        // Abrir banco
         if (!Rs2Bank.isOpen()) {
             Rs2Bank.openBank();
             sleepUntil(Rs2Bank::isOpen, 3000);
         }
 
-        if (!hasCloak && Rs2Bank.hasItem(CLAN_CLOAK)) {
-            Rs2Bank.withdrawOne(CLAN_CLOAK);
-            sleepUntil(() -> Rs2Inventory.contains(CLAN_CLOAK), 3000);
+        // Retirar y equipar items que falten
+        if (!cloakEquipped && Rs2Bank.hasItem(CLAN_CLOAK)) {
+            Rs2Bank.withdrawAndEquip(CLAN_CLOAK);
+            sleepUntil(() -> Rs2Equipment.isEquipped(CLAN_CLOAK, EquipmentInventorySlot.CAPE), 3000);
         }
 
-        if (!hasVexillum && Rs2Bank.hasItem(CLAN_VEXILLUM)) {
-            Rs2Bank.withdrawOne(CLAN_VEXILLUM);
-            sleepUntil(() -> Rs2Inventory.contains(CLAN_VEXILLUM), 3000);
+        if (!vexillumEquipped && Rs2Bank.hasItem(CLAN_VEXILLUM)) {
+            Rs2Bank.withdrawAndEquip(CLAN_VEXILLUM);
+            sleepUntil(() -> Rs2Equipment.isEquipped(CLAN_VEXILLUM, EquipmentInventorySlot.SHIELD), 3000);
         }
 
-        if (Rs2Inventory.contains(CLAN_CLOAK)) Rs2Inventory.interact(CLAN_CLOAK, "Wear");
-        if (Rs2Inventory.contains(CLAN_VEXILLUM)) Rs2Inventory.interact(CLAN_VEXILLUM, "Wear");
-
-        Rs2Bank.closeBank();
+        // Cerrar banco
+        if (Rs2Bank.isOpen()) {
+            Rs2Bank.closeBank();
+            sleep(500);
+        }
     }
 
+
+    // Resto del código permanece igual
     private void sendRandomMessage(CRONOVISORConfig config) {
         List<String> messages = new ArrayList<>();
 
