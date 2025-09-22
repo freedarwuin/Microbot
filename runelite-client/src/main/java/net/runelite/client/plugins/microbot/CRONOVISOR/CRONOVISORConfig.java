@@ -33,7 +33,7 @@ public interface CRONOVISORConfig extends Config {
             position = 0
     )
     default int messageInterval() {
-        return 90;
+        return 120;
     }
 
     @ConfigItem(
