@@ -9,14 +9,15 @@ import net.runelite.client.config.ConfigItem;
 @ConfigInformation(
         "Be in a clan and have equipped clan vexillum. Start the plugin in a crowded area (e.g., GE 301, GE 302).<br/>" +
                 "This plugin will automatically invite nearby players to your clan CRONO-VISOR (if recruiting is enabled),<br/>" +
-                "send custom messages in English or Spanish depending on your settings, with individual message toggles.<br/>" +
+                "send custom messages in English, Spanish, or both depending on your settings, with individual message toggles.<br/>" +
                 "You can also configure a list of worlds to hop automatically between for recruitment."
 )
 public interface CRONOVISORConfig extends Config {
 
     enum LanguageOption {
         English,
-        Spanish
+        Spanish,
+        Both
     }
 
     enum ChatTypeOption {
@@ -32,7 +33,7 @@ public interface CRONOVISORConfig extends Config {
             position = 0
     )
     default int messageInterval() {
-        return 90; // por defecto 90 segundos
+        return 90;
     }
 
     @ConfigItem(
@@ -48,11 +49,11 @@ public interface CRONOVISORConfig extends Config {
     @ConfigItem(
             keyName = "language",
             name = "Language",
-            description = "Choose language for messages",
+            description = "Choose language for messages (English, Spanish, or Both)",
             position = 2
     )
     default LanguageOption language() {
-        return LanguageOption.English;
+        return LanguageOption.Both;
     }
 
     @ConfigItem(
@@ -169,7 +170,7 @@ public interface CRONOVISORConfig extends Config {
             keyName = "customMessage4_en",
             name = "Custom Message 4 (EN)",
             description = "Message 4 in English",
-            position = 14
+            position = 13
     )
     default String customMessage4_en() {
         return "Ready for PK? Clan CRONO-VISOR wants you!";
@@ -183,5 +184,34 @@ public interface CRONOVISORConfig extends Config {
     )
     default String customMessage4_es() {
         return "¿Listo para PK? ¡El clan CRONO-VISOR te espera!";
+    }
+
+    // --- Message 5 (Discord con reglas) ---
+    @ConfigItem(
+            keyName = "enableMessage5",
+            name = "Enable Message 5",
+            description = "Enable or disable custom message 5",
+            position = 15
+    )
+    default boolean enableMessage5() { return false; }
+
+    @ConfigItem(
+            keyName = "customMessage5_en",
+            name = "Custom Message 5 (EN)",
+            description = "Message 5 in English (Discord rules)",
+            position = 16
+    )
+    default String customMessage5_en() {
+        return "Clan rules are on our Discord: discord.gg/hFnTbjWyfB";
+    }
+
+    @ConfigItem(
+            keyName = "customMessage5_es",
+            name = "Custom Message 5 (ES)",
+            description = "Mensaje 5 en Español (reglas en Discord)",
+            position = 17
+    )
+    default String customMessage5_es() {
+        return "Las reglas están en nuestro Discord: discord.gg/hFnTbjWyfB";
     }
 }
