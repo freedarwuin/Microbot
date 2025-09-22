@@ -221,6 +221,7 @@ public class CRONOVISORScript extends Script {
 
         if (message.length() > 80) message = message.substring(0, 80);
 
+        // Cambiar canal según configuración
         switch (config.chatType()) {
             case ALL:
                 Rs2Keyboard.typeString("");
