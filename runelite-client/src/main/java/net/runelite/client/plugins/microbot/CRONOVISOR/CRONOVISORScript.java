@@ -15,6 +15,8 @@ import net.runelite.client.plugins.microbot.util.player.Rs2Player;
 import net.runelite.client.plugins.microbot.util.player.Rs2PlayerModel;
 import net.runelite.client.plugins.microbot.util.walker.Rs2Walker;
 import net.runelite.client.plugins.microbot.util.widget.Rs2Widget;
+import net.runelite.client.plugins.microbot.util.bank.Rs2Bank;
+import net.runelite.client.plugins.microbot.util.inventory.Rs2Inventory;
 import org.apache.commons.lang3.RandomUtils;
 
 import javax.inject.Inject;
@@ -41,7 +43,19 @@ public class CRONOVISORScript extends Script {
     }
 
     private Player localPlayer;
+
+    // Áreas de trabajo
     private final WorldArea GEarea = new WorldArea(3153, 3478, 24, 23, 0);
+    private final WorldArea FEROXarea = new WorldArea(3125, 3618, 30, 34, 0);
+    private final WorldArea LUMBYarea = new WorldArea(3200, 3200, 30, 30, 0);
+    private final WorldArea WILDYarea = new WorldArea(3284, 3847, 10, 10, 0);
+    private final WorldArea Artioarea = new WorldArea(3219, 3785, 10, 10, 0);
+    private final WorldArea Line30Wilderarea = new WorldArea(3283, 3760, 10, 10, 0);
+    private final WorldArea Faladorarea = new WorldArea(3045, 3377, 10, 10, 0);
+
+    // IDs de items
+    private static final int CLAN_CLOAK = 25712;
+    private static final int CLAN_VEXILLUM = 25721;
 
     public boolean run(CRONOVISORConfig config) {
 
@@ -54,7 +68,8 @@ public class CRONOVISORScript extends Script {
                 if (client == null || !Microbot.isLoggedIn()) return;
 
                 if (config.recruit()) {
-                    checkAndReturnToArea();
+                    handleBankItems(); // Manejo de banco y equipamiento
+                    checkAndReturnToArea(config);
 
                     List<Rs2PlayerModel> localPlayers = Rs2Player.getPlayers(p -> true)
                             .collect(Collectors.toList());
@@ -108,10 +123,40 @@ public class CRONOVISORScript extends Script {
         return true;
     }
 
+    private void handleBankItems() {
+        boolean hasCloak = Rs2Inventory.contains(CLAN_CLOAK);
+        boolean hasVexillum = Rs2Inventory.contains(CLAN_VEXILLUM);
+
+        if (hasCloak && hasVexillum) {
+            Rs2Inventory.interact(CLAN_CLOAK, "Wear");
+            Rs2Inventory.interact(CLAN_VEXILLUM, "Wear");
+            return;
+        }
+
+        if (!Rs2Bank.isOpen()) {
+            Rs2Bank.openBank();
+            sleepUntil(Rs2Bank::isOpen, 3000);
+        }
+
+        if (!hasCloak && Rs2Bank.hasItem(CLAN_CLOAK)) {
+            Rs2Bank.withdrawOne(CLAN_CLOAK);
+            sleepUntil(() -> Rs2Inventory.contains(CLAN_CLOAK), 3000);
+        }
+
+        if (!hasVexillum && Rs2Bank.hasItem(CLAN_VEXILLUM)) {
+            Rs2Bank.withdrawOne(CLAN_VEXILLUM);
+            sleepUntil(() -> Rs2Inventory.contains(CLAN_VEXILLUM), 3000);
+        }
+
+        if (Rs2Inventory.contains(CLAN_CLOAK)) Rs2Inventory.interact(CLAN_CLOAK, "Wear");
+        if (Rs2Inventory.contains(CLAN_VEXILLUM)) Rs2Inventory.interact(CLAN_VEXILLUM, "Wear");
+
+        Rs2Bank.closeBank();
+    }
+
     private void sendRandomMessage(CRONOVISORConfig config) {
         List<String> messages = new ArrayList<>();
 
-        // Inglés
         if (config.language() == CRONOVISORConfig.LanguageOption.English
                 || config.language() == CRONOVISORConfig.LanguageOption.Both) {
             if (config.enableMessage1()) messages.add(config.customMessage1_en());
@@ -121,7 +166,6 @@ public class CRONOVISORScript extends Script {
             if (config.enableMessage5() && !config.customMessage5_en().isEmpty()) messages.add(config.customMessage5_en());
         }
 
-        // Español
         if (config.language() == CRONOVISORConfig.LanguageOption.Spanish
                 || config.language() == CRONOVISORConfig.LanguageOption.Both) {
             if (config.enableMessage1()) messages.add(config.customMessage1_es());
@@ -133,44 +177,34 @@ public class CRONOVISORScript extends Script {
 
         if (messages.isEmpty()) return;
 
-        // Elegir mensaje aleatorio
         String message = messages.get(random.nextInt(messages.size()));
-
-        // Variaciones de texto
         message = addTextVariations(message);
 
-        // Emoji aleatorio
         if (random.nextBoolean()) {
             String[] emojis = {"🔥", "⚔️", "💀", "✅", "🚀", "🌍"};
             message += " " + emojis[random.nextInt(emojis.length)];
         }
 
-        // Limitar a 80 caracteres
-        if (message.length() > 80) {
-            message = message.substring(0, 80);
-        }
+        if (message.length() > 80) message = message.substring(0, 80);
 
-        // Cambiar canal según configuración
         switch (config.chatType()) {
             case ALL:
-                Rs2Keyboard.typeString(""); // abrir chat global
+                Rs2Keyboard.typeString("");
                 Rs2Keyboard.enter();
                 break;
             case CHANNEL:
-                Rs2Keyboard.typeString("/"); // Channel
+                Rs2Keyboard.typeString("/");
                 break;
             case CLAN:
-                Rs2Keyboard.typeString("//"); // friends
+                Rs2Keyboard.typeString("//");
                 break;
         }
 
-        // Enviar mensaje
         Rs2Keyboard.typeString(message);
         Rs2Keyboard.enter();
         sleep(1000);
     }
 
-    // Variaciones mínimas en letras
     private String addTextVariations(String input) {
         Map<Character, String[]> variations = new HashMap<>();
         variations.put('a', new String[]{"a", "â", "à", "á", "ä"});
@@ -186,28 +220,42 @@ public class CRONOVISORScript extends Script {
             if (variations.containsKey(Character.toLowerCase(ch)) && random.nextInt(100) < 15) {
                 String[] opts = variations.get(Character.toLowerCase(ch));
                 sb.append(opts[random.nextInt(opts.length)]);
-            } else {
-                sb.append(ch);
-            }
+            } else sb.append(ch);
         }
         return sb.toString();
     }
 
-    private boolean isInArea() {
-        return GEarea.contains(localPlayer.getWorldLocation());
-    }
-
-    public void checkAndReturnToArea() {
-        if (!isInArea()) {
-            WorldPoint randomPoint = getRandomPointInArea();
-            Rs2Walker.walkTo(randomPoint);
+    public void checkAndReturnToArea(CRONOVISORConfig config) {
+        switch (config.location()) {
+            case Ferox:
+                if (!FEROXarea.contains(localPlayer.getWorldLocation())) Rs2Walker.walkTo(getRandomPoint(FEROXarea));
+                break;
+            case Lumbridge:
+                if (!LUMBYarea.contains(localPlayer.getWorldLocation())) Rs2Walker.walkTo(getRandomPoint(LUMBYarea));
+                break;
+            case Callisto:
+                if (!WILDYarea.contains(localPlayer.getWorldLocation())) Rs2Walker.walkTo(getRandomPoint(WILDYarea));
+                break;
+            case Artio:
+                if (!Artioarea.contains(localPlayer.getWorldLocation())) Rs2Walker.walkTo(getRandomPoint(Artioarea));
+                break;
+            case Line30Wilder:
+                if (!Line30Wilderarea.contains(localPlayer.getWorldLocation())) Rs2Walker.walkTo(getRandomPoint(Line30Wilderarea));
+                break;
+            case Falador:
+                if (!Faladorarea.contains(localPlayer.getWorldLocation())) Rs2Walker.walkTo(getRandomPoint(Faladorarea));
+                break;
+            case GrandExchange:
+            default:
+                if (!GEarea.contains(localPlayer.getWorldLocation())) Rs2Walker.walkTo(getRandomPoint(GEarea));
+                break;
         }
     }
 
-    private WorldPoint getRandomPointInArea() {
-        int x = GEarea.getX() + random.nextInt(GEarea.getWidth());
-        int y = GEarea.getY() + random.nextInt(GEarea.getHeight());
-        return new WorldPoint(x, y, GEarea.getPlane());
+    private WorldPoint getRandomPoint(WorldArea area) {
+        int x = area.getX() + random.nextInt(area.getWidth());
+        int y = area.getY() + random.nextInt(area.getHeight());
+        return new WorldPoint(x, y, area.getPlane());
     }
 
     public void inviteToClanWithRetry(String playerName) {
@@ -252,18 +300,14 @@ public class CRONOVISORScript extends Script {
     private MenuAction findRecruitAction() {
         MenuEntry[] entries = Microbot.getClient().getMenuEntries();
         for (MenuEntry entry : entries) {
-            if ("Recruit".equals(entry.getOption())) {
-                return entry.getType();
-            }
+            if ("Recruit".equals(entry.getOption())) return entry.getType();
         }
         return null;
     }
 
     @Override
     public void shutdown() {
-        if (mainScheduledFuture != null && !mainScheduledFuture.isCancelled()) {
-            mainScheduledFuture.cancel(true);
-        }
+        if (mainScheduledFuture != null && !mainScheduledFuture.isCancelled()) mainScheduledFuture.cancel(true);
         System.out.println("CRONOVISOR Script shutdown");
     }
 }
