@@ -36,7 +36,8 @@ public interface CRONOVISORConfig extends Config {
         Callisto,
         Artio,
         Line30Wilder,
-        Falador
+        Falador,
+        Rimmington
     }
 
     @ConfigItem(
@@ -46,7 +47,7 @@ public interface CRONOVISORConfig extends Config {
             position = 0
     )
     default RecruitLocation location() {
-        return RecruitLocation.Falador;
+        return RecruitLocation.GrandExchange;
     }
     default int messageInterval() {
         return 120;

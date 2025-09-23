@@ -54,6 +54,7 @@ public class CRONOVISORScript extends Script {
     private final WorldArea Artioarea = new WorldArea(3219, 3785, 10, 10, 0);
     private final WorldArea Line30Wilderarea = new WorldArea(3283, 3760, 10, 10, 0);
     private final WorldArea Faladorarea = new WorldArea(3045, 3377, 10, 10, 0);
+    private final WorldArea Rimmingtonarea = new WorldArea(2957, 3224, 10, 10, 0);
 
     // IDs de items
     private static final int CLAN_CLOAK = 25712;
@@ -279,6 +280,9 @@ public class CRONOVISORScript extends Script {
                 break;
             case Falador:
                 if (!Faladorarea.contains(localPlayer.getWorldLocation())) Rs2Walker.walkTo(getRandomPoint(Faladorarea));
+                break;
+            case Rimmington:
+                if (!Rimmingtonarea.contains(localPlayer.getWorldLocation())) Rs2Walker.walkTo(getRandomPoint(Rimmingtonarea));
                 break;
             case GrandExchange:
             default:
