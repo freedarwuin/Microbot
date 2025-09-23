@@ -1,4 +1,4 @@
-name: Manual Nightly release
+name: Manual Guason release
 
 on:
   workflow_dispatch:
@@ -53,12 +53,12 @@ jobs:
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "nightly"
+          automatic_release_tag: "Guason"
           prerelease: false
-          title: "Nightly Build"
+          title: "Guason Build"
           files: |
             /home/runner/work/Microbot/Microbot/runelite-client/target/microbot-*.jar
-            
+
 
       - name: Upload Jar to Hetzner
         uses: appleboy/scp-action@v0.1.7
@@ -67,7 +67,7 @@ jobs:
           username: root
           key: ${{ secrets.PROD_SSH_KEY }}
           source: runelite-client/target/microbot-*.jar
-          target: /var/www/files/releases/microbot/nightly/
+          target: /var/www/files/releases/microbot/Guason/
           strip_components: 2
 
       - name: Set up Maven settings
@@ -77,7 +77,7 @@ jobs:
           <settings>
           <servers>
            <server>
-             <id>microbot-nightly</id>
+             <id>microbot-Guason</id>
              <username>${{ secrets.NEXUS_USER }}</username>
              <password>${{ secrets.NEXUS_PASSWORD }}</password>
            </server>
@@ -86,4 +86,4 @@ jobs:
           EOL
 
       - name: Deploy to Nexus
-        run: mvn deploy:deploy-file -DgroupId=com.microbot -DartifactId=client -Dversion=${{ steps.version.outputs.version }} -Dpackaging=jar -Dfile=runelite-client/target/microbot-${{ steps.version.outputs.version }}.jar -DrepositoryId=microbot-nightly -Durl=https://nexus.microbot.cloud/repository/microbot-nightly/
+        run: mvn deploy:deploy-file -DgroupId=com.microbot -DartifactId=client -Dversion=${{ steps.version.outputs.version }} -Dpackaging=jar -Dfile=runelite-client/target/microbot-${{ steps.version.outputs.version }}.jar -DrepositoryId=microbot-Guason -Durl=https://nexus.microbot.cloud/repository/microbot-Guason/
