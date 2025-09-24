@@ -32,7 +32,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface PluginDescriptor
 {
-    String Bee = "<html>[<font color=#FFD700><b>B</b></font>] ";
+    String Bee = "<html>[<font color=#FFD700><b>CVS</b></font>] ";
     String Nate = "<html>[<font color=orange>N</font>] ";
     String Mocrosoft = "<html>[<font color=#b8f704M>M</font>] ";
     String Default = "<html>[<font color=green>D</font>] ";
