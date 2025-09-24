@@ -11,7 +11,7 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import javax.inject.Inject;
 
 @PluginDescriptor(
-        name = "Black Chinchompas",
+        name = PluginDescriptor.Bee + "Black Chinchompas",
         description = "Microbot AutoHunter plugin",
         tags = {"hunter", "microbot"},
         enabledByDefault = false
