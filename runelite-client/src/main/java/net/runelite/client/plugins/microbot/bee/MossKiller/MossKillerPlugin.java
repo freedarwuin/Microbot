@@ -406,28 +406,28 @@ public class MossKillerPlugin extends Plugin implements SchedulablePlugin {
             }
         }
 
-        if (config.wildy() || config.wildySafer()) {
-            if (!Rs2Player.isMoving()) {
-                tickCount++;
+            if (config.wildy() || config.wildySafer()) {
+                if (!Rs2Player.isMoving()) {
+                    tickCount++;
 
-                if (tickCount >= 50) {
-                    isJammed = true;
+                    if (tickCount >= 50) {
+                        isJammed = true;
+                    }
+
+                    if (tickCount >= 500) {
+                        superJammed = true;
+                    }
+
+                } else {
+                    tickCount = 0;
+                    isJammed = false;
+                    superJammed = false;
                 }
-
-                if (tickCount >= 500) {
-                    superJammed = true;
-                }
-
-            } else {
-                tickCount = 0;
-                isJammed = false;
-                superJammed = false;
             }
-        }
 
-        if (config.wildySafer() && !windStrikeflag) {
-            checkProjectiles();
-        }
+            if (config.wildySafer() && !windStrikeflag) {
+                checkProjectiles();
+            }
 
         if (!config.wildy() && !config.wildySafer()) {
             NPC bryophyta = findBryophyta();
@@ -448,8 +448,10 @@ public class MossKillerPlugin extends Plugin implements SchedulablePlugin {
         }*/
     }
 
-    public void checkProjectiles() {
-        if (projectileCount > 10) {
+    public void checkProjectiles()
+    {
+        if (projectileCount > 10)
+        {
             // Stop processing after 10 detections
             return;
         }
@@ -461,13 +463,16 @@ public class MossKillerPlugin extends Plugin implements SchedulablePlugin {
         LocalPoint playerPos = localPlayer.getLocalLocation();
 
         Deque<Projectile> projectiles = Microbot.getClient().getProjectiles();
-        for (Projectile projectile : projectiles) {
+        for (Projectile projectile : projectiles)
+        {
             if (projectile == null)
                 continue;
 
-            if (projectile.getId() == 91) {
+            if (projectile.getId() == 91)
+            {
                 LocalPoint start = new LocalPoint(projectile.getX1(), projectile.getY1());
-                if (start.equals(playerPos)) {
+                if (start.equals(playerPos))
+                {
                     windStrikeflag = true;
                     projectileCount++;
                     break;
@@ -607,8 +612,7 @@ public class MossKillerPlugin extends Plugin implements SchedulablePlugin {
                 Microbot.log("Removing " + player.getName() + " from map due to 0 ticks");
                 if (currentTarget == player.getPlayer()) {
                     resetTarget();
-                    if (Rs2Player.getWorldLocation().getY() > 3675) wildyKillerScript.handleAsynchWalk("Twenty Wild");
-                    Microbot.log("target has been reset, going twenty wild for safety");
+                    if (Rs2Player.getWorldLocation().getY() > 3675) wildyKillerScript.handleAsynchWalk("Twenty Wild"); Microbot.log("target has been reset, going twenty wild for safety");
                     Microbot.log("Resetting target since it was " + player.getName());
                 }
             }
@@ -715,66 +719,65 @@ public class MossKillerPlugin extends Plugin implements SchedulablePlugin {
 
                     // Debug to see what's happening
                     System.out.println("Hit registered at safespot, count: " + consecutiveHitsplatsMain);
-                    System.out.println("*** SETTING MOVE TO TRUE ***");
-                    wildySaferScript.move = true;
-                    consecutiveHitsplatsMain = 0; // Reset counter
+                            System.out.println("*** SETTING MOVE TO TRUE ***");
+                            wildySaferScript.move = true;
+                            consecutiveHitsplatsMain = 0; // Reset counter
 
-                    // Update the last hitsplat time
-                    lastHitsplatTimeMain = currentTime;
-                }
-
-                if (target == client.getLocalPlayer()) {
-                    if (wildySaferScript.iveMoved && wildySaferScript.isAtSafeSpot1()) {
-                        System.out.println("*** SETTING SAFESPOT1ATTACK TO TRUE ***");
-                        wildySaferScript.safeSpot1Attack = true;
-                        System.out.println("*** you've been hit while at safespot1 ***");
+                        // Update the last hitsplat time
+                        lastHitsplatTimeMain = currentTime;
                     }
+
+                if (target == client.getLocalPlayer()){
+                    if (wildySaferScript.iveMoved && wildySaferScript.isAtSafeSpot1()) {
+                            System.out.println("*** SETTING SAFESPOT1ATTACK TO TRUE ***");
+                            wildySaferScript.safeSpot1Attack = true;
+                        System.out.println("*** you've been hit while at safespot1 ***");
+                        }
+                    }
+
+                }
                 }
 
-            }
+        if(config.wildy()) {
+
+        if (currentTarget != null) {
+            wildyKillerScript.hitsplatApplied = event.getHitsplat().isMine();
         }
 
-        if (config.wildy()) {
 
-            if (currentTarget != null) {
-                wildyKillerScript.hitsplatApplied = event.getHitsplat().isMine();
-            }
-
-
-            if (target == Microbot.getClient().getLocalPlayer()) {
-                if (hitsplat.getHitsplatType() == HitsplatID.BLOCK_ME || hitsplat.getHitsplatType() == HitsplatID.DAMAGE_ME) {
-                    //System.out.println("registered a hit");
-                    WorldView worldView = client.getWorldView(-1); // or getTopLevelWorldView()
-                    if (worldView != null && worldView.players() != null && worldView.players().iterator().hasNext()) {
-                        int playerCount = 0;
-                        for (Player player : worldView.players()) {
-                            if (player != client.getLocalPlayer()) {
-                                playerCount++;
-                            }
-                        }
-
-                        if (playerCount > 0) {
-                            // There are players other than the local player
-                            System.out.println("There are other players in the world view.");
-                            for (Player player : worldView.players()) {
-                                System.out.println("there is a player nearby");
-                                System.out.println("is doing combat animation " + (!isNonCombatAnimation(player)));
-                                System.out.println("Interacting with me he is " + (player.getInteracting() == client.getLocalPlayer()));
-                                if (player.getInteracting() == client.getLocalPlayer() && !isNonCombatAnimation(player)) {
-                                    Microbot.log("Someone is interacting with me while doing a combat animation");
-                                    recentHitsplats.put(player, client.getTickCount());
-                                    hitsplatIsTheirs = true;
-                                    hitsplatSetTick = client.getTickCount(); // Record the tick when the flag is set
-                                }
-                            }
+        if (target == Microbot.getClient().getLocalPlayer()) {
+            if (hitsplat.getHitsplatType() == HitsplatID.BLOCK_ME || hitsplat.getHitsplatType() == HitsplatID.DAMAGE_ME) {
+                //System.out.println("registered a hit");
+                WorldView worldView = client.getWorldView(-1); // or getTopLevelWorldView()
+                if (worldView != null && worldView.players() != null && worldView.players().iterator().hasNext()) {
+                    int playerCount = 0;
+                    for (Player player : worldView.players()) {
+                        if (player != client.getLocalPlayer()) {
+                            playerCount++;
                         }
                     }
 
+                    if (playerCount > 0) {
+                        // There are players other than the local player
+                        System.out.println("There are other players in the world view.");
+                        for (Player player : worldView.players()) {
+                            System.out.println("there is a player nearby");
+                            System.out.println("is doing combat animation " + (!isNonCombatAnimation(player)));
+                            System.out.println("Interacting with me he is " + (player.getInteracting() == client.getLocalPlayer()));
+                            if (player.getInteracting() == client.getLocalPlayer() && !isNonCombatAnimation (player)) {
+                                Microbot.log("Someone is interacting with me while doing a combat animation");
+                                recentHitsplats.put(player, client.getTickCount());
+                                hitsplatIsTheirs = true;
+                                hitsplatSetTick = client.getTickCount(); // Record the tick when the flag is set
+                            }
+                        }
+                    }
                 }
+
             }
         }
     }
-
+    }
     /**
      * Determines which player caused the hitsplat based on interaction and proximity.
      */
@@ -874,5 +877,5 @@ public class MossKillerPlugin extends Plugin implements SchedulablePlugin {
         preparingForShutdown = false;
         projectileCount = 0;
         overlayManager.remove(mossKillerOverlay);
+        }
     }
-}
