@@ -1,29 +1,31 @@
-name: Manual Nightly release
+name: Manual Nightly Release
 
 on:
   workflow_dispatch:
     inputs:
-      parameter:
-        description: branch
+      branch:
+        description: "Branch to build"
+        required: false
+        default: freedarwuin
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # You can choose a different runner if needed
+    runs-on: ubuntu-latest
     permissions: write-all
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # Specify the branch you want
-          ref: development
+          ref: ${{ github.event.inputs.branch }}  # Toma la rama desde el input o usa freedarwuin por defecto
           fetch-depth: 0
 
-      - name: Force sync with latest development
+      - name: Force sync with latest branch
         run: |
-          git fetch origin development
-          git checkout development
-          git reset --hard origin/development
+          BRANCH=${{ github.event.inputs.branch }}
+          git fetch origin $BRANCH
+          git checkout $BRANCH
+          git reset --hard origin/$BRANCH
 
       - name: Set up JDK 11
         uses: actions/setup-java@v3
@@ -54,11 +56,10 @@ jobs:
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "nightly"
-          prerelease: false
-          title: "Nightly Build"
+          prerelease: true  # Lo dejamos como prerelease para pruebas
+          title: "Nightly Build ${{ github.event.inputs.branch }}"
           files: |
             /home/runner/work/Microbot/Microbot/runelite-client/target/microbot-*.jar
-            
 
       - name: Upload Jar to Hetzner
         uses: appleboy/scp-action@v0.1.7
