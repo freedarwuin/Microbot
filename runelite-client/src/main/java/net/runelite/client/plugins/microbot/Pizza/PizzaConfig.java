@@ -7,10 +7,10 @@ import net.runelite.client.config.ConfigInformation;
 @ConfigGroup("Pizza")
 @ConfigInformation(
         "Required ingredients (5 of each per batch):\n" +
-                "- Pizza Base\n" +
-                "- Tomato\n" +
-                "- Dough\n" +
-                "- Cheese\n\n" +
+                "- Bucket of water\n" +
+                "- Pot of flour\n" +
+                "- Cheese\n" +
+                "- Tomato\n\n" +
                 "Recommendation:\n" +
                 "Keep at least 1000 of each ingredient in your bank."
 )
