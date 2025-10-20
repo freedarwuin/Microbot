@@ -81,6 +81,14 @@ public abstract class Script extends Global implements IScript {
             startTime = Instant.now();
             //init - things that have to be checked once can be added here
         }
+        //Avoid executing any blocking events if the player hasn't finished Tutorial Island
+        if (Microbot.isLoggedIn() && !Rs2Player.hasCompletedTutorialIsland())
+            return true;
+
+        if (Rs2Player.hasCompletedTutorialIsland() && Microbot.getBlockingEventManager().shouldBlockAndProcess()) {
+            // A blocking event was found & is executing
+            return false;
+        }
         if (Microbot.pauseAllScripts.get())
             return false;
         if (Thread.currentThread().isInterrupted())
@@ -89,15 +97,8 @@ public abstract class Script extends Global implements IScript {
         if (Microbot.isLoggedIn() && Microbot.isRs2CacheEnabled() && !Rs2CacheManager.isCacheDataValid()) {
             log.debug("Cache data is not valid, waiting...");
             return false;
-
         }
-        //Avoid executing any blocking events if the player hasn't finished Tutorial Island
-        if (Microbot.isLoggedIn() && !Rs2Player.hasCompletedTutorialIsland())
-            return true;
-		if (Microbot.getBlockingEventManager().shouldBlockAndProcess()) {
-			// A blocking event was found & is executing
-			return false;
-		}
+
         if (Microbot.isLoggedIn()) {
             boolean hasRunEnergy = Microbot.getClient().getEnergy() > Microbot.runEnergyThreshold;
             if (Microbot.enableAutoRunOn && hasRunEnergy)
