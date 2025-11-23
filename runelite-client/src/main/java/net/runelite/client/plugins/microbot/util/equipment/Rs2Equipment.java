@@ -6,21 +6,19 @@ import net.runelite.api.ItemComposition;
 import net.runelite.api.ItemContainer;
 import net.runelite.api.MenuAction;
 import net.runelite.api.events.ItemContainerChanged;
+import net.runelite.api.gameval.InterfaceID;
 import net.runelite.api.gameval.InventoryID;
+import net.runelite.api.widgets.Widget;
 import net.runelite.client.plugins.microbot.Microbot;
 import net.runelite.client.plugins.microbot.globval.enums.InterfaceTab;
 import net.runelite.client.plugins.microbot.util.inventory.Rs2ItemModel;
 import net.runelite.client.plugins.microbot.util.menu.NewMenuEntry;
 import net.runelite.client.plugins.microbot.util.tabs.Rs2Tab;
+import net.runelite.client.plugins.microbot.util.widget.Rs2Widget;
 import org.slf4j.event.Level;
 
 import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -50,40 +48,6 @@ public class Rs2Equipment {
             _equipmentItems.add(new Rs2ItemModel(item, itemComposition, i));
         }
         equipmentItems = Collections.unmodifiableList(_equipmentItems);
-    }
-
-    @Deprecated(since = "Use interact", forRemoval = true)
-    public static boolean useCapeAction(int itemId, String action) {
-        Rs2ItemModel item = get(itemId);
-        if (item == null) {
-            Microbot.status = "Cape is missing in the equipment slot";
-            return false;
-        }
-
-        invokeMenu(item, action);
-        return true;
-    }
-
-    @Deprecated(since = "Use interact", forRemoval = true)
-    public static boolean useRingAction(JewelleryLocationEnum jewelleryLocationEnum) {
-        if (!isWearing(EquipmentInventorySlot.RING)) {
-            Microbot.status = "Amulet is missing in the equipment slot";
-            return false;
-        }
-        Microbot.doInvoke(new NewMenuEntry(-1, 25362456, MenuAction.CC_OP.getId(), jewelleryLocationEnum.getIdentifier(), -1, "Equip"),
-                new Rectangle(1, 1, Microbot.getClient().getCanvasWidth(), Microbot.getClient().getCanvasHeight()));
-        return true;
-    }
-
-    @Deprecated(since = "Use interact", forRemoval = true)
-    public static boolean useAmuletAction(JewelleryLocationEnum jewelleryLocationEnum) {
-        if (!isWearing(EquipmentInventorySlot.AMULET) || !hasEquippedContains(jewelleryLocationEnum.getTooltip())) {
-            Microbot.status = "Amulet is missing in the equipment slot";
-            return false;
-        }
-        Microbot.doInvoke(new NewMenuEntry(-1, 25362449, MenuAction.CC_OP.getId(), jewelleryLocationEnum.getIdentifier(), -1, "Equip"),
-                new Rectangle(1, 1, Microbot.getClient().getCanvasWidth(), Microbot.getClient().getCanvasHeight()));
-        return true;
     }
 
     public static Stream<Rs2ItemModel> all() {
@@ -150,81 +114,6 @@ public class Rs2Equipment {
         return all(names).findFirst().orElse(null);
     }
 
-    /**
-     * Checks if the equipment contains an item that matches the specified predicate.
-     *
-     * @param predicate The predicate to apply.
-     * @return True if the equipment contains an item that matches the predicate, false otherwise.
-     */
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean contains(Predicate<Rs2ItemModel> predicate) {
-        return get(predicate) != null;
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean hasEquipped(String itemName) {
-        return isWearing(itemName,true);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean hasEquippedContains(String itemName) {
-        return isWearing(itemName,false);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean hasEquipped(int id) {
-        return isWearing(id);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean hasEquippedSlot(EquipmentInventorySlot slot) {
-        return isWearing(slot);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean isEquipped(String name, EquipmentInventorySlot slot) {
-        return isEquipped(name, slot, false);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean isEquipped(int id, EquipmentInventorySlot slot) {
-        final Rs2ItemModel item = get(slot);
-        return item != null && item.getId() == id;
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean isEquipped(String name, EquipmentInventorySlot slot, boolean exact) {
-        final Rs2ItemModel item = get(slot);
-        if (item == null) return false;
-        return exact ? item.getName().equalsIgnoreCase(name) : item.getName().toLowerCase().contains(name.toLowerCase());
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean hasGuthanWeaponEquiped() {
-        return isEquipped("guthan's warspear", EquipmentInventorySlot.WEAPON);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean hasGuthanBodyEquiped() {
-        return isEquipped("guthan's platebody", EquipmentInventorySlot.BODY);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean hasGuthanLegsEquiped() {
-        return isEquipped("guthan's chainskirt", EquipmentInventorySlot.LEGS);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean hasGuthanHelmEquiped() {
-        return isEquipped("guthan's helm", EquipmentInventorySlot.HEAD);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean isWearingFullGuthan() {
-        return hasGuthanBodyEquiped() && hasGuthanWeaponEquiped() &&
-                hasGuthanHelmEquiped() && hasGuthanLegsEquiped();
-    }
-
     public static boolean isWearing() {
         return get() != null;
     }
@@ -276,11 +165,6 @@ public class Rs2Equipment {
 
     public static boolean isWearing(String[] names, EquipmentInventorySlot[] searchSlots) {
         return isWearing(names, false, searchSlots);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean isWearing(List<String> names, boolean exact, List<EquipmentInventorySlot> ignoreSlots) {
-        return isWearing(names.toArray(String[]::new), exact, ignoreSlots.toArray(EquipmentInventorySlot[]::new), false);
     }
 
     private static boolean unEquip(Rs2ItemModel item) {
@@ -414,16 +298,6 @@ public class Rs2Equipment {
         return interact(names, action, false);
     }
 
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean isWearingShield() {
-        return isWearing(EquipmentInventorySlot.SHIELD);
-    }
-
-    @Deprecated(since = "Use isWearing", forRemoval = true)
-    public static boolean isNaked() {
-        return !isWearing();
-    }
-
     public static void invokeMenu(Rs2ItemModel rs2Item, String action) {
         if (action == null || action.isEmpty()) return;
         if (rs2Item == null) return;
@@ -437,6 +311,7 @@ public class Rs2Equipment {
         int param0 = -1;
         int param1 = -1;
         int identifier;
+        String target = rs2Item.getName();
         MenuAction menuAction = MenuAction.CC_OP;
         if (action.equalsIgnoreCase("remove")) {
             identifier = 1;
@@ -444,42 +319,74 @@ public class Rs2Equipment {
             identifier = -1;
             List<String> actions = rs2Item.getEquipmentActions();
             for (int i = 0; i < actions.size(); i++) {
-                if (action.equalsIgnoreCase(actions.get(i))) {
+                if (actions.get(i).toLowerCase().contains(action.toLowerCase())) {
                     identifier = i + 2;
                     break;
                 }
             }
+            // We could not find the action in the equipment actions, so we try to find it in the sub-menu actions
             if (identifier == -1) {
-                Microbot.log("Item=" + rs2Item.getName() + " does not have action=" + action + ". Actions=" + Arrays.toString(actions.stream().filter(Objects::nonNull).toArray()), Level.ERROR);
-                return;
+                Map.Entry<String, Integer> subMenuEntry = rs2Item.getIndexOfSubAction(action);
+                if (subMenuEntry == null) {
+                    Microbot.log("Item=" + rs2Item.getName() + " does not have a subaction=" + action, Level.ERROR);
+                    return;
+                }
+                int mainMenuIndex = actions.indexOf(subMenuEntry.getKey());
+                if (mainMenuIndex < 0) {
+                    Microbot.log("Cannot find action=%s, in main actions=%s, mainMenuIndex=%s", subMenuEntry.getKey(), String.join(", ", actions), mainMenuIndex, Level.ERROR);
+                    return;
+                }
+                target = "";
+                identifier = NewMenuEntry.findIdentifier(subMenuEntry.getValue() + 1, mainMenuIndex + 2);
             }
         }
-
+        Rectangle rectangle = new Rectangle(1, 1, Microbot.getClient().getCanvasWidth(), Microbot.getClient().getCanvasHeight());
         if (rs2Item.getSlot() == EquipmentInventorySlot.CAPE.getSlotIdx()) {
             param1 = 25362448;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,16);
         } else if (rs2Item.getSlot() == EquipmentInventorySlot.HEAD.getSlotIdx()) {
             param1 = 25362447;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,15);
         } else if (rs2Item.getSlot() == EquipmentInventorySlot.AMMO.getSlotIdx()) {
             param1 = 25362457;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,25);
         } else if (rs2Item.getSlot() == EquipmentInventorySlot.AMULET.getSlotIdx()) {
             param1 = 25362449;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,17);
         } else if (rs2Item.getSlot() == EquipmentInventorySlot.WEAPON.getSlotIdx()) {
             param1 = 25362450;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,18);
         } else if (rs2Item.getSlot() == EquipmentInventorySlot.BODY.getSlotIdx()) {
             param1 = 25362451;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,19);
         } else if (rs2Item.getSlot() == EquipmentInventorySlot.SHIELD.getSlotIdx()) {
             param1 = 25362452;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,20);
         } else if (rs2Item.getSlot() == EquipmentInventorySlot.LEGS.getSlotIdx()) {
             param1 = 25362453;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,21);
         } else if (rs2Item.getSlot() == EquipmentInventorySlot.GLOVES.getSlotIdx()) {
             param1 = 25362454;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,22);
         } else if (rs2Item.getSlot() == EquipmentInventorySlot.BOOTS.getSlotIdx()) {
             param1 = 25362455;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,23);
         } else if (rs2Item.getSlot() == EquipmentInventorySlot.RING.getSlotIdx()) {
             param1 = 25362456;
+            rectangle = getSafeBounds(InterfaceID.WORNITEMS,24);
         }
 
-        Microbot.doInvoke(new NewMenuEntry(param0, param1, menuAction.getId(), identifier, -1, rs2Item.getName()), new Rectangle(1, 1, Microbot.getClient().getCanvasWidth(), Microbot.getClient().getCanvasHeight()));
+        Microbot.doInvoke(new NewMenuEntry(param0, param1, menuAction.getId(), identifier, -1, rs2Item.getName()), rectangle);
         //Rs2Reflection.invokeMenu(param0, param1, menuAction.getId(), identifier, rs2Item.id, action, target, -1, -1);
+    }
+
+    private static Rectangle getSafeBounds(int interfaceId, int childId) {
+        Widget widget = Rs2Widget.getWidget(interfaceId, childId);
+        if (widget != null && widget.getBounds() != null) {
+            return widget.getBounds();
+        }
+        return new Rectangle(1, 1,
+                Microbot.getClient().getCanvasWidth(),
+                Microbot.getClient().getCanvasHeight());
     }
 }

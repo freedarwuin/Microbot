@@ -1,24 +1,17 @@
 package net.runelite.client.plugins.microbot.util;
 
-import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Shape;
-import java.awt.image.BufferedImage;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.runelite.api.Actor;
-import net.runelite.api.ActorSpotAnim;
-import net.runelite.api.IterableHashTable;
-import net.runelite.api.Model;
-import net.runelite.api.Node;
 import net.runelite.api.Point;
-import net.runelite.api.SpritePixels;
-import net.runelite.api.WorldView;
+import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.client.plugins.microbot.Microbot;
 import org.jetbrains.annotations.Nullable;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 @Getter
 @RequiredArgsConstructor
@@ -31,6 +24,11 @@ public class ActorModel implements Actor
 	public WorldView getWorldView()
 	{
 		return actor.getWorldView();
+	}
+
+	@Override
+	public LocalPoint getCameraFocus() {
+		return Microbot.getClientThread().runOnClientThreadOptional(actor::getCameraFocus).orElse(null);
 	}
 
 	@Override
@@ -234,7 +232,7 @@ public class ActorModel implements Actor
 	@Override
 	public void setActionFrame(int frame)
 	{
-		actor.setActionFrame(frame);
+		actor.setAnimationFrame(frame);
 	}
 
 	@Override

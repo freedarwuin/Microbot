@@ -37,7 +37,7 @@ import net.runelite.api.coords.WorldPoint;
 /**
  * Represents a RuneScape actor/entity.
  */
-public interface Actor extends Renderable
+public interface Actor extends Renderable, CameraFocusableEntity
 {
 	/**
 	 * Get the {@link WorldView} this actor belongs to
@@ -496,5 +496,6 @@ public interface Actor extends Renderable
 	 * Get the height offset of the actor from their current animation
 	 * @return
 	 */
+	@Override
 	int getAnimationHeightOffset();
 }

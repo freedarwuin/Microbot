@@ -36,7 +36,7 @@ import net.runelite.client.plugins.loottracker.LootTrackerItem;
 import net.runelite.client.plugins.loottracker.LootTrackerPlugin;
 import net.runelite.client.plugins.loottracker.LootTrackerRecord;
 import net.runelite.client.plugins.microbot.configs.SpecialAttackConfigs;
-import net.runelite.client.plugins.microbot.qualityoflife.scripts.pouch.PouchScript;
+import net.runelite.client.plugins.microbot.pouch.PouchScript;
 import net.runelite.client.plugins.microbot.util.cache.Rs2VarPlayerCache;
 import net.runelite.client.plugins.microbot.util.cache.Rs2VarbitCache;
 import net.runelite.client.plugins.microbot.util.inventory.Rs2ItemModel;
@@ -47,6 +47,7 @@ import net.runelite.client.plugins.microbot.util.mouse.Mouse;
 import net.runelite.client.plugins.microbot.util.mouse.VirtualMouse;
 import net.runelite.client.plugins.microbot.util.mouse.naturalmouse.NaturalMouse;
 import net.runelite.client.plugins.microbot.util.player.Rs2PlayerCache;
+import net.runelite.client.plugins.microbot.util.security.LoginManager;
 import net.runelite.client.plugins.microbot.util.widget.Rs2Widget;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.ui.overlay.tooltip.TooltipManager;
@@ -67,7 +68,6 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.Executors;
@@ -192,11 +192,6 @@ public class Microbot {
     @Getter
     private static Rs2ItemManager rs2ItemManager = new Rs2ItemManager();
 
-    public static boolean loggedIn = false;
-
-    @Setter
-    private static Instant loginTime;
-
     @Setter
     @Getter
     public static boolean isRs2CacheEnabled = false;
@@ -211,11 +206,7 @@ public class Microbot {
      * @return the {@link Duration} the account has been logged in
      */
     public static Duration getLoginTime() {
-        if (loginTime == null) {
-            return Duration.of(0, ChronoUnit.MILLIS);
-        }
-
-        return Duration.between(loginTime, Instant.now());
+        return LoginManager.getLoginDuration();
     }
 
     /**
@@ -280,15 +271,7 @@ public class Microbot {
     }
 
     public static boolean isLoggedIn() {
-        if (loggedIn) {
-            return true;
-        }
-        if (client == null) {
-            return false;
-        }
-        GameState idx = client.getGameState();
-        loggedIn = idx == GameState.LOGGED_IN && Rs2Widget.isWidgetVisible(REPORT_BUTTON_COMPONENT_ID);
-        return loggedIn;
+        return LoginManager.isLoggedIn();
     }
 
     public static boolean isHopping() {
@@ -569,16 +552,14 @@ public class Microbot {
         }
     }
 
+    @Deprecated(since = "Use LootTrackerPlugin.getAggregateLootRecords()", forRemoval = true)
     public static List<LootTrackerRecord> getAggregateLootRecords() {
-        return LootTrackerPlugin.panel.aggregateRecords;
+        return new ArrayList<>();
     }
 
+    @Deprecated(since = "Use LootTrackerPlugin.getAggregateLootRecords()", forRemoval = true)
     public static LootTrackerRecord getAggregateLootRecords(String npcName) {
-        return getAggregateLootRecords()
-                .stream()
-                .filter(x -> x.getTitle().equalsIgnoreCase(npcName))
-                .findFirst()
-                .orElse(null);
+        return null;
     }
 
     /**
@@ -588,24 +569,9 @@ public class Microbot {
      * @param npcName name of the npc to get the loot records for
      * @return total GE value of the loot records
      */
+    @Deprecated(since = "Use LootTrackerPlugin.getAggregateLootRecords()", forRemoval = true)
     public static long getAggregateLootRecordsTotalGevalue(String npcName) {
-        LootTrackerRecord record = getAggregateLootRecords(npcName);
-        if (record == null) {
-            return 0;
-        }
-
-        long totalGeValue = 0;
-        try {
-            LootTrackerItem[] items = record.getItems();
-            for (LootTrackerItem item : items) {
-                ;
-                totalGeValue += item.getTotalGePrice();
-            }
-        } catch (Exception e) {
-            log.error("Error calculating total GE value", e);
-        }
-
-        return totalGeValue;
+        return 0;
     }
 
     /**
@@ -719,11 +685,6 @@ public class Microbot {
         return isPluginEnabled(getPlugin(name));
     }
 
-    @Deprecated(since = "1.6.2 - Use Rs2Player variant")
-    public static QuestState getQuestState(Quest quest) {
-        return getClientThread().runOnClientThreadOptional(() -> quest.getState(client)).orElse(null);
-    }
-
     public static void writeVersionToFile(String version) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(VERSION_FILE_PATH))) {
             writer.write(version);
@@ -835,4 +796,3 @@ public class Microbot {
                 .collect(Collectors.toList());
     }
 }
-

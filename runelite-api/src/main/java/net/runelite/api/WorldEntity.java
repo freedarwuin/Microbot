@@ -24,7 +24,38 @@
  */
 package net.runelite.api;
 
-public interface WorldEntity
+import net.runelite.api.coords.LocalPoint;
+import org.intellij.lang.annotations.MagicConstant;
+
+public interface WorldEntity extends CameraFocusableEntity
 {
 	WorldView getWorldView();
+
+	/**
+	 * Get the location of this world entity in the top level world.
+	 * @return
+	 */
+	LocalPoint getLocalLocation();
+
+	/**
+	 * Transform a point within the world entity to the overworld
+	 * @param point
+	 * @return
+	 */
+	LocalPoint transformToMainWorld(LocalPoint point);
+
+	/**
+	 * Return true if this worldentity is overlapped
+	 * @return
+	 */
+	boolean isHiddenForOverlap();
+
+	WorldEntityConfig getConfig();
+
+	@MagicConstant(intValues = {OWNER_TYPE_NOT_PLAYER, OWNER_TYPE_OTHER_PLAYER, OWNER_TYPE_SELF_PLAYER})
+	int getOwnerType();
+
+	int OWNER_TYPE_NOT_PLAYER = 0;
+	int OWNER_TYPE_OTHER_PLAYER = 1;
+	int OWNER_TYPE_SELF_PLAYER = 2;
 }

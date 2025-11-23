@@ -1,41 +1,6 @@
 package net.runelite.client.plugins.microbot.pluginscheduler;
 
-import static net.runelite.client.plugins.microbot.util.Global.sleep;
-import static net.runelite.client.plugins.microbot.util.Global.sleepUntil;
-import static net.runelite.client.plugins.microbot.util.Global.sleepUntilOnClientThread;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
-import javax.inject.Inject;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-
-import org.slf4j.event.Level;
-import java.nio.file.Files;
-
-import com.google.common.util.concurrent.AbstractScheduledService.Scheduler;
 import com.google.inject.Provides;
-
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.GameState;
@@ -58,7 +23,6 @@ import net.runelite.client.plugins.microbot.breakhandler.BreakHandlerConfig;
 import net.runelite.client.plugins.microbot.breakhandler.BreakHandlerScript;
 import net.runelite.client.plugins.microbot.pluginscheduler.api.SchedulablePlugin;
 import net.runelite.client.plugins.microbot.pluginscheduler.condition.Condition;
-import net.runelite.client.plugins.microbot.pluginscheduler.condition.logical.LockCondition;
 import net.runelite.client.plugins.microbot.pluginscheduler.condition.time.TimeCondition;
 import net.runelite.client.plugins.microbot.pluginscheduler.event.ExecutionResult;
 import net.runelite.client.plugins.microbot.pluginscheduler.event.PluginScheduleEntryMainTaskFinishedEvent;
@@ -70,25 +34,46 @@ import net.runelite.client.plugins.microbot.pluginscheduler.serialization.Schedu
 import net.runelite.client.plugins.microbot.pluginscheduler.tasks.AbstractPrePostScheduleTasks;
 import net.runelite.client.plugins.microbot.pluginscheduler.tasks.state.TaskExecutionState;
 import net.runelite.client.plugins.microbot.pluginscheduler.tasks.state.TaskExecutionState.ExecutionPhase;
+import net.runelite.client.plugins.microbot.pluginscheduler.ui.Antiban.AntibanDialogWindow;
 import net.runelite.client.plugins.microbot.pluginscheduler.ui.SchedulerPanel;
 import net.runelite.client.plugins.microbot.pluginscheduler.ui.SchedulerWindow;
-import net.runelite.client.plugins.microbot.pluginscheduler.ui.Antiban.AntibanDialogWindow;
 import net.runelite.client.plugins.microbot.pluginscheduler.ui.util.SchedulerUIUtils;
 import net.runelite.client.plugins.microbot.pluginscheduler.util.SchedulerPluginUtil;
-import net.runelite.client.plugins.microbot.qualityoflife.QoLPlugin;
 import net.runelite.client.plugins.microbot.util.antiban.enums.Activity;
 import net.runelite.client.plugins.microbot.util.antiban.enums.ActivityIntensity;
 import net.runelite.client.plugins.microbot.util.antiban.enums.CombatSkills;
+import net.runelite.client.plugins.microbot.util.cache.Rs2CacheManager;
 import net.runelite.client.plugins.microbot.util.events.PluginPauseEvent;
 import net.runelite.client.plugins.microbot.util.math.Rs2Random;
 import net.runelite.client.plugins.microbot.util.player.Rs2Player;
-import net.runelite.client.plugins.microbot.util.security.Login;
+import net.runelite.client.plugins.microbot.util.security.LoginManager;
+import net.runelite.client.config.ConfigProfile;
 import net.runelite.client.plugins.microbot.util.widget.Rs2Widget;
-import net.runelite.client.plugins.microbot.util.cache.Rs2CacheManager;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.NavigationButton;
 import net.runelite.client.ui.overlay.OverlayManager;
 import net.runelite.client.util.ImageUtil;
+
+import javax.inject.Inject;
+import javax.swing.Timer;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.nio.file.Files;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import static net.runelite.client.plugins.microbot.util.Global.*;
 
 @Slf4j
 @PluginDescriptor(name = PluginDescriptor.Mocrosoft + PluginDescriptor.VOX
@@ -402,7 +387,7 @@ public class SchedulerPlugin extends Plugin {
                 }
             }
             if (hasDisabledQoLPlugin){
-                SchedulerPluginUtil.enablePlugin(QoLPlugin.class);
+                // SchedulerPluginUtil.enablePlugin(QoLPlugin.class);
             }
             
             setState(SchedulerState.HOLD);
@@ -973,13 +958,13 @@ public class SchedulerPlugin extends Plugin {
                 }
             }
             // Ensure QoL is disabled when we start a plugin
-            if (SchedulerPluginUtil.isPluginEnabled(QoLPlugin.class)) {
+            /*if (SchedulerPluginUtil.isPluginEnabled(QoLPlugin.class)) {
                 log.info("Disabling QoL plugin");
                 if (SchedulerPluginUtil.disablePlugin(QoLPlugin.class)) {
                     hasDisabledQoLPlugin = true;
                     log.info("Automatically disabled QoL plugin");
                 }
-            }
+            }*/
             
             // Ensure break handler is unlocked before starting a plugin
             SchedulerPluginUtil.unlockBreakHandler();
@@ -1864,7 +1849,7 @@ public class SchedulerPlugin extends Plugin {
                     notifier.notify(Notification.ON, notificationMessage);
                 }
                 if (hasDisabledQoLPlugin){
-                    SchedulerPluginUtil.enablePlugin(QoLPlugin.class);
+                    // SchedulerPluginUtil.enablePlugin(QoLPlugin.class);
                 }
                 log.info("Plugin '{}' stopped because conditions were met",
                         currentPlugin.getCleanName());                
@@ -1909,8 +1894,8 @@ public class SchedulerPlugin extends Plugin {
      * Adds conditions to a scheduled plugin with support for saving to a specific file
      * 
      * @param plugin The plugin to add conditions to
-     * @param userStopConditions List of stop conditions
-     * @param userStartConditions List of start conditions
+     * @param stopConditions List of stop conditions
+     * @param startConditions List of start conditions
      * @param requireAll Whether all conditions must be met
      * @param stopOnConditionsMet Whether to stop the plugin when conditions are met
      * @param saveFile Optional file to save the conditions to, or null to use default config
@@ -2397,7 +2382,8 @@ public class SchedulerPlugin extends Plugin {
             // net.runelite.client.plugins.microbot.util.security
             int currentLoginIndex = Microbot.getClient().getLoginIndex();
             boolean tryMemberWorld =  config.worldType() == 2 || config.worldType() == 1 ; // TODO get correct one
-            tryMemberWorld = Login.activeProfile.isMember();
+            ConfigProfile profile = LoginManager.getActiveProfile();
+            tryMemberWorld = profile != null && profile.isMember();
             if (currentLoginIndex == 4 || currentLoginIndex == 3) { // we are in the auth screen and cannot login
                 // 3 mean wrong authtifaction
                 return false; // we are in auth
@@ -2405,7 +2391,7 @@ public class SchedulerPlugin extends Plugin {
             if (currentLoginIndex == 34) { // we are not a member and cannot login
                 if (isAutoLoginEnabled() || config.autoLogInWorld() == 1) {                    
                     Microbot.getConfigManager().setConfiguration("AutoLoginConfig", "World",
-                            Login.getRandomWorld(false));
+                            LoginManager.getRandomWorld(false));
                 }
                 int loginScreenWidth = 804;
                 int startingWidth = (Microbot.getClient().getCanvasWidth() / 2) - (loginScreenWidth / 2);
@@ -2442,7 +2428,7 @@ public class SchedulerPlugin extends Plugin {
                 ConfigManager configManager = Microbot.getConfigManager();
                 if (configManager != null) {
                     configManager.setConfiguration("AutoLoginConfig", "World",
-                            Login.getRandomWorld(tryMemberWorld));                    
+                            LoginManager.getRandomWorld(tryMemberWorld));                    
                 }
                 // Give it a moment to initialize
                 try {
@@ -2451,10 +2437,10 @@ public class SchedulerPlugin extends Plugin {
                     Thread.currentThread().interrupt();
                 }
             } else {
-                int worldID = Login.getRandomWorld(tryMemberWorld);
+                int worldID = LoginManager.getRandomWorld(tryMemberWorld);
                 log.info("\n\tforced login by scheduler plugin \n\t-> currentLoginIndex: {} - member World {}? - world {}", currentLoginIndex,
                         tryMemberWorld, worldID);
-                new Login(worldID);
+                LoginManager.login(worldID);
             }
             return true;
         }).orElse(false);        
@@ -3034,7 +3020,6 @@ public class SchedulerPlugin extends Plugin {
 
       /**
      * Sorts all scheduled plugins according to a consistent order.
-     * See {@link #sortPluginScheduleEntries(List, boolean)} for the sorting
      * criteria.
      * 
      * @param applyWeightedSelection Whether to apply weighted selection for

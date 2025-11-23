@@ -1,7 +1,5 @@
 package net.runelite.client.plugins.microbot.util.settings;
 
-import java.awt.Rectangle;
-import java.util.Map;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.MenuAction;
@@ -11,17 +9,18 @@ import net.runelite.api.widgets.ComponentID;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.plugins.microbot.Microbot;
 import net.runelite.client.plugins.microbot.globval.enums.InterfaceTab;
-import net.runelite.client.plugins.microbot.util.bank.Rs2Bank;
 import net.runelite.client.plugins.microbot.util.keyboard.Rs2Keyboard;
 import net.runelite.client.plugins.microbot.util.menu.NewMenuEntry;
 import net.runelite.client.plugins.microbot.util.misc.Rs2UiHelper;
 import net.runelite.client.plugins.microbot.util.tabs.Rs2Tab;
 import net.runelite.client.plugins.microbot.util.widget.Rs2Widget;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Map;
 
-import static net.runelite.client.plugins.microbot.globval.VarbitIndices.TOGGLE_ROOFS;
-import static net.runelite.client.plugins.microbot.util.Global.*;
+import static net.runelite.client.plugins.microbot.util.Global.sleepGaussian;
+import static net.runelite.client.plugins.microbot.util.Global.sleepUntil;
 
 @Slf4j
 @NoArgsConstructor
@@ -82,7 +81,7 @@ public class Rs2Settings
 			return false;
 		}
 
-		// MenuEntryImpl(getOption=Toggle, getTarget=, getIdentifier=1, getType=CC_OP, getParam0=8, getParam1=8781843, getItemId=-1, isForceLeftClick=false, getWorldViewId=-1, isDeprioritized=false)
+		// MenuEntryImpl(getOption=Toggle, getTarget=, getIdentifier=1, getType=CC_OP, getParam0=8, getParam1=8781844, getItemId=-1, isForceLeftClick=false, getWorldViewId=-1, isDeprioritized=false)
 		NewMenuEntry menuEntry = new NewMenuEntry("Toggle", "", 1, MenuAction.CC_OP, 8, widget.getId(), false);
 		Microbot.doInvoke(menuEntry, Rs2UiHelper.getDefaultRectangle());
 		boolean success = sleepUntil(Rs2Settings::isDropShiftSettingEnabled);
@@ -102,7 +101,7 @@ public class Rs2Settings
 
 	public static boolean isHideRoofsEnabled()
 	{
-		return Microbot.getVarbitValue(TOGGLE_ROOFS) == 1;
+		return Microbot.getVarbitValue(VarbitID.OPTION_HIDE_ROOFTOPS) == 1;
 	}
 
 	public static boolean hideRoofs(boolean closeInterface)
@@ -245,8 +244,8 @@ public class Rs2Settings
 		Widget widget = Rs2Widget.getWidget(SETTINGS_CLICKABLE);
 		if (widget == null) return false;
 
-		// MenuEntryImpl(getOption=Toggle, getTarget=, getIdentifier=1, getType=CC_OP, getParam0=34, getParam1=8781844, getItemId=-1, isForceLeftClick=false, getWorldViewId=-1, isDeprioritized=false)
-		NewMenuEntry menuEntry = new NewMenuEntry("Toggle", "", 1, MenuAction.CC_OP, 34, widget.getId(), false);
+		// MenuEntryImpl(getOption=Toggle, getTarget=, getIdentifier=1, getType=CC_OP, getParam0=35, getParam1=8781844, getItemId=-1, isForceLeftClick=false, getWorldViewId=-1, isDeprioritized=false)
+		NewMenuEntry menuEntry = new NewMenuEntry("Toggle", "", 1, MenuAction.CC_OP, 35, widget.getId(), false);
 		Microbot.doInvoke(menuEntry, Rs2UiHelper.getDefaultRectangle());
 		boolean success = sleepUntil(() -> !isWorldSwitcherConfirmationEnabled());
 

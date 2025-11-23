@@ -25,6 +25,8 @@
 package net.runelite.api;
 
 import javax.annotation.Nullable;
+import net.runelite.api.coords.LocalPoint;
+import net.runelite.api.coords.WorldPoint;
 
 public interface WorldView
 {
@@ -61,6 +63,12 @@ public interface WorldView
 	 * Gets all the WorldEntities in this view
 	 */
 	IndexedObjectSet<? extends WorldEntity> worldEntities();
+
+	/**
+	 * Get the worldviews of each worldentity in this worldview.
+	 * @return
+	 */
+	IndexedObjectSet<? extends WorldView> worldViews();
 
 	/**
 	 * Gets an array of tile collision data.
@@ -205,4 +213,46 @@ public interface WorldView
 	 * @return the map regions
 	 */
 	int[] getMapRegions();
+
+	/**
+	 * Returns a 2D array containing XTEA encryption keys used to decrypt
+	 * map region files.
+	 * <p>
+	 * The array maps the region keys at index {@code n} to the region
+	 * ID held in {@link #getMapRegions()} at {@code n}.
+	 * <p>
+	 * The array of keys for the region make up a 128-bit encryption key
+	 * spread across 4 integers.
+	 *
+	 * @return the XTEA encryption keys
+	 */
+	int[][] getXteaKeys();
+
+	/**
+	 * Test if this worldview contains the given point
+	 * @param point
+	 * @return
+	 */
+	boolean contains(WorldPoint point);
+
+	/**
+	 * Test if this worldview contains the given point
+	 * @param point
+	 * @return
+	 */
+	boolean contains(LocalPoint point);
+
+	/**
+	 * Returns a {@link Projection} to translate from this world view to the main world
+	 * @return
+	 */
+	@Nullable
+	Projection getMainWorldProjection();
+
+	/**
+	 * Returns a {@link Projection} to translate from this world view to the canvas
+	 * @return
+	 */
+	@Nullable
+	Projection getCanvasProjection();
 }

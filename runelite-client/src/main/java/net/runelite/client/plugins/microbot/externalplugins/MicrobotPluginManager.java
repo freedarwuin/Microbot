@@ -316,6 +316,8 @@ public class MicrobotPluginManager {
                     plugins.add(clazz);
                 } catch (ClassNotFoundException e) {
                     log.trace("Class not found during sideloading: {}", classInfo.getName(), e);
+                } catch(Throwable t) {
+                    log.error("Incompatible plugin found: " + internalName);
                 }
             }
             loadPlugins(plugins, null);
@@ -514,7 +516,9 @@ public class MicrobotPluginManager {
             Injector pluginInjector = parent.createChildInjector(pluginModule);
             plugin.setInjector(pluginInjector);
         } catch (CreationException ex) {
-            throw new PluginInstantiationException(ex);
+            log.error(ex.getMessage());
+            File jar = getPluginJarFile(plugin.getClass().getSimpleName());
+            jar.delete();
         }
 
         log.debug("Loaded plugin {}", clazz.getSimpleName());
@@ -829,6 +833,8 @@ public class MicrobotPluginManager {
                             pluginClasses.add(clazz);
                         } catch (ClassNotFoundException e) {
                             log.trace("Class not found during plugin loading: {}", classInfo.getName(), e);
+                        } catch(Throwable t) {
+                            log.error("Incompatible plugin found: " + pluginName);
                         }
                     }
 
@@ -1092,18 +1098,19 @@ public class MicrobotPluginManager {
         String pluginName = plugin.getClass().getSimpleName();
 
         try {
-            if (pluginManager.isPluginEnabled(plugin)) {
-                pluginManager.setPluginEnabled(plugin, false);
-            }
-
             if (pluginManager.isPluginActive(plugin)) {
-                SwingUtilities.invokeAndWait(() -> {
-                    try {
-                        pluginManager.stopPlugin(plugin);
-                    } catch (PluginInstantiationException e) {
-                        log.warn("Error stopping plugin {}: {}", pluginName, e.getMessage());
-                    }
-                });
+                if (SwingUtilities.isEventDispatchThread()) {
+                    pluginManager.stopPlugin(plugin);
+                    return;
+                } else  {
+                    SwingUtilities.invokeAndWait(() -> {
+                        try {
+                            pluginManager.stopPlugin(plugin);
+                        } catch (PluginInstantiationException e) {
+                            log.warn("Error stopping plugin {}: {}", pluginName, e.getMessage());
+                        }
+                    });
+                }
             }
             pluginManager.remove(plugin);
         } catch (Exception e) {
