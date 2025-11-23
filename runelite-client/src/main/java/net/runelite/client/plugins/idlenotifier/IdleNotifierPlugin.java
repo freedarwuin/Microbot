@@ -226,7 +226,8 @@ public class IdleNotifierPlugin extends Plugin
 			case AnimationID.HUMAN_DIAMONDCUTTING:
 			case AnimationID.HUMAN_AMETHYSTCUTTING:
 			case AnimationID.HUMAN_GLASSBLOWING:
-			case AnimationID.HUMAN_SPINNINGWHEEL:
+			case AnimationID.HUMAN_SPINNINGWHEEL_60:
+			case AnimationID.HUMAN_SPINNINGWHEEL_90:
 			case AnimationID.FARMING_USELOOM:
 			case AnimationID.HUMAN_BATTLESTAFF_CRAFTING:
 			case AnimationID.HUMAN_LEATHER_CRAFTING:
@@ -411,6 +412,11 @@ public class IdleNotifierPlugin extends Plugin
 			case AnimationID.PICKING_HIGH:
 			case AnimationID.FARMING_PICK_MUSHROOM:
 			case AnimationID.HUMAN_DIG:
+			/* Sailing */
+			case AnimationID.SAILING_HUMAN_SALVAGE_HOOK_KANDARIN_1X3_IDLE01:
+			case AnimationID.SAILING_HUMAN_SALVAGE_HOOK_KANDARIN_2X5_IDLE01:
+			case AnimationID.SAILING_HUMAN_SALVAGE_HOOK_KANDARIN_3X8_IDLE01:
+			case AnimationID.SAILING_HUMAN_SALVAGE_HOOK_KANDARIN_1X3_INTERACT01: // Sort-salvage
 			/* Misc */
 			case AnimationID.PISC_REPAIR_HAMMER:
 			case AnimationID.POH_CREATE_MAGIC_TABLET:

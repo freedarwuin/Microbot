@@ -48,14 +48,8 @@ public final class LoginManager {
 	public static ConfigProfile activeProfile = null;
 
 	public static ConfigProfile getActiveProfile() {
-		try (ProfileManager.Lock lock = Microbot.getProfileManager().lock())
-		{
-			var profile = lock.getProfiles().stream().filter(ConfigProfile::isActive).findFirst().orElse(null);
-			if (profile == null) {
-				profile = lock.getProfiles().get(0);
-			}
-			return profile;
-		}
+        return Microbot.getConfigManager().getProfile();
+
 	}
 
 	private LoginManager() {
@@ -117,29 +111,29 @@ public final class LoginManager {
 	 * Attempts a login using the active profile and an intelligent world selection.
 	 */
 	public static boolean login() {
-		if (activeProfile == null) {
+		if (getActiveProfile() == null) {
 			log.warn("No active profile available for login");
 			return false;
 		}
+		System.out.println(getActiveProfile());
 		Client client = Microbot.getClient();
 		if (client == null) {
 			log.warn("Cannot login - client is not initialised");
 			return false;
 		}
-		int currentWorld = client.getWorld();
-		int targetWorld = currentWorld > 300 ? currentWorld : getRandomWorld(activeProfile.isMember());
-		return login(activeProfile.getName(), activeProfile.getPassword(), targetWorld);
+		int targetWorld = getRandomWorld(getActiveProfile().isMember());
+		return login(getActiveProfile().getName(), getActiveProfile().getPassword(), targetWorld);
 	}
 
 	/**
 	 * Attempts a login using the active profile into a specific world.
 	 */
 	public static boolean login(int worldId) {
-		if (activeProfile == null) {
+		if (getActiveProfile() == null) {
 			log.warn("No active profile available for world specific login");
 			return false;
 		}
-		return login(activeProfile.getName(), activeProfile.getPassword(), worldId);
+		return login(getActiveProfile().getName(), getActiveProfile().getPassword(), worldId);
 	}
 
 	/**

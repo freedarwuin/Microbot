@@ -724,7 +724,7 @@ public class ConfigManager
 				log.info("Creating profile: {} ({})", profile.getName(), profile.getId());
 			}
 
-			// synced profile need to be fetched if outdated
+			// synced profautoogile need to be fetched if outdated
 			syncRemote(lock, profile, remoteProfiles);
 
 			this.profile = profile;
